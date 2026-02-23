@@ -34,7 +34,8 @@
 </head>
 <body>
   <h1>Scraper Dashboard</h1>
-  <p style="color: var(--muted); margin: 0 0 1rem;">Share this link to upload files, start runs, watch logs, and download outputs.</p>
+  <p style="color: var(--muted); margin: 0 0 0.5rem;">Share this link to upload files, start runs, watch logs, and download outputs.</p>
+  <p id="uptimeConfig" style="color: var(--muted); font-size: 0.875rem; margin: 0 0 1rem;"></p>
 
   <div class="card">
     <h2>Upload input file</h2>
@@ -74,8 +75,13 @@
     <div id="runMsg" class="msg"></div>
     <h2 style="margin-top: 1rem;">Run status</h2>
     <div id="statusBadge"></div>
+    <div id="progressInfo" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    <div id="lastRunInfo" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    <div style="margin-top: 0.5rem;">
+      <button type="button" class="secondary" id="refreshStatus">Refresh status</button>
+      <button type="button" id="cancelBtn" class="secondary" style="display: none; background: var(--danger); color: #fff; margin-left: 0.5rem;">Cancel run</button>
+    </div>
     <div id="log" aria-label="Live log"></div>
-    <button type="button" class="secondary" id="refreshStatus">Refresh status</button>
   </div>
 
   <div class="card">
@@ -106,13 +112,21 @@
       el.className = 'msg' + (isErr ? ' err' : ' ok');
     }
 
+    function fileDisplayName(f) {
+      return typeof f === 'string' ? f : (f && f.name);
+    }
+    function fileMtime(f) {
+      return (typeof f === 'object' && f && f.mtime_iso) ? ' · ' + f.mtime_iso : '';
+    }
+
     async function refreshInputList() {
       const list = document.getElementById('inputList');
       const select = document.getElementById('inputFile');
       try {
         const { files } = await json('/input');
-        list.innerHTML = files.length ? files.map(f => `<li><span>${f}</span><a href="${api('/input/' + encodeURIComponent(f))}" download>Download</a></li>`).join('') : '<li>No files</li>';
-        const opts = files.map(f => `<option value="${f}">${f}</option>`).join('');
+        const names = files.map(fileDisplayName).filter(Boolean);
+        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const m = fileMtime(f); return `<li><span>${n}${m}</span><a href="${api('/input/' + encodeURIComponent(n))}" download>Download</a></li>`; }).join('') : '<li>No files</li>';
+        const opts = names.map(n => `<option value="${n}">${n}</option>`).join('');
         select.innerHTML = '<option value="">— select —</option>' + opts;
       } catch (e) {
         list.innerHTML = '<li>Error loading list</li>';
@@ -123,7 +137,8 @@
       const list = document.getElementById('outputList');
       try {
         const { files } = await json('/output');
-        list.innerHTML = files.length ? files.map(f => `<li><span>${f}</span><a href="${api('/output/' + encodeURIComponent(f))}" download>Download</a></li>`).join('') : '<li>No files</li>';
+        const names = files.map(fileDisplayName).filter(Boolean);
+        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const m = fileMtime(f); return `<li><span>${n}${m}</span><a href="${api('/output/' + encodeURIComponent(n))}" download>Download</a></li>`; }).join('') : '<li>No files</li>';
       } catch (e) {
         list.innerHTML = '<li>Error loading list</li>';
       }
@@ -144,22 +159,47 @@
       try {
         const s = await json('/run/status');
         const badge = document.getElementById('statusBadge');
+        const cancelBtn = document.getElementById('cancelBtn');
         if (s.running) {
           badge.innerHTML = '<span class="badge running">Running</span>';
+          cancelBtn.style.display = 'inline-block';
           if (!statusInterval) statusInterval = setInterval(refreshStatus, 2000);
         } else {
+          cancelBtn.style.display = 'none';
           if (statusInterval) { clearInterval(statusInterval); statusInterval = null; }
           if (s.last_exit_code === 0) badge.innerHTML = '<span class="badge done">Last run: success</span>';
           else if (s.last_exit_code != null) badge.innerHTML = '<span class="badge failed">Last run: exit ' + s.last_exit_code + '</span>';
           else badge.innerHTML = '';
         }
+        const progressEl = document.getElementById('progressInfo');
+        progressEl.textContent = (s.progress && s.progress.enriched_count != null) ? 'Progress: ' + s.progress.enriched_count + ' enriched (from checkpoint)' : '';
+        const lastRunEl = document.getElementById('lastRunInfo');
+        lastRunEl.textContent = (s.last_run && s.last_run.finished_at) ? 'Last run finished: ' + s.last_run.finished_at + (s.last_run.exit_code != null ? ' (exit ' + s.last_run.exit_code + ')' : '') : '';
         const logEl = document.getElementById('log');
         logEl.textContent = s.log_tail || '(no log yet)';
         logEl.scrollTop = logEl.scrollHeight;
+        if (s.uptime_seconds != null) {
+          const mins = Math.floor(s.uptime_seconds / 60);
+          const hrs = Math.floor(mins / 60);
+          const uptimeStr = hrs ? hrs + 'h ' + (mins % 60) + 'm' : mins + 'm';
+          document.getElementById('uptimeConfig').textContent = 'Uptime: ' + uptimeStr + (s.timeout_seconds ? ' · Timeout: ' + s.timeout_seconds + 's' : '');
+        }
       } catch (e) {
         document.getElementById('statusBadge').innerHTML = '<span class="badge failed">Error</span>';
+        document.getElementById('cancelBtn').style.display = 'none';
       }
     }
+
+    document.getElementById('cancelBtn').onclick = async () => {
+      try {
+        const r = await fetch(api('/run/cancel'), { method: 'POST' });
+        if (r.ok) setMsg('runMsg', 'Cancel requested.');
+        else { const d = await r.json().catch(() => ({})); setMsg('runMsg', d.detail || 'Cancel failed', true); }
+        refreshStatus();
+      } catch (e) {
+        setMsg('runMsg', e.message, true);
+      }
+    };
 
     document.getElementById('uploadBtn').onclick = async () => {
       const input = document.getElementById('file');

@@ -3,17 +3,21 @@ Minimal API to feed input files and pull output from the scraper on Railway.
 
 - POST /upload: upload a CSV or TXT file (stored under DATA_DIR/input/)
 - POST /run: run a script (enrich_justcall or main) with an optional input file
-- GET /run/status: see if a run is in progress and tail of live logs (observability)
-- GET /output: list output files
-- GET /output/{filename}: download an output file
+- GET /run/status: running?, log tail, uptime, progress, last run
+- POST /run/cancel: cancel the current run
+- GET /config: effective config (timeout, data_dir)
+- GET /output, GET /input: list files with mtime
 
 Set DATA_DIR in env (e.g. /data) when using a Railway volume; default is data/ for local.
 Set SCRAPER_RUN_TIMEOUT_SECONDS to change max run time (default 3600 = 1 hour).
 """
+import json
 import os
 import subprocess
 import threading
+import time
 import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -35,6 +39,9 @@ RUN_LOG_FILE = STATE_DIR / "run.log"
 _run_lock = threading.Lock()
 _running = False
 _last_exit_code: int | None = None
+_current_proc: subprocess.Popen | None = None
+_start_time = time.time()
+LAST_RUN_FILE = STATE_DIR / "last_run.json"
 
 app = FastAPI(
     title="Scraper API",
@@ -46,6 +53,23 @@ def ensure_dirs():
     INPUT_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     STATE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _progress_from_checkpoint() -> dict | None:
+    """Read checkpoint JSON(s) and return enriched/done counts if present."""
+    for name in ("justcall_checkpoint.json", "checkpoint.json"):
+        path = STATE_DIR / name
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            phase2 = data.get("phase2", {})
+            enriched = phase2.get("enriched_urls", []) or list(phase2.get("enrichments", {}).keys())
+            if enriched is not None:
+                return {"checkpoint_file": name, "enriched_count": len(enriched) if isinstance(enriched, list) else 0}
+        except Exception:
+            pass
+    return None
 
 
 def _dashboard_html() -> str:
@@ -63,13 +87,15 @@ def root():
         "dashboard": "GET /dashboard — shareable web UI (upload, run, logs, download)",
         "endpoints": {
             "upload": "POST /upload — upload CSV/TXT",
-            "run": "POST /run — body: {\"script\": \"enrich_justcall\"|\"main\", \"input_file\": \"name.csv\", \"concurrency\": 4}",
-            "run_status": "GET /run/status — running? + live log tail",
-            "input_list": "GET /input — list uploaded files",
-            "output_list": "GET /output — list output files",
-            "output_download": "GET /output/{filename} — download file",
+            "run": "POST /run — body: {\"script\", \"input_file\"?, \"concurrency\"?}",
+            "run_status": "GET /run/status — running?, log tail, uptime, progress, last_run",
+            "run_cancel": "POST /run/cancel — cancel current run",
+            "config": "GET /config — data_dir, timeout_seconds (read-only)",
+            "input_list": "GET /input — list uploaded files (with mtime)",
+            "output_list": "GET /output — list output files (with mtime)",
             "state_list": "GET /state — list state/checkpoint files",
-            "state_download": "GET /state/{filename} — download state file",
+            "output_download": "GET /output/{filename}",
+            "state_download": "GET /state/{filename}",
         },
         "timeout_seconds": RUN_TIMEOUT,
     }
@@ -173,57 +199,66 @@ async def run(body: RunRequest):
         _running = True
         _last_exit_code = None
 
-    try:
-        with open(log_path, "w") as logf:
-            proc = subprocess.Popen(
-                cmd,
-                stdout=logf,
-                stderr=subprocess.STDOUT,
-                text=True,
-                cwd=cwd,
-                env=env,
-            )
+    def run_in_background():
+        global _running, _last_exit_code, _current_proc
+        proc = None
         try:
-            proc.wait(timeout=RUN_TIMEOUT)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-            proc.wait()
+            with open(log_path, "w") as logf:
+                proc = subprocess.Popen(
+                    cmd,
+                    stdout=logf,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    cwd=cwd,
+                    env=env,
+                )
+            with _run_lock:
+                _current_proc = proc
+            try:
+                proc.wait(timeout=RUN_TIMEOUT)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                proc.wait()
+            finally:
+                with _run_lock:
+                    _last_exit_code = proc.returncode
+                    _running = False
+                    _current_proc = None
+                ensure_dirs()
+                try:
+                    LAST_RUN_FILE.write_text(
+                        json.dumps({
+                            "finished_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                            "exit_code": proc.returncode,
+                        }),
+                        encoding="utf-8",
+                    )
+                except Exception:
+                    pass
+        except Exception:
             with _run_lock:
                 _running = False
-            raise HTTPException(
-                status_code=504,
-                detail=f"Run timed out after {RUN_TIMEOUT} seconds. Set SCRAPER_RUN_TIMEOUT_SECONDS for a different limit.",
-            )
-        _last_exit_code = proc.returncode
-    finally:
-        with _run_lock:
-            _running = False
+                _last_exit_code = -1
+                _current_proc = None
 
-    if proc.returncode != 0:
-        tail = ""
-        if log_path.exists():
-            tail = log_path.read_text(encoding="utf-8", errors="replace")[-4000:]
-        raise HTTPException(
-            status_code=500,
-            detail={
-                "message": "Scraper exited with non-zero code. Check GET /run/status for full logs.",
-                "exit_code": proc.returncode,
-                "log_tail": tail,
-            },
-        )
+    thread = threading.Thread(target=run_in_background, daemon=True)
+    thread.start()
 
+    # Return immediately so dashboard and /run/status stay responsive
     if script == "enrich_justcall":
-        return {"output_file": out_name, "message": f"Download via GET /output/{out_name}"}
+        return {
+            "message": "Run started in background. Poll GET /run/status for progress and log tail. When done, list GET /output and download the new file.",
+            "output_file_when_done": out_name,
+        }
     return {
-        "message": "Pipeline finished. List files with GET /output and download as needed.",
+        "message": "Run started in background. Poll GET /run/status for progress. When done, list GET /output for companies.csv / people.csv.",
     }
 
 
 @app.get("/run/status")
 def run_status():
     """
-    Observability: see if a run is in progress and get the tail of live logs.
-    Poll this while POST /run is in progress to confirm the scraper isn't silently failing.
+    Observability: running?, log tail, uptime, progress from checkpoint, last run info.
     """
     ensure_dirs()
     log_path = STATE_DIR / "run.log"
@@ -231,26 +266,74 @@ def run_status():
     if log_path.exists():
         try:
             content = log_path.read_text(encoding="utf-8", errors="replace")
-            log_tail = content[-8000:]  # last 8k chars
+            log_tail = content[-8000:]
         except Exception:
             log_tail = "(could not read log)"
     with _run_lock:
         running = _running
         last_exit = _last_exit_code
+    last_run = None
+    if LAST_RUN_FILE.exists():
+        try:
+            last_run = json.loads(LAST_RUN_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
     return {
         "running": running,
         "last_exit_code": last_exit,
         "log_tail": log_tail,
         "timeout_seconds": RUN_TIMEOUT,
+        "uptime_seconds": round(time.time() - _start_time, 1),
+        "progress": _progress_from_checkpoint(),
+        "last_run": last_run,
     }
+
+
+@app.post("/run/cancel")
+def run_cancel():
+    """Cancel the current run (if any). Returns 200 when a run was canceled or 404 if none was running."""
+    global _current_proc
+    with _run_lock:
+        if not _running or _current_proc is None:
+            raise HTTPException(status_code=404, detail="No run in progress")
+        proc = _current_proc
+    try:
+        proc.kill()
+    except Exception:
+        pass
+    return {"message": "Cancel requested. Run should stop shortly."}
+
+
+@app.get("/config")
+def get_config():
+    """Effective config (from env) for visibility. Read-only."""
+    return {
+        "data_dir": str(DATA_DIR),
+        "timeout_seconds": RUN_TIMEOUT,
+        "input_dir": str(INPUT_DIR),
+        "output_dir": str(OUTPUT_DIR),
+        "state_dir": str(STATE_DIR),
+    }
+
+
+def _file_list_with_mtime(dir_path: Path) -> list[dict]:
+    files = []
+    for f in dir_path.iterdir():
+        if f.is_file():
+            try:
+                mtime = f.stat().st_mtime
+                mtime_iso = datetime.fromtimestamp(mtime, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            except Exception:
+                mtime_iso = None
+            files.append({"name": f.name, "mtime_iso": mtime_iso})
+    return sorted(files, key=lambda x: x["name"])
 
 
 @app.get("/output")
 def list_output():
-    """List output files (CSVs) in DATA_DIR/output."""
+    """List output files (CSVs) in DATA_DIR/output with last modified time."""
     ensure_dirs()
-    files = [f.name for f in OUTPUT_DIR.iterdir() if f.is_file()]
-    return {"files": sorted(files)}
+    return {"files": _file_list_with_mtime(OUTPUT_DIR)}
 
 
 @app.get("/output/{filename}")
@@ -264,10 +347,9 @@ def download_output(filename: str):
 
 @app.get("/input")
 def list_input():
-    """List uploaded input files in DATA_DIR/input."""
+    """List uploaded input files in DATA_DIR/input with last modified time."""
     ensure_dirs()
-    files = [f.name for f in INPUT_DIR.iterdir() if f.is_file()]
-    return {"files": sorted(files)}
+    return {"files": _file_list_with_mtime(INPUT_DIR)}
 
 
 @app.get("/input/{filename}")
