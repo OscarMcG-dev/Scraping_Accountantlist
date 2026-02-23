@@ -292,6 +292,38 @@ PAGE_TIMEOUT=30000                      # milliseconds
 
 See `config.py` for the full list with defaults and validation ranges.
 
+### Running on Railway (keys don’t carry over from GitHub)
+
+**Fix “Error creating build plan with Railpack”:** Your app lives in `scraper/`, but Railway builds from the repo root by default, so it doesn’t see `requirements.txt`. In the Railway dashboard: open your **service** → **Settings** → **Root Directory** → set to **`scraper`** and save. Redeploy so the build runs from `scraper/` and Railpack detects Python. The repo root has a `railway.json` that sets the start command to `python main.py`; change it in Railway or in that file if you want a different entry point (e.g. `enrich_justcall.py`).
+
+`.env` is **not** in the repo (it’s in `.gitignore`), so your API keys are never pushed. On Railway you set the same variables in the dashboard; the app already reads from `os.environ`, so no code changes are needed.
+
+1. **Railway dashboard** → your project → **Variables** (or **Settings** → **Variables**).
+2. Add each variable from `.env.example` with the same **name** and your real **value**:
+
+   | Variable | Required | Notes |
+   |----------|----------|--------|
+   | `OPENROUTER_API_KEY` | Yes | From [OpenRouter](https://openrouter.ai) |
+   | `OPENROUTER_MODEL` | No | Default: `x-ai/grok-4.1-fast` |
+   | `OPENROUTER_BASE_URL` | No | Default: `https://openrouter.ai/api/v1` |
+   | `ATTIO_API_KEY` | If using dedup/Attio | From Attio → Settings → API |
+   | `JINA_API_KEY` | If using Jina/PDF | From [Jina](https://jina.ai) |
+   | `DIRECTORY_DELAY` | No | e.g. `1.0` |
+   | `DIRECTORY_MAX_CONCURRENT` | No | e.g. `5` |
+   | `MAX_CONCURRENT_CRAWLS` | No | e.g. `5` |
+   | `PAGE_TIMEOUT` | No | e.g. `30000` |
+   | `MAX_DECISION_MAKERS` | No | e.g. `3` |
+   | `LLM_TEMPERATURE` | No | e.g. `0.0` |
+   | `WEB_SEARCH_ENABLED` | No | `true` / `false` |
+   | `WEB_SEARCH_MAX_RESULTS` | No | e.g. `3` |
+   | `WEB_SEARCH_MODEL` | No | e.g. `x-ai/grok-4.1-fast:online` |
+   | `LLM_LINK_TRIAGE` | No | `true` / `false` |
+   | `OUTPUT_DIR` | No | e.g. `data/output` |
+
+3. Redeploy so the new variables are picked up.
+
+If you use the Railway CLI: `railway variables set OPENROUTER_API_KEY=sk-or-v1-...` (and so on for each key).
+
 ---
 
 ## Troubleshooting
