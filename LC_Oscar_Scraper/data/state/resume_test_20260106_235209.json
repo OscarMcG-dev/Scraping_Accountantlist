@@ -1,0 +1,26 @@
+{
+  "session_id": "20260106_235209",
+  "checkpoint_name": "resume_test",
+  "total_urls": 5,
+  "urls": [
+    "https://www.jpo.com.au",
+    "https://www.spaldingadvisory.com.au",
+    "https://www.hnk.com.au",
+    "https://www.bentleys.com.au",
+    "https://www.walkerwayland.com.au"
+  ],
+  "processed_urls": [],
+  "successful_urls": [],
+  "out_of_scope_urls": [],
+  "low_confidence_urls": [],
+  "broken_urls": [],
+  "skipped_urls": [],
+  "results": [],
+  "out_of_scope_records": [],
+  "low_confidence_records": [],
+  "broken_urls_list": [],
+  "current_index": 0,
+  "start_time": "2026-01-06T23:52:09.001961",
+  "last_update": "2026-01-06T23:52:09.001963",
+  "completed": false
+}

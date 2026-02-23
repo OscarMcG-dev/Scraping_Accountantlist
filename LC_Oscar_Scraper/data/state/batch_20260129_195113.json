@@ -1,0 +1,1727 @@
+{
+  "session_id": "20260129_195113",
+  "checkpoint_name": "batch",
+  "total_urls": 49,
+  "urls": [
+    "https://www.taxcentres.co.uk",
+    "https://www.gravita.com",
+    "https://www.pricebailey.co.uk",
+    "https://www.pkfsmithcooper.com",
+    "https://www.sterlingca.com",
+    "https://www.sayersb.co.uk",
+    "https://www.psaa.co.uk",
+    "https://www.advance.online",
+    "https://www.praxity.com",
+    "https://www.pennybooks.io",
+    "https://www.mazumamoney.co.uk",
+    "https://www.dafferns.com",
+    "https://www.cowgills.co.uk",
+    "https://www.ensors.co.uk",
+    "https://www.360accountants.co.uk",
+    "https://www.fmd.com.au",
+    "https://www.price.co.uk",
+    "https://www.mageegammon.com",
+    "https://www.bkl.co.uk",
+    "https://www.cfwaccountants.co.uk",
+    "https://www.edmundcarr.com",
+    "https://www.ifa.org.uk",
+    "https://www.clarksonhyde.com",
+    "https://www.accountingforsustainability.org",
+    "https://www.hivebusiness.co.uk",
+    "https://www.mw-w.com",
+    "https://www.argentsaccountants.co.uk",
+    "https://www.fwsr.com",
+    "https://www.chavereys.co.uk",
+    "https://www.everfairtax.co.uk",
+    "https://www.wisteria.co.uk",
+    "https://www.bhp.co.uk",
+    "https://www.numbermill.co.uk",
+    "https://www.myaccountancyplace.co.uk",
+    "https://www.sjpraccountants.com",
+    "https://www.albertgoodman.co.uk",
+    "https://www.srlv.co.uk",
+    "https://www.waltonscw.co.uk",
+    "https://www.wilson-partners.co.uk",
+    "https://www.sjca.co.uk",
+    "https://www.langricks.com",
+    "https://www.wbv.ltd.uk",
+    "https://www.plusaccounting.co.uk",
+    "https://www.icsuk.com",
+    "https://www.uwm.co.uk",
+    "https://www.om.uk",
+    "https://www.fwca.co.uk",
+    "https://www.samera.co.uk",
+    "https://www.mercerhole.co.uk"
+  ],
+  "processed_urls": [
+    "https://www.taxcentres.co.uk",
+    "https://www.advance.online",
+    "https://www.psaa.co.uk",
+    "https://www.sterlingca.com",
+    "https://www.pricebailey.co.uk",
+    "https://www.pkfsmithcooper.com",
+    "https://www.praxity.com",
+    "https://www.pennybooks.io",
+    "https://www.sayersb.co.uk",
+    "https://www.gravita.com",
+    "https://www.cowgills.co.uk",
+    "https://www.price.co.uk",
+    "https://www.mazumamoney.co.uk",
+    "https://www.dafferns.com",
+    "https://www.360accountants.co.uk",
+    "https://www.ensors.co.uk",
+    "https://www.mageegammon.com",
+    "https://www.bkl.co.uk",
+    "https://www.cfwaccountants.co.uk",
+    "https://www.edmundcarr.com",
+    "https://www.fmd.com.au",
+    "https://www.clarksonhyde.com",
+    "https://www.ifa.org.uk",
+    "https://www.accountingforsustainability.org",
+    "https://www.fwsr.com",
+    "https://www.argentsaccountants.co.uk",
+    "https://www.chavereys.co.uk",
+    "https://www.everfairtax.co.uk",
+    "https://www.hivebusiness.co.uk",
+    "https://www.myaccountancyplace.co.uk",
+    "https://www.mw-w.com",
+    "https://www.sjpraccountants.com",
+    "https://www.srlv.co.uk",
+    "https://www.wisteria.co.uk",
+    "https://www.bhp.co.uk",
+    "https://www.waltonscw.co.uk",
+    "https://www.langricks.com",
+    "https://www.albertgoodman.co.uk",
+    "https://www.numbermill.co.uk",
+    "https://www.plusaccounting.co.uk",
+    "https://www.icsuk.com",
+    "https://www.wilson-partners.co.uk",
+    "https://www.wbv.ltd.uk",
+    "https://www.samera.co.uk",
+    "https://www.fwca.co.uk",
+    "https://www.uwm.co.uk",
+    "https://www.om.uk",
+    "https://www.mercerhole.co.uk",
+    "https://www.sjca.co.uk"
+  ],
+  "successful_urls": [
+    "https://www.advance.online",
+    "https://www.sterlingca.com",
+    "https://www.pricebailey.co.uk",
+    "https://www.praxity.com",
+    "https://www.pennybooks.io",
+    "https://www.sayersb.co.uk",
+    "https://www.gravita.com",
+    "https://www.cowgills.co.uk",
+    "https://www.mazumamoney.co.uk",
+    "https://www.dafferns.com",
+    "https://www.360accountants.co.uk",
+    "https://www.ensors.co.uk",
+    "https://www.mageegammon.com",
+    "https://www.bkl.co.uk",
+    "https://www.cfwaccountants.co.uk",
+    "https://www.edmundcarr.com",
+    "https://www.fmd.com.au",
+    "https://www.clarksonhyde.com",
+    "https://www.ifa.org.uk",
+    "https://www.accountingforsustainability.org",
+    "https://www.fwsr.com",
+    "https://www.argentsaccountants.co.uk",
+    "https://www.chavereys.co.uk",
+    "https://www.everfairtax.co.uk",
+    "https://www.hivebusiness.co.uk",
+    "https://www.mw-w.com",
+    "https://www.srlv.co.uk",
+    "https://www.wisteria.co.uk",
+    "https://www.bhp.co.uk",
+    "https://www.albertgoodman.co.uk",
+    "https://www.numbermill.co.uk",
+    "https://www.wilson-partners.co.uk",
+    "https://www.wbv.ltd.uk",
+    "https://www.samera.co.uk",
+    "https://www.fwca.co.uk",
+    "https://www.uwm.co.uk",
+    "https://www.om.uk",
+    "https://www.mercerhole.co.uk"
+  ],
+  "out_of_scope_urls": [
+    "https://www.psaa.co.uk",
+    "https://www.price.co.uk",
+    "https://www.myaccountancyplace.co.uk",
+    "https://www.sjpraccountants.com",
+    "https://www.langricks.com",
+    "https://www.icsuk.com"
+  ],
+  "low_confidence_urls": [
+    "https://www.pkfsmithcooper.com"
+  ],
+  "broken_urls": [
+    "https://www.taxcentres.co.uk",
+    "https://www.waltonscw.co.uk",
+    "https://www.plusaccounting.co.uk",
+    "https://www.sjca.co.uk"
+  ],
+  "skipped_urls": [],
+  "results": [
+    {
+      "company_name": "ADVANCE",
+      "company_url": "https://www.advance.online",
+      "office_phone": "+441244564564",
+      "office_email": "newbusiness@advance.online",
+      "associated_emails": [
+        "newbusiness@advance.online",
+        "[email protected]"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "FCSA accredited umbrella company providing ethical payment solutions to contractors. Market leader since 2010 with world-class service and compliance focus.",
+      "associated_location": "Chester, UK (outskirts)",
+      "organisational_structure": "FCSA accredited umbrella company with multiple service offerings including umbrella employment, limited company accountancy, and self-employment solutions.",
+      "team": "Professional teams providing expert support to contractors and agency partners. Staff are fully trained in cyber-security and receive regular training.",
+      "description": "ADVANCE is a reliable, market leading and compliant Umbrella Company. World-class service is at the core of all we do, so whether you are new to contracting or have worked with us previously, you can rest assured that you will receive quality support from professional teams that you can trust.",
+      "edited_description": "ADVANCE is a market-leading FCSA accredited umbrella company providing ethical payment solutions to contractors with world-class service. With flexible margins starting from just \u00a315.00 per week, no automated phone lines, and 99.26% of calls answered within 3 rings, we offer unrivalled support for contractors nationwide.",
+      "business_segment": "Other Tax",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Sterling Chartered Accountants",
+      "company_url": "https://www.sterlingca.com",
+      "office_phone": "+442085152929",
+      "office_email": "info@sterlingca.com",
+      "associated_emails": [
+        "info@sterlingca.com"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "UK-based chartered accountancy firm with international services including UAE operations",
+      "associated_location": "505 Pinner Road, Harrow, Middlesex. HA2 6EH",
+      "organisational_structure": "Chartered accountancy firm with multiple partners and directors",
+      "team": "Team information not available on website",
+      "description": "Sterling Chartered Accountants is a UK-based firm offering comprehensive accounting, tax, and business advisory services with international reach including UAE operations.",
+      "edited_description": "Sterling Chartered Accountants provides full-service accounting, tax planning, and business advisory solutions for UK and international clients. With expertise in cloud accounting, corporate tax, and international expansion services, they serve businesses looking to grow domestically and overseas, including UAE market entry.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Price Bailey",
+      "company_url": "https://www.pricebailey.co.uk",
+      "office_phone": "+448004346460",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "UK top accountancy firm with multiple office locations across the UK and Dubai. Member of APA and IAPA International. Specializes in alternative assets and serves a wide range of industries.",
+      "associated_location": "Multiple locations including Norwich, Great Yarmouth, Newmarket, Peterborough, Cambridge, Sawston, Bishop's Stortford, City of London, London Baker Street, London Mayfair, Dubai, Eastern Caribbean, Oxford",
+      "organisational_structure": "Large partnership with over 50 partners and directors, plus numerous managers and staff. Led by Managing Director Martin Clapson.",
+      "team": "Extensive team of chartered accountants and business advisors with deep local networks and industry expertise across multiple sectors.",
+      "description": "Price Bailey is a UK top accountancy firm and we're proud to have won many awards. We work with clients across a wide range of industries and provide comprehensive accounting, tax, and business advisory services.",
+      "edited_description": "Price Bailey is a leading UK top accountancy firm with award-winning expertise across multiple industries. Our team of over 50 partners and directors provides comprehensive accounting, tax, and business advisory services, with particular strength in alternative assets and strategic corporate finance. We combine local market knowledge with international reach through our APA and IAPA memberships.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Martin Clapson",
+          "title": "Managing Director",
+          "decision_maker_summary": "As Managing Director, Martin leads the firm's strategic direction and oversees operations across multiple UK locations and Dubai. He brings extensive leadership experience in growing accounting practices and maintaining high professional standards.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Chand Chudasama",
+          "title": "Partner",
+          "decision_maker_summary": "Chand is a partner with deep expertise in corporate finance and strategic advisory services. He has extensive experience working with businesses across various sectors and provides high-level financial guidance to clients.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Holly Gibson",
+          "title": "Partner",
+          "decision_maker_summary": "Holly is a healthcare specialist partner who provides expert advice to medical practices and healthcare organizations. She combines accounting expertise with deep industry knowledge to help healthcare clients navigate complex financial challenges.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Praxity",
+      "company_url": "https://www.praxity.com",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [
+        "iain.mcvicar@albertgoodman.co.uk",
+        "e.costa@alphaaudit.com",
+        "pgut@altoadvisory.pl",
+        "jdecordova@adacpa.com",
+        "tadao@arai-cpa.com",
+        "a.kabele@attesta.at",
+        "vborrell@mbasociados.com.ni",
+        "stephanie@mbtcpa.co.il",
+        "jjaque@cclac.cl",
+        "rbenn@mri-cheetah.com",
+        "lisoardi@cpaferrere.com",
+        "kimyk@dasancpa.com",
+        "david.bui@enor.is",
+        "gerhard.meyer@falk-co.de",
+        "g.lohmann@fides-online.de",
+        "massimo.diterlizzi@studiopirola.com",
+        "fespiritu@fintaxconsulting.do"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Praxity is a global alliance of independent accounting firms with 73 member firms across 72 countries, providing cross-border services while maintaining local expertise and independence.",
+      "associated_location": "Global - 489 offices across 72 countries",
+      "organisational_structure": "Praxity operates as an alliance with a Management Board, Governing Council, Membership Committee, Regional Chairs, Working Group Chairs, and an executive team. The structure includes democratic representation from member firms.",
+      "team": "The alliance includes senior leaders from member firms including CEOs, Managing Partners, and Partners from various countries. The executive team handles conferences, communications, marketing, and administration.",
+      "description": "Praxity is an international accounting alliance of independent accounting firms, bringing together like-minded professionals from across the globe. As a leading global accounting alliance, we provide a powerful platform for accounting firm collaboration, enabling member firms to serve clients with cross-border needs while maintaining full independence and local expertise.",
+      "edited_description": "Praxity is a global alliance of 73 independent accounting firms across 72 countries, offering cross-border expertise while maintaining local independence. With 489 offices worldwide, we provide a unique platform for firms to grow internationally without compromising their identity or client relationships.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Samantha Louis",
+          "title": "CEO",
+          "decision_maker_summary": "Samantha Louis serves as the Chief Executive Officer of Praxity, leading the global alliance's strategic direction and overseeing the executive team responsible for conferences, communications, marketing, and day-to-day administration.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Steffen Ahrens",
+          "title": "Management Board Chair, Governing Council and Membership Committee",
+          "decision_maker_summary": "Steffen Ahrens holds multiple leadership roles as Management Board Chair, Governing Council member, and Membership Committee participant, playing a crucial role in guiding Praxity's strategic direction and member firm relationships.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Kellie Becker",
+          "title": "Membership Committee Chair and Global Tax Chair",
+          "decision_maker_summary": "Kellie Becker serves as both Membership Committee Chair and Global Tax Chair, overseeing member firm applications and leading tax-related initiatives across the Praxity alliance network.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "PennyBooks",
+      "company_url": "https://www.pennybooks.io",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "London-based accounting firm specializing in SME businesses and personal tax clients. Xero Platinum Partner with expertise in modern accounting technology including Xero, QuickBooks, Dext, Hubdoc, Fathom, and Telleroo.",
+      "associated_location": "London, United Kingdom",
+      "organisational_structure": "Growing London-based firm with Directors and a team that includes bookkeeping staff. Process-driven organization with experience from Directors down to bookkeeping team.",
+      "team": "Team includes Directors, client advisors, bookkeepers, and accountants. Specializes in small to medium-sized businesses and personal tax clients.",
+      "description": "PennyBooks is a growing London-based accounting firm partnering with SME businesses and personal tax clients. They provide end-to-end accounting and tax services, from bookkeeping to business plans, using modern accounting technology to deliver integrated finance solutions.",
+      "edited_description": "PennyBooks is a London-based Xero Platinum Partner specializing in SME businesses and personal tax. They offer comprehensive accounting, tax, and bookkeeping services with modern technology integration, serving clients across various industry sectors with scalable pricing and dedicated client advisors.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Sayers Butterworth LLP",
+      "company_url": "https://www.sayersb.co.uk",
+      "office_phone": "+442079361910",
+      "office_email": "enquiries@sayersb.co.uk",
+      "associated_emails": [
+        "enquiries@sayersb.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "A Member firm of IECnet, ICAEW Chartered Accountants",
+      "associated_location": "3rd Floor 12 Gough Square London EC4A 3DW",
+      "organisational_structure": "LLP with multiple partners",
+      "team": "Partners include Phil Taylor, Hannah Clegg, Andrew Burch, James Hearsey, Matt Bird, Paul Ffitch",
+      "description": "Sayers Butterworth LLP provides a full range of accountancy and tax services to entrepreneurial start-ups, high growth businesses, worldwide groups, individuals resident in the UK and other tax jurisdictions, professional partnerships and international companies operating in the UK.",
+      "edited_description": "Sayers Butterworth LLP offers comprehensive accounting and tax services with deep expertise across multiple sectors including early-stage businesses, established companies, partnerships, and high-net-worth individuals. Their team of experienced partners provides big firm knowledge at smaller firm rates, with particular strengths in tax planning, innovation tax breaks, and international tax affairs.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Phil Taylor",
+          "title": "Partner",
+          "decision_maker_summary": "Partner specializing in early-stage businesses, helping entrepreneurs turn their vision into successful enterprises with sound accounting, tax, and banking structures.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Hannah Clegg",
+          "title": "Partner",
+          "decision_maker_summary": "Partner with expertise in partnerships and LLPs, working with professional services firms and helping clients structure their worldwide business interests efficiently.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Andrew Burch",
+          "title": "Partner",
+          "decision_maker_summary": "Partner serving established companies with significant shareholder involvement, offering audit, accounting, and tax advice with pragmatic solutions for high-growth businesses.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "James Hearsey",
+          "title": "Partner",
+          "decision_maker_summary": "Partner specializing in partnerships and LLPs, providing expertise in regulatory requirements and complex financial structures for professional services firms.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Matt Bird",
+          "title": "Partner",
+          "decision_maker_summary": "Partner with extensive experience in private client tax affairs, including income tax, capital gains tax, inheritance tax, and trust management for families and individuals.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Paul Ffitch",
+          "title": "Partner",
+          "decision_maker_summary": "Partner specializing in private client tax services with expertise in residency issues, inheritance tax planning, and acting as trustees and executors for high-net-worth individuals.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Gravita",
+      "company_url": "https://www.gravita.com",
+      "office_phone": "+442073300000",
+      "office_email": "hello@gravita.com",
+      "associated_emails": [
+        "hello@gravita.com"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Accounting firm offering advisory services, audit, corporate tax, managed business services, and private client services. Specializes in sectors including capital markets, charities, creative, education, financial services, life sciences, property, recruitment, and technology.",
+      "associated_location": "UK-based with offices in London, Bristol, Essex, Exeter, and Oxford",
+      "organisational_structure": "Professional accounting firm with multiple service lines and sector specializations",
+      "team": "Team information not fully accessible from provided content",
+      "description": "Gravita is a UK-based accounting firm providing comprehensive financial services including advisory, audit, tax, and managed business services to forward-thinking businesses and entrepreneurs across multiple sectors.",
+      "edited_description": "Gravita combines incredible expertise with intuitive technology to support ambitious businesses on their growth journey. With specialized services in transactional tax, R&D credits, charity audits, and sector-specific expertise across technology, life sciences, and financial services, Gravita delivers tailored solutions for forward-thinking entrepreneurs and businesses.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Cowgills",
+      "company_url": "https://www.cowgills.co.uk",
+      "office_phone": "+441612361000",
+      "office_email": "info@cowgills.co.uk",
+      "associated_emails": [
+        "info@cowgills.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chartered Accountants and Business Advisers based in Manchester, UK",
+      "associated_location": "Manchester, UK",
+      "organisational_structure": "Chartered Accountants and Business Advisers",
+      "team": "Not specified on main page",
+      "description": "Cowgills is a leading firm of Chartered Accountants and Business Advisers based in Manchester, providing a comprehensive range of accountancy, tax and business advisory services to businesses and individuals.",
+      "edited_description": "Cowgills is a leading Manchester-based firm of Chartered Accountants and Business Advisers offering comprehensive accountancy, tax and business advisory services to businesses and individuals. They provide expert guidance across multiple sectors with a focus on delivering practical business solutions.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Mazuma GB Limited",
+      "company_url": "https://www.mazumamoney.co.uk",
+      "office_phone": "+442922940383",
+      "office_email": "sales@mazumamoney.co.uk",
+      "associated_emails": [
+        "sales@mazumamoney.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Online accounting firm specializing in small business services with a quirky, approachable brand voice",
+      "associated_location": "Dragon House, Princes Way, Bridgend Industrial Estate, Bridgend, CF31 3AQ",
+      "organisational_structure": "Limited company with multiple accountants and support staff",
+      "team": "Team of fully qualified accountants providing online accounting services",
+      "description": "Mazuma GB Limited is an online accounting firm that provides hassle-free accounting and bookkeeping services for small businesses, freelancers, landlords, and sole traders. They offer a subscription-based model starting from \u00a338+VAT per month, with services including bookkeeping, payroll, tax returns, and VAT compliance.",
+      "edited_description": "Mazuma is a leading online accounting firm that liberates small business owners from the drudgery of accounting. With their fully qualified accountants, MTD-compliant technology, and affordable subscription model starting at \u00a338+VAT per month, they help freelancers, landlords, and small businesses focus on what they love while handling all the numbers. Their MazApp platform makes document submission and financial management effortless.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Dafferns LLP",
+      "company_url": "https://www.dafferns.com",
+      "office_phone": "+442476221046",
+      "office_email": "hub@dafferns.com",
+      "associated_emails": [
+        "hub@dafferns.com"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Dafferns LLP is a limited liability partnership, registered in England and Wales No OC327595, Vat No 272 3070 81. A list of members of the LLP is displayed at our registered office, together with a list of those non-members who are designated as partners and directors.",
+      "associated_location": "One Eastwood, Binley Business Park, Coventry, CV3 2UB",
+      "organisational_structure": "Limited Liability Partnership with Joint Managing Partners, Partners, Directors, and a team of approximately 45 professionals",
+      "team": "Approximately 45 professionals across all departments working from the Coventry office",
+      "description": "Dafferns is a Coventry and Warwickshire accounting firm with national and international connections. We work with ambitious small, medium and large UK and international businesses, charities, business owners and private individuals providing audit, assurance, accounts, tax and advisory services, with proactive advice and ethical tax planning.",
+      "edited_description": "Dafferns LLP is a 130-year-old established accounting firm in Coventry offering comprehensive audit, tax, and advisory services to ambitious businesses, charities, and private clients. With a team of 45 professionals and international connections through AGN International, they provide proactive advice and ethical tax planning for complex business needs.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Brian Jukes",
+          "title": "Joint Managing Partner, Head of Corporate Tax",
+          "decision_maker_summary": "Brian Jukes serves as Joint Managing Partner and Head of Corporate Tax at Dafferns LLP, bringing extensive experience in corporate tax planning and management. He leads the firm's tax strategy and provides expert guidance to corporate clients on complex tax matters.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Geoffrey Cox",
+          "title": "Joint Managing Partner, Head of Audit",
+          "decision_maker_summary": "Geoffrey Cox is Joint Managing Partner and Head of Audit at Dafferns LLP, overseeing the firm's audit practice and ensuring high-quality assurance services. He brings significant expertise in audit methodology and regulatory compliance to the leadership team.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Karen Keeling",
+          "title": "Partner, Head of Private Client Tax",
+          "decision_maker_summary": "Karen Keeling serves as Partner and Head of Private Client Tax, specializing in complex personal tax affairs for high-net-worth individuals and business owners. She provides strategic tax planning and compliance services tailored to private clients' unique needs.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "360 Chartered Accountants",
+      "company_url": "https://www.360accountants.co.uk",
+      "office_phone": "+441482427360",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Award-winning, forward-thinking accounting firm based in Hull, UK. Specializes in digital accounting solutions and business advisory services. Uses Xero cloud accounting software. Offers fixed fees and free consultations.",
+      "associated_location": "18/19 Albion Street, Hull, East Yorkshire, HU1 3TG",
+      "organisational_structure": "Partnership structure with 3 directors: Andy Steele (Chairperson), Leanne Steele (People & Culture Director), and Sophie Holmes (Client Services Director). Team includes Chartered Accountants and Chartered Tax Advisors.",
+      "team": "Team of Chartered Accountants and Chartered Tax Advisors. Focus on modern technology and business practice. Friendly, unstuffy service approach.",
+      "description": "360 Chartered Accountants is a fresh-thinking, award-winning, forward-looking team of accountants in Hull, servicing businesses across the UK. They combine years of experience with the latest technology and first-hand experience of growing and developing a business.",
+      "edited_description": "Award-winning Hull-based accounting firm offering modern, digital-first solutions for UK businesses. Specializes in Xero cloud accounting, fixed-fee pricing, and business advisory services. Their team of Chartered Accountants and Tax Advisors provide real-time financial information and strategic business planning to help clients grow and succeed.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Andy Steele",
+          "title": "Chairperson",
+          "decision_maker_summary": "Founder and Chairperson of 360 Chartered Accountants. Created the firm to offer modern, digital-age accounting services. Combines extensive experience with latest technology to help businesses grow and succeed.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Leanne Steele",
+          "title": "People & Culture Director",
+          "decision_maker_summary": "People & Culture Director responsible for team development and organizational culture. Ensures the firm maintains its friendly, unstuffy service approach while delivering professional accounting services.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Sophie Holmes",
+          "title": "Client Services Director",
+          "decision_maker_summary": "Client Services Director with ACA FCCA qualifications. Oversees client relationships and service delivery, ensuring high-quality accounting and advisory services to business clients across the UK.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Ensors Accountants LLP",
+      "company_url": "https://www.ensors.co.uk",
+      "office_phone": "+441473221000",
+      "office_email": "info@ensors.co.uk",
+      "associated_emails": [
+        "info@ensors.co.uk",
+        "careers@ensors.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Ensors Accountants LLP is a trading name of Ensors Accountants LLP and Azets Audit Services Limited, registered in England & Wales. They have been providing accountancy services for over 130 years and have multiple office locations across the UK.",
+      "associated_location": "Multiple offices including Bury St Edmunds, Cambridge, Huntingdon, Ipswich, London, Norwich, and Saxmundham",
+      "organisational_structure": "Limited Liability Partnership with multiple partners and directors across various locations",
+      "team": "Large team of over 100 professionals including partners, directors, and staff across multiple service lines and sectors",
+      "description": "Ensors Accountants LLP is a UK-based accountancy firm with over 130 years of experience providing end-to-end accountancy services to businesses and individuals. They offer a comprehensive range of services including audit & assurance, business advice, corporate finance, tax planning, and specialized sector expertise across industries such as property development, agriculture, education, and healthcare.",
+      "edited_description": "Ensors Accountants LLP brings over 130 years of technical excellence and award-winning approach to accountancy services. As a full-service firm with sector specialists across property, agriculture, education, and healthcare, they provide tailored financial solutions for owner-managed businesses and large corporates alike. Their comprehensive service offering includes audit, tax planning, corporate finance, and business restructuring, making them a trusted partner for businesses seeking expert financial guidance.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Neil Meekings",
+          "title": "Partner",
+          "decision_maker_summary": "As a Partner at Ensors, Neil Meekings brings extensive experience in providing strategic business advice and accountancy services to owner-managed businesses and corporate clients across multiple sectors.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Graham Page",
+          "title": "Partner",
+          "decision_maker_summary": "Graham Page is a Partner specializing in agricultural and landed estates, providing expert guidance on tax planning, business restructuring, and financial management for rural businesses and farming enterprises.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Hugh Simpson",
+          "title": "Partner",
+          "decision_maker_summary": "Hugh Simpson serves as a Partner with expertise in corporate finance and business advisory services, helping clients with acquisitions, disposals, and strategic growth planning across various industries.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Magee Gammon",
+      "company_url": "https://www.mageegammon.com",
+      "office_phone": "+441233630000",
+      "office_email": "mg@mageegammon.com",
+      "associated_emails": [
+        "mg@mageegammon.com"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chartered Accountants in Ashford, Kent. Established 1992. Member of ICAEW and Kent Invicta Chamber of Commerce.",
+      "associated_location": "Ashford, Kent, United Kingdom",
+      "organisational_structure": "Independent firm of Chartered Accountants with 7 Directors and 5 Associate Directors. Established in 1992.",
+      "team": "Team includes Directors, Associate Directors, Managers, and other staff. Specializes in business and individual services across various sectors.",
+      "description": "Magee Gammon is one of the most prominent independent firms of Chartered Accountants in Kent, established in 1992. Based in Ashford, Kent, they provide traditional accountancy services along with fully focused business and tax strategies, profit improvement planning, and expert advice with a personal touch.",
+      "edited_description": "Magee Gammon is a leading independent firm of Chartered Accountants in Kent with over 30 years of experience. They offer comprehensive business and tax strategies, profit improvement planning, and specialist sector expertise across healthcare, construction, property, and more. Their team of 7 Directors and 5 Associate Directors provides expert advice with a personal touch to help clients achieve their financial goals.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Antony Tutt",
+          "title": "Director",
+          "decision_maker_summary": "Managing Director and joint Staff Director specializing in business strategy, tactical management advice, and taxation planning for clients ranging from sole traders to subsidiaries of large overseas companies.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Abhi Jain",
+          "title": "Director",
+          "decision_maker_summary": "Director who re-joined the practice in 1999 after working as Financial Director for a commodity broker. Specializes in advising SME business owners to maximize profitability and tax planning.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Roland Parry",
+          "title": "Director",
+          "decision_maker_summary": "Director with in-depth knowledge of VAT who joined in 2003 from industry as financial controller. Became Chartered Accountant in 2009 and specializes in commercial world insights.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Andy Childs",
+          "title": "Director",
+          "decision_maker_summary": "Director who joined in 2013 after firm acquisition, with expertise in diverse client portfolio from personal tax returns to complex audits for UK subsidiaries of overseas companies.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Andy Vanburen",
+          "title": "Associate Director",
+          "decision_maker_summary": "Associate Director specializing in R&D tax claims and owner managed businesses. Also serves as Deputy Anti Money Laundering Officer and responsible for Marketing.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Berg Kaprow Lewis LLP",
+      "company_url": "https://www.bkl.co.uk",
+      "office_phone": "+442089229222",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "B Corp certified accounting firm with offices in London (North London, City of London) and Cardiff. Member of DFK International network.",
+      "associated_location": "35 Ballards Lane, London N3 1XW; First floor, 5 Fleet Place, London EC4M 7RD; 1 Capital Quarter, Tyndall Street, Cardiff CF10 4BZ",
+      "organisational_structure": "LLP structure with multiple partners and directors across various service lines and sectors",
+      "team": "Team of specialists across financial services, not-for-profit, music/media/sport/entertainment, professional services, property/construction, and technology sectors",
+      "description": "Berg Kaprow Lewis LLP is a leading UK accounting firm that blends technical expertise with a personal touch to support forward-thinking businesses, individuals and families. They are a Certified B Corporation committed to balancing profit with purpose.",
+      "edited_description": "Berg Kaprow Lewis LLP is a B Corp certified accounting firm offering comprehensive services to forward-thinking businesses across multiple sectors including financial services, not-for-profit, and technology. With offices in London and Cardiff, they provide expert tax planning, audit, and advisory services while maintaining a strong commitment to social and environmental responsibility.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Myfanwy Neville",
+          "title": "Partner, Head of Governance & Sustainability",
+          "decision_maker_summary": "As Partner and Head of Governance & Sustainability, Myfanwy leads BKL's B Corp journey and sustainability initiatives, bringing expertise in balancing business growth with social and environmental responsibility.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Rebecca Jackson",
+          "title": "Impact Project Manager",
+          "decision_maker_summary": "Rebecca manages BKL's impact projects and sustainability initiatives, focusing on continuous improvement of the firm's social and environmental performance while driving measurable change across the organization.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Lee Brook",
+          "title": "CEO",
+          "decision_maker_summary": "As CEO, Lee Brook leads BKL's strategic direction and growth, emphasizing the firm's commitment to purposeful business practices and delivering value to clients while maintaining strong governance standards.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "C F W Accountants LLP",
+      "company_url": "https://www.cfwaccountants.co.uk",
+      "office_phone": "+441536713555",
+      "office_email": "enquiries@cfwaccountants.co.uk",
+      "associated_emails": [
+        "enquiries@cfwaccountants.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "CFW Chartered Accountants & Business Advisers is a trading name of CFW Accountants LLP",
+      "associated_location": "3 Weekley Wood Close, Kettering, Northamptonshire, NN14 1UQ",
+      "organisational_structure": "LLP structure with team of accountants and specialists",
+      "team": "Professional team of accountants providing expert services to businesses and individuals across the country",
+      "description": "C F W Accountants LLP is a professional team of accountants who provide expert services to business and individuals across the country. They pride themselves on offering a personalised accountancy service delivered by highly experienced staff with the knowledge to help your business succeed.",
+      "edited_description": "CFW Accountants LLP provides comprehensive accounting services including year-end accounts, audit, tax planning, self-assessment, property tax, bookkeeping, payroll, VAT compliance, and company registration. With extensive experience and a focus on proactive tax planning, they help businesses and individuals maximize tax efficiency while ensuring compliance. Their personalized service and expertise make them trusted advisors for clients of all sizes.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Edmund Carr",
+      "company_url": "https://www.edmundcarr.com",
+      "office_phone": "+441245465500",
+      "office_email": "info@edmund-carr.co.uk",
+      "associated_emails": [
+        "info@edmund-carr.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chartered Accountants in Chelmsford, Essex. Member of UK200Group. Registered with ICAEW and CIOT. Uses Xero, QuickBooks, and Sage software.",
+      "associated_location": "146 New London Road, Chelmsford, Essex CM2 0AW",
+      "organisational_structure": "Chartered Accountancy firm with multiple partners and staff. Registered in England & Wales. Number: OC333955.",
+      "team": "Team includes Stewart P Martin, Debbie J Wakefield, Thomas C York FCCA, Sandra A Morrell FCCA, Alison J McDowall, Stephen C Drain, and Alex M Stone FCCA.",
+      "description": "Founded in 1953, Edmund Carr is a well-established firm of Chartered Accountants in Chelmsford offering comprehensive business advice and accountancy services to individuals and businesses throughout the South East and beyond.",
+      "edited_description": "Edmund Carr is a leading Chartered Accountancy firm in Chelmsford with over 70 years of experience. We provide comprehensive business advice and accountancy services, specializing in tax minimization and business growth strategies. Our team of qualified professionals offers personalized service to help SMEs and businesses maximize their potential.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Stewart P Martin",
+          "title": "Partner",
+          "decision_maker_summary": "Stewart P Martin is a Partner at Edmund Carr with extensive experience in providing comprehensive accounting and business advisory services to clients across various sectors.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Debbie J Wakefield",
+          "title": "Partner",
+          "decision_maker_summary": "Debbie J Wakefield serves as a Partner at Edmund Carr, bringing expertise in tax planning and compliance to help businesses optimize their financial strategies.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Thomas C York FCCA",
+          "title": "Partner",
+          "decision_maker_summary": "Thomas C York FCCA is a Partner at Edmund Carr with Chartered Certified Accountant qualification, specializing in providing strategic financial advice to growing businesses.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "FMD Financial",
+      "company_url": "https://www.fmd.com.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "FMD Financial is a financial advisory firm based in Melbourne, Brisbane, and Adelaide, Australia. They specialize in providing financial advice for various life stages including retirement planning, wealth building, and getting started with money. The firm has a strong focus on client satisfaction with 98% of clients being highly satisfied and 97% willing to refer them to others.",
+      "associated_location": "Melbourne, Brisbane, Adelaide",
+      "organisational_structure": "The firm has multiple financial advisors and planners including Andrew Goh, Jason Calleja, Darren, Jimmy Wong, Tim Gaspar, and others. They operate across multiple offices in Victoria, Queensland, and South Australia.",
+      "team": "The team consists of financial advisors, retirement planning experts, and support staff who provide comprehensive financial advice across six pillars: Goal Setting, Income & Budgeting, Assets & Debt, Superannuation, Insurance, and Investments.",
+      "description": "FMD Financial is a financial advisory firm that provides expert financial advice for every life stage in Melbourne, Brisbane, and Adelaide. They specialize in retirement planning, wealth building, and helping clients achieve their financial goals through comprehensive financial planning services.",
+      "edited_description": "FMD Financial is a leading financial advisory firm with offices in Melbourne, Brisbane, and Adelaide. They specialize in retirement planning and wealth management for professionals at every life stage. With 98% client satisfaction and 97% referral rates, FMD offers comprehensive financial planning across six key pillars including superannuation, investments, and insurance. Their team of experienced advisors provides personalized strategies to help clients achieve their financial goals faster.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Andrew Goh",
+          "title": "Financial Advisor",
+          "decision_maker_summary": "Andrew Goh is a highly experienced financial advisor with over 20 years of experience at FMD. He specializes in retirement planning and superannuation management, consistently receiving excellent client reviews for his thorough approach and clear communication. Andrew is known for his proactive planning and ability to explain complex financial concepts in simple terms.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Jason Calleja",
+          "title": "Financial Advisor",
+          "decision_maker_summary": "Jason Calleja is a trusted financial advisor at FMD who manages superannuation portfolios and provides comprehensive financial planning. He has received numerous positive reviews for his professionalism, knowledge, and ability to deliver tailored solutions. Jason is particularly skilled in helping clients navigate complex financial situations including retirement transitions and investment strategies.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Jimmy Wong",
+          "title": "Financial Advisor/Mortgage Broker",
+          "decision_maker_summary": "Jimmy Wong is a highly-rated financial advisor and mortgage broker at FMD, known for his exceptional efficiency and client service. He has received outstanding reviews for his professionalism, responsiveness, and ability to deliver results with zero fuss. Jimmy specializes in mortgage broking and comprehensive financial planning, consistently exceeding client expectations.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Affinia",
+      "company_url": "https://www.clarksonhyde.com",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Affinia is a UK-based accounting, tax and business advisory firm that has rebranded from Clarkson Hyde Global. The firm operates across multiple locations in East Anglia, South East England, and London, offering comprehensive services including accountancy, tax planning, corporate finance, audit, and payroll. They serve various sectors including education, haulage, hospitality, media, professional services, and recruitment.",
+      "associated_location": "Multiple offices across East Anglia, South East England, and London",
+      "organisational_structure": "Affinia has a large team with multiple directors and managers across different departments. The leadership team includes Group CEO Darren Redmayne, Group COO Vanessa Emens, Group CFO Rob Harden, and Group CCO Chris Annis. The firm has over 300 years' combined sector experience and employs numerous professionals across various service lines.",
+      "team": "The team includes numerous professionals with titles such as Directors, Managers, and Executives across departments including Accountancy & Advisory, Tax & Planning, Corporate Finance, Audit & Assurance, and Payroll. Specific team members mentioned include Charles Green (Director, Tax & Planning), Graham Speck (Director, Accountancy & Advisory), Andrew Meredith (Director & Head of Department, Accountancy & Advisory), and many others.",
+      "description": "Affinia is a challenger accountancy firm offering full-service accounting, tax, and business advisory services. They focus on building stronger, more valuable relationships with clients and provide tailored advice across multiple sectors. The firm emphasizes understanding each business's unique challenges and opportunities.",
+      "edited_description": "Affinia is a rapidly growing UK accounting firm offering comprehensive services including tax planning, corporate finance, audit, and advisory support across multiple sectors. With over 300 years' combined experience and offices throughout East Anglia, London, and South East England, they provide tailored, partner-led support to help businesses thrive. Their challenger approach focuses on building authentic relationships and delivering actionable insights that drive real business growth.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Darren Redmayne",
+          "title": "Group Chief Executive Officer",
+          "decision_maker_summary": "As Group CEO, Darren Redmayne leads Affinia's strategic direction and growth initiatives. With extensive experience in the accounting and advisory sector, he oversees the firm's operations across multiple locations and service lines, driving the company's mission to provide exceptional client service and support business growth.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Vanessa Emens",
+          "title": "Group Chief Operations & People Officer",
+          "decision_maker_summary": "Vanessa Emens leads Affinia's people and operations strategy, ensuring the firm maintains its values of respect, integrity, and teamwork. She plays a crucial role in developing the company culture and supporting the professional growth of the team while maintaining operational excellence across all offices.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Charles Green",
+          "title": "Director, Tax & Planning",
+          "decision_maker_summary": "As Director of Tax & Planning, Charles Green leads the firm's tax advisory services, providing tailored tax advice aligned with client goals. His expertise spans property tax, private client tax, and Making Tax Digital compliance, helping businesses navigate complex tax regulations and optimize their tax positions.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Institute of Financial Accountants (IFA)",
+      "company_url": "https://www.ifa.org.uk",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "The IFA is part of the Institute of Public Accountants (IPA) Group, one of the world's largest SME-focused accountancy groups with more than 49,000 members and students in 100 countries.",
+      "associated_location": "United Kingdom",
+      "organisational_structure": "The IFA is governed by an IFA Board of Directors and supported by an IFA Council. Jonathan Barber is Group Executive - UK. Andrew Conway is CEO of the IPA Group.",
+      "team": "The IFA has leadership teams including the IPA Board of Directors, IFA Board of Directors, and IFA Council. The IFA Council comprises a chairperson, IFA regional ambassadors, and two IFA Award winners.",
+      "description": "The Institute of Financial Accountants (IFA) is an internationally recognised professional accountancy membership body providing dedicated support to SMEs and SMPs. We are part of the Institute of Public Accountants (IPA) Group, one of the world's largest SME-focused accountancy group, with more than 49,000 members and students in 100 countries.",
+      "edited_description": "The IFA is a leading professional accountancy body dedicated to supporting SMEs and SMPs with compliance and planning expertise. As part of the IPA Group with 49,000+ members globally, we offer comprehensive support including CPD, technical resources, and professional development. Our members are recognised by HM Treasury, FCA, and other regulatory bodies, making us the ideal partner for accounting professionals serving small businesses.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Jonathan Barber",
+          "title": "Group Executive - UK",
+          "decision_maker_summary": "Jonathan Barber serves as Group Executive - UK, providing senior guidance and leadership to the IFA. He plays a key role in strategic direction and member support for the UK operations of this international accountancy body.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Andrew Conway",
+          "title": "CEO of IPA Group",
+          "decision_maker_summary": "Andrew Conway is CEO of the IPA Group, overseeing the broader organisation that includes the IFA. He is responsible for the management and control of the IPA and its funds, providing strategic leadership across the global SME-focused accountancy network.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Accounting for Sustainability",
+      "company_url": "https://www.accountingforsustainability.org",
+      "office_phone": "+442072400660",
+      "office_email": "info@accountingforsustainability.org",
+      "associated_emails": [
+        "info@accountingforsustainability.org"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "9 Appold Street, 8th Floor, London, EC2A 2AP",
+      "associated_location": "London, United Kingdom",
+      "organisational_structure": "Charitable Incorporated Organization with Executive Chair, Executive Director, and multiple Directors leading various programs",
+      "team": "Team includes Executive Chair Jessica Fries, Executive Director Helen Slinger, and Directors leading CFO Leadership Network, Capital Markets, and regional chapters",
+      "description": "Accounting for Sustainability (A4S) is a charitable organization founded by His Majesty King Charles III to help finance professionals integrate sustainability into business decision-making. The organization works with CFOs, finance teams, and the global accounting community to drive sustainable business practices.",
+      "edited_description": "Accounting for Sustainability is a leading charitable organization founded by His Majesty King Charles III that helps finance professionals integrate sustainability into business decision-making. We work with CFOs and finance teams globally to drive sustainable business practices through our CFO Leadership Network, Academy programs, and practical guidance on net zero, nature positive, and just transition strategies.",
+      "business_segment": "Other Accounting (No Tax)",
+      "decision_makers": [
+        {
+          "name": "Jessica Fries",
+          "title": "Executive Chair",
+          "decision_maker_summary": "Jessica Fries is the Executive Chair of Accounting for Sustainability, leading the organization since 2008. She has extensive experience in sustainability integration, having previously worked at PwC advising companies, governments, and investors. She has been instrumental in establishing the International Integrated Reporting Council and the Taskforce on Climate-related Financial Disclosures.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Helen Slinger",
+          "title": "Executive Director",
+          "decision_maker_summary": "Helen Slinger is Executive Director at Accounting for Sustainability, leading work to provide finance professionals with knowledge and skills to embed sustainability into business-as-usual. She has experience as Head of Sustainable Business at Yorkshire Water and previously worked at PwC supporting clients on sustainability challenges.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Kerry Perkins",
+          "title": "Director, Capital Markets",
+          "decision_maker_summary": "Kerry Perkins leads the Capital Markets programme at A4S, focusing on accelerating awareness and action towards a global sustainable financial system. She manages the A4S Asset Owners Network and has worked on numerous sustainability initiatives of His Majesty King Charles III since 2006.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "F. W. Smith, Riches & Co.",
+      "company_url": "https://www.fwsr.com",
+      "office_phone": "+442079300833",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Member of MGI Worldwide, a Top 20 international accounting network with 9,000 professionals in 400 locations. ESGmark\u00ae community member focused on ESG practices.",
+      "associated_location": "15 Whitehall, London SW1A 2DD",
+      "organisational_structure": "Four partner practice with dedicated and enthusiastic staff. High staff retention enables continuity and tailored advice.",
+      "team": "Team information not fully available from provided content. Practice has four partners and dedicated staff.",
+      "description": "F. W. Smith, Riches & Co. is a firm of ICAEW Chartered Accountants providing a wide range of accountancy services and advice. A partner-led service combined with experience and technical expertise enables highly personal and professional service. The firm offers the full spectrum of services to companies, professional partnerships, businesses and individuals.",
+      "edited_description": "Established in 1881, F. W. Smith, Riches & Co. is a prestigious four-partner ICAEW Chartered Accountants firm in Central London offering comprehensive accounting, tax, and advisory services. As a member of MGI Worldwide, they provide seamless international support with access to 9,000 professionals globally. Their partner-led approach and high staff retention ensure personalized, proactive advice for businesses and individuals seeking trusted, long-term relationships.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Argents Accountants Limited",
+      "company_url": "https://www.argentsaccountants.co.uk",
+      "office_phone": "+441603666132",
+      "office_email": null,
+      "associated_emails": [
+        "jon.spoor@argentsaccountants.co.uk",
+        "mark.johnstone@argentsaccountants.co.uk",
+        "stewart.davy@argentsaccountants.co.uk",
+        "stewart.halton@argentsaccountants.co.uk",
+        "neil.groom@argentsaccountants.co.uk",
+        "fiona.dye@argentsaccountants.co.uk",
+        "will.batchelor@argentsaccountants.co.uk",
+        "susie.wye@argentsaccountants.co.uk",
+        "donna.mackay@argentsaccountants.co.uk",
+        "debbie.chettleburgh@argentsaccountants.co.uk",
+        "ulanda.snowling@argentsaccountants.co.uk",
+        "callum.cooper@argentsaccountants.co.uk",
+        "catherine.dale@argentsaccountants.co.uk",
+        "jonathan.sinclair@argentsaccountants.co.uk",
+        "julie.francis@argentsaccountants.co.uk",
+        "libby.matthewson@argentsaccountants.co.uk",
+        "oliver.walker@argentsaccountants.co.uk",
+        "will.muirhead@argentsaccountants.co.uk",
+        "ben.wright@argentsaccountants.co.uk",
+        "aaron.johnson@argentsaccountants.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Argents Accountants Limited is a chartered accounting firm based in Norwich, Norfolk. The firm became part of Scrutton Bland on 30 September 2025, expanding their presence into Norwich. They specialize in serving various sectors including agriculture & farming, charities, hospitality, and property & construction.",
+      "associated_location": "15 Palace Street, Norwich, Norfolk, NR3 1RT",
+      "organisational_structure": "Chartered accounting firm with multiple directors and specialized managers. The firm has a strong focus on agricultural services and serves various sectors including charities, hospitality, and property & construction.",
+      "team": "The team consists of 7 directors (including 3 with FCA qualifications), multiple managers, accountants, bookkeepers, and support staff. The firm has specialized teams for agriculture, payroll, tax, and audit services.",
+      "description": "Argents Accountants Limited is a chartered accounting firm based in Norwich, Norfolk. They provide comprehensive accounting services including tax planning, audit, payroll, bookkeeping, and business support. The firm specializes in serving various sectors including agriculture & farming, charities, hospitality, and property & construction.",
+      "edited_description": "Argents Accountants Limited is a trusted chartered accounting firm in Norwich, specializing in agricultural, charity, hospitality, and property sectors. With 7 qualified directors and specialized teams, they offer comprehensive services including tax planning, audit, payroll, and digital bookkeeping solutions. Their client-focused approach and sector expertise make them ideal partners for growing businesses.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Jon Spoor",
+          "title": "FCA, Managing Director",
+          "decision_maker_summary": "Jon is the Managing Director specializing in the agricultural sector, working with farming businesses on budgets, cashflow, asset finance, and strategic business decisions. He has extensive experience with farming accounts software including Key Accounts and Farmplan.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "jon.spoor@argentsaccountants.co.uk",
+          "linkedin": ""
+        },
+        {
+          "name": "Mark Johnstone",
+          "title": "FCA, Director",
+          "decision_maker_summary": "Mark focuses on owner-managed SMEs and voluntary organizations, dividing his time between statutory audit, accountancy, and tax compliance work. He provides strategic guidance in areas such as remuneration policy and tax planning.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "mark.johnstone@argentsaccountants.co.uk",
+          "linkedin": ""
+        },
+        {
+          "name": "Stewart Davy",
+          "title": "Director, FCA, MAAT",
+          "decision_maker_summary": "Stewart looks after corporate clients, leads the firm's Making Tax Digital (MTD) focus for VAT, and advises on bookkeeping solutions including QuickBooks Online. He oversees the payroll team and advises on Auto Enrolment legislation.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "stewart.davy@argentsaccountants.co.uk",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Chavereys",
+      "company_url": "https://www.chavereys.co.uk",
+      "office_phone": "+441795594495",
+      "office_email": "enquiries@chavereys.co.uk",
+      "associated_emails": [
+        "enquiries@chavereys.co.uk",
+        "claire.jones@chavereys.co.uk",
+        "karen.blackiston@chavereys.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chavereys is a UK-based accounting firm with multiple divisions including Core Services, Probate Services, and Audit. They are registered with the Institute of Chartered Accountants in England and Wales.",
+      "associated_location": "UK (specific office locations not provided on website)",
+      "organisational_structure": "Chavereys operates as a limited company with multiple divisions and specialized teams. They have a structured approach with separate entities for different service lines.",
+      "team": "The firm emphasizes that their team members define them and share a common passion for their sectors and culture. Specific team member details are available on their 'Our People' page.",
+      "description": "Chavereys is a UK accounting firm offering a range of services including bookkeeping, management reporting, payroll, systems & process review, financial reporting, probate services, and audit services. They serve the agricultural industry with monthly farming updates and have multiple specialized divisions.",
+      "edited_description": "Chavereys is a well-established UK accounting firm with specialized divisions in core accounting services, probate, and audit. They serve the agricultural sector with dedicated farming updates and offer comprehensive financial services to businesses. Their team-driven approach and sector expertise make them a valuable partner for clients seeking professional accounting solutions.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Claire Jones",
+          "title": "Contact for Core Services",
+          "decision_maker_summary": "Claire Jones is the primary contact for Chavereys Core Services division, handling bookkeeping, management reporting, payroll, and financial reporting services. She serves as a key point of contact for clients seeking outsourced accounting solutions.",
+          "phone_office": "+441795594495",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "claire.jones@chavereys.co.uk",
+          "linkedin": ""
+        },
+        {
+          "name": "Karen Blackiston",
+          "title": "Contact for Probate Services",
+          "decision_maker_summary": "Karen Blackiston specializes in probate services and estate administration, providing bespoke and tailored services to executors and personal representatives. She is licensed by the Institute of Chartered Accountants in England and Wales to handle non-contentious probate matters.",
+          "phone_office": "+441795594495",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "karen.blackiston@chavereys.co.uk",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Everfair Tax",
+      "company_url": "https://www.everfairtax.co.uk",
+      "office_phone": "+442039495999",
+      "office_email": "info@everfairtax.co.uk",
+      "associated_emails": [
+        "info@everfairtax.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "UK-based tax advisory and compliance firm specializing in UK, US and international tax services for individuals and companies",
+      "associated_location": "Weybridge Office: Ground Floor, 37a Church Street, Weybridge, Surrey KT13 8DG; London Office: 40 Gracechurch Street, London, EC3V 0BT",
+      "organisational_structure": "Small team with focus on building long-term relationships, intentionally small portfolios for responsive service, breadth of experience comparable to larger firms",
+      "team": "Experienced technical team with specialist knowledge in Private Client Tax, Trusts and Estates, and Entrepreneurs. Team includes tax seniors, tax assistants, client service administrators, and office support staff",
+      "description": "Everfair Tax is a UK-based tax advisory and compliance firm founded in 2014, specializing in UK, US and international tax services for both individuals and companies. The firm provides tax compliance and advisory services tailored to each client's unique needs, with a focus on timely, proactive, and pragmatic advice.",
+      "edited_description": "Everfair Tax is a specialist UK, US and international tax advisory firm founded in 2014, offering personalized tax compliance and advisory services for private clients, trusts, estates, and entrepreneurs. With intentionally small portfolios, they provide responsive, proactive advice comparable to larger firms while maintaining exceptional client care and work-life balance for their team.",
+      "business_segment": "Tax Specialist",
+      "decision_makers": [
+        {
+          "name": "Gillian Everall",
+          "title": "Managing Director",
+          "decision_maker_summary": "Founder and Managing Director with excellent understanding of international tax matters, vital for EU nationals residing in the UK. Visionary leader focused on creating a different experience for both clients and staff by delivering more than just tax returns.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Daniel Everall",
+          "title": "Operations Director",
+          "decision_maker_summary": "Operations Director who joined the firm in 2018, helping to expand services and manage company growth. Works alongside the Managing Director to ensure exceptional client care and service tailored to individual requirements.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Matthew Edwards",
+          "title": "Tax Director",
+          "decision_maker_summary": "Tax Director with specialist knowledge in tax advisory services. Part of the experienced technical team that provides comprehensive tax compliance and advisory services tailored to each client's unique needs.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Hive Business Group Limited",
+      "company_url": "https://www.hivebusiness.co.uk",
+      "office_phone": "+441604239111",
+      "office_email": "info@hivebusiness.co.uk",
+      "associated_emails": [
+        "info@hivebusiness.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Dental accountancy, marketing and practice development services",
+      "associated_location": "United Kingdom",
+      "organisational_structure": "Multi-disciplinary team of dental accountants and marketers",
+      "team": "Close-knit team of dental industry experts with at least two people knowing everything about each client account",
+      "description": "Hive Business Group Limited provides dental accountancy, marketing and practice development services with a money-back guarantee. They specialize in the dental industry and offer comprehensive solutions including accounting, tax advice, marketing, compliance, and wealth management.",
+      "edited_description": "Hive Business Group Limited is a specialized dental accountancy firm offering comprehensive practice development services with a unique money-back guarantee. They provide expert accounting, tax advice, marketing, and compliance services specifically tailored for dental practices, helping owners achieve commercial success through strategic business intelligence and industry-leading advice.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Ross Martin",
+          "title": "Partner",
+          "decision_maker_summary": "Ross Martin is a partner at Hive Business who specializes in vision planning and strategic business development for dental practices. He works closely with practice owners to create actionable growth strategies and implement comprehensive business solutions.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Dan Martin",
+          "title": "Partner",
+          "decision_maker_summary": "Dan Martin is a partner at Hive Business focusing on practice development and strategic planning. He collaborates with dental practice owners to identify growth opportunities and implement effective business strategies for long-term success.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Simon",
+          "title": "Accountant",
+          "decision_maker_summary": "Simon is a financial expert at Hive Business who provides comprehensive accounting services and financial analysis for dental practices. He helps practice owners maintain financial clarity and control over their business operations.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "McTear Williams & Wood",
+      "company_url": "https://www.mw-w.com",
+      "office_phone": "+448003317417",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "UK-based insolvency and business rescue specialists for SMEs",
+      "associated_location": "UK (headquarters not specified)",
+      "organisational_structure": "Team of licensed insolvency practitioners, chartered accountants, and restructuring specialists",
+      "team": "Over 20 years of experience helping businesses navigate financial challenges",
+      "description": "McTear Williams & Wood are the UK's leading business rescue and insolvency specialists focused on SMEs. They offer free and confidential initial consultations to help businesses find the right way forward when facing financial pressures.",
+      "edited_description": "UK's leading business rescue and insolvency specialists for SMEs with over 20 years of experience. Licensed by ICAEW, offering confidential initial consultations for businesses facing cash flow challenges, financial restructuring, and insolvency proceedings. Specializes in finding recovery routes or managing orderly wind-downs with sensitivity and professionalism.",
+      "business_segment": "Other Tax",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "SRLV",
+      "company_url": "https://www.srlv.co.uk",
+      "office_phone": "+441483532532",
+      "office_email": "info@sriv.co.uk",
+      "associated_emails": [
+        "info@sriv.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chartered Accountants and Business Advisers based in Guildford, Surrey",
+      "associated_location": "Guildford, Surrey, UK",
+      "organisational_structure": "Chartered Accountants and Business Advisers",
+      "team": "Not specified on main page",
+      "description": "SRLV is a firm of Chartered Accountants and Business Advisers based in Guildford, Surrey. They provide a range of accounting and business advisory services to clients.",
+      "edited_description": "SRLV is a Chartered Accountants and Business Advisers firm based in Guildford, Surrey, offering comprehensive accounting and business advisory services. They serve a diverse client base with expertise in financial management, tax planning, and business growth strategies.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Wisteria Accountants",
+      "company_url": "https://www.wisteria.co.uk",
+      "office_phone": "+442045467630",
+      "office_email": "info@wisteria.co.uk",
+      "associated_emails": [
+        "info@wisteria.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Based in North West London, serving clients across the UK and internationally",
+      "associated_location": "The Grange Barn, Pike's End Pinner London, HA5 2EX",
+      "organisational_structure": "Young, dynamic firm with dedicated professionals",
+      "team": "Team of specialist accountants, tax advisors and auditors",
+      "description": "Wisteria Accountants is a strong, modern accountancy firm based in the heart of North West London. Our dedicated team of specialist accountants, tax advisors and auditors provide various services to suit your business needs. We are a young, dynamic accountant firm of dedicated professionals who have a passion for being every client\u2019s number one advisers, providing expertise and a friendly service for life.",
+      "edited_description": "Wisteria Accountants is a dynamic North West London-based firm offering tailored accountancy and taxation services for businesses and individuals across all industries. With 24 years of experience and 103 active clients, they provide comprehensive solutions from bookkeeping to tax compliance, payroll management, and year-end reporting. Their proactive approach identifies potential issues before they become problems, leveraging advanced accounting software to maintain precise financial records while focusing on enhancing client businesses.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "BHP Professional Services Limited",
+      "company_url": "https://www.bhp.co.uk",
+      "office_phone": "+443331237171",
+      "office_email": "info@bhp.co.uk",
+      "associated_emails": [
+        "info@bhp.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "BHP Professional Services Limited is part of the Sumer Group, formed on January 1, 2026. The firm provides audit services through Sumer Auditco Limited, accounting and tax services through BHP Professional Services Limited, and corporate finance services through Translink Corporate Finance Limited.",
+      "associated_location": "Multiple offices in Yorkshire: Chesterfield, Cleckheaton, Leeds, Sheffield, York",
+      "organisational_structure": "BHP LLP has transitioned to multiple legal entities under the Sumer Group umbrella. The firm has a team of experienced professionals across various service lines including audit, tax, corporate finance, and advisory services.",
+      "team": "The firm employs a team of professionals across Yorkshire with expertise in audit, tax, corporate finance, and advisory services. They have been recognized as a Great Place to Work Certified Organisation and have received multiple awards for workplace culture and service excellence.",
+      "description": "BHP Professional Services Limited is a leading accounting firm in Yorkshire, providing tailored solutions for business owners and leaders. They offer a comprehensive range of services including audit and assurance, corporate finance, business taxes, digital finance, consultancy, business funding, forensic accounting, financial reporting, financial planning, personal tax, pensions, and trust & estates services.",
+      "edited_description": "BHP Professional Services Limited is a leading Yorkshire-based accounting firm offering comprehensive business solutions from audit to corporate finance. With multiple office locations and a team of experienced professionals, they provide tailored services to help businesses achieve their goals. Their expertise spans across various industries including healthcare, manufacturing, property, tech, and retail.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Albert Goodman LLP",
+      "company_url": "https://www.albertgoodman.co.uk",
+      "office_phone": "+443303335039",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Albert Goodman LLP is a UK-based accounting firm with over 150 years of heritage in the South West. They provide comprehensive accounting, tax, and financial planning services to businesses and individuals across multiple sectors.",
+      "associated_location": "Goodwood House, Blackbrook Park Avenue, Taunton, Somerset, TA1 2PX",
+      "organisational_structure": "Partnership structure with multiple partners and directors across various service lines including tax, audit, and financial planning. The firm has recently appointed four senior tax professionals to strengthen their tax expertise.",
+      "team": "The team consists of sector-focused experts with deep knowledge across agriculture, landed estates, SMEs, healthcare, charities, construction, family businesses, academies, and law firms. They emphasize practical, down-to-earth service delivery.",
+      "description": "Albert Goodman is a friendly, fair, and forward-thinking accounting firm providing excellent service and positive client experiences. With 150 years of heritage in the South West, they offer comprehensive accounting, tax, and financial planning services across multiple sectors.",
+      "edited_description": "Albert Goodman LLP is a well-established South West accounting firm with 150 years of heritage, offering comprehensive accounting, tax, and financial planning services. They specialize in serving diverse sectors including agriculture, landed estates, SMEs, healthcare, and charities, with a team of sector-focused experts who provide practical, down-to-earth advice. Recently strengthened their tax expertise with four senior appointments, making them an ideal partner for businesses seeking experienced, forward-thinking accountants.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Lauren",
+          "title": "Partner and Head of Personal Tax",
+          "decision_maker_summary": "Lauren has been appointed as Partner and Head of Personal Tax, bringing significant expertise to lead the firm's personal tax services. Her leadership role indicates she's a key decision maker for tax-related client engagements and strategic direction in the tax department.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Oli",
+          "title": "Senior Manager in Corporate Tax",
+          "decision_maker_summary": "Oli has joined as a Senior Manager in Corporate Tax, contributing to the firm's growing tax expertise. His senior position suggests he plays a crucial role in managing corporate tax clients and providing strategic tax advice to businesses.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Tom",
+          "title": "Senior Manager in Corporate Tax",
+          "decision_maker_summary": "Tom has been appointed as a Senior Manager in Corporate Tax, strengthening the firm's corporate tax capabilities. His role involves managing complex corporate tax matters and providing expert guidance to business clients on tax strategy and compliance.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "NumberMill Limited",
+      "company_url": "https://www.numbermill.co.uk",
+      "office_phone": "+443331212001",
+      "office_email": "enquiries@numbermill.co.uk",
+      "associated_emails": [
+        "enquiries@numbermill.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Specialist accountants for recruitment and high volume workforce management",
+      "associated_location": "Focus 31 \u2013 East Wing, Mark Road, Hemel Hempstead, HP2 7BW",
+      "organisational_structure": "Specialist accounting firm with focus on recruitment sector",
+      "team": "Team of professional specialists with experience in recruitment and accountancy services",
+      "description": "NumberMill was set up, specifically to meet the requirements of recruitment business's for support with regard to the pace of recruitment, volume workforce management, financial, strategic and compliance affairs. Everyone in our business has been selected as they are professional specialists with experience in recruitment and accountancy services.",
+      "edited_description": "NumberMill is a specialist accounting consultancy for recruitment businesses, offering umbrella/PEO services, back office support, and accounting services. With over 15 years of industry experience and FCSA accreditation, they provide compliant, efficient solutions for high-volume workforce management. Their team of ACCA-qualified accountants delivers commercial, honest advice tailored to the recruitment sector's unique challenges.",
+      "business_segment": "Other Accounting (No Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Wilson Partners Limited",
+      "company_url": "https://www.wilson-partners.co.uk",
+      "office_phone": "+441628770770",
+      "office_email": "info@wilson-partners.co.uk",
+      "associated_emails": [
+        "info@wilson-partners.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Wilson Partners Limited is a trading style of multiple entities including Craufurd Hale US Tax Services Ltd, CH Probate Services Ltd, WP Audit Limited, and WP Audit Services LLP. Registered in England with multiple office locations across the South of England and South Africa.",
+      "associated_location": "TOR, Saint-Cloud Way, Maidenhead, Berkshire, SL6 8BN (Headquarters) with additional offices in Cambridge, Sevenoaks, Woking, Plymouth, Oakham, and South Africa",
+      "organisational_structure": "Chartered accounting firm with multiple trading styles and registered entities. Offers comprehensive accounting, audit, tax advisory, and corporate finance services through a team of experienced professionals.",
+      "team": "Team of highly experienced, commercial professionals offering 'Big 4' expertise with diverse skill sets. Focus on client service, value addition, and continuous development. Includes tax specialists, corporate finance experts, audit professionals, and business advisors.",
+      "description": "Wilson Partners is a group of business enthusiasts who are accountants, helping clients realize their ambitions through smart finance and straight talk. They combine deep financial expertise with real-world perspective to help entrepreneurs, owners, and investors make smart decisions professionally and personally.",
+      "edited_description": "Wilson Partners delivers comprehensive accounting, audit, tax, and corporate finance services to SMEs, private equity investors, and private individuals across the South of England and South Africa. With 'Big 4' expertise and a refreshing approach focused on outcomes you can feel, they provide clean numbers, clear strategy, and protected wealth while being big enough to count and small enough to care.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Caroline Fallows",
+          "title": "Senior Tax Manager",
+          "decision_maker_summary": "Longstanding US tax specialist focusing on individual advice from detailed compliance to strategic planning, with 10 years of experience at Coopers & Lybrand.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Erica Straw",
+          "title": "Semi-Senior Client Advisor",
+          "decision_maker_summary": "Client advisor with business advisory expertise, supporting clients with their accounting and advisory needs.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Jenny Evans",
+          "title": "Accounts Director",
+          "decision_maker_summary": "Accounts Director overseeing accounting services and client relationships, ensuring high-quality financial management for clients.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Gareth Lambe",
+          "title": "Tax Director",
+          "decision_maker_summary": "Tax Director leading tax advisory services, providing strategic tax planning and compliance expertise to businesses and individuals.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Geethika Muralidharan",
+          "title": "R&D Tax Consultant",
+          "decision_maker_summary": "R&D Tax Consultant specializing in innovations tax, helping clients identify and claim R&D tax relief and other innovation incentives.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "WBV Chartered Accountants",
+      "company_url": "https://www.wbv.ltd.uk",
+      "office_phone": "+441792652108",
+      "office_email": "mail@wbv.ltd.uk",
+      "associated_emails": [
+        "mail@wbv.ltd.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chartered accountants based in Swansea and Neath, South Wales with over 800 clients. Member of UK200Group.",
+      "associated_location": "Swansea Office: Unit 15, Third Floor, Langdon House, SA1 Waterfront, Swansea, SA1 8QY; Neath Office: Woodfield House, Castle Walk, Neath, SA11 3LN",
+      "organisational_structure": "Independent firm with multiple offices in South Wales. No specific partner information available on website.",
+      "team": "No specific team member information available on website.",
+      "description": "Chartered accountants based in Swansea and Neath, South Wales who help you develop and manage your business. Member of UK200Group with over 800 clients.",
+      "edited_description": "WBV Chartered Accountants is one of the largest independent firms in South Wales with over 800 clients. We provide comprehensive accounting services including tax, payroll, bookkeeping, and business advisory. Our team offers free initial consultations and fixed-fee pricing to help businesses of all sizes achieve their financial goals.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Samera Business Advisors",
+      "company_url": "https://www.samera.co.uk",
+      "office_phone": "+442071008788",
+      "office_email": "info@samera.co.uk",
+      "associated_emails": [
+        "info@samera.co.uk"
+      ],
+      "associated_mobile_numbers": [
+        "+447873615112"
+      ],
+      "associated_info": "Samera Business Advisors is a specialist accounting and business advisory firm focused on dentists and healthcare professionals. They offer accounting, tax, finance brokerage, practice sales, and AI-driven business solutions. The firm has over 25 years of experience and has helped over 750 dental practices.",
+      "associated_location": "136 High Street, Esher, KT10 9QJ, United Kingdom",
+      "organisational_structure": "Samera is led by CEO Arun Mehra and Clinical Director Dr Smita Mehra. The firm has a team of specialists including accountants, finance brokers, and business development consultants. They operate multiple entities including Samera Ltd, Samera Finance Ltd, and Samera Practice Sales Limited.",
+      "team": "The team includes dental accountants, finance specialists, business development executives, and client service managers. Key team members include Natasha Gnanapragasam (Accountancy Senior Manager), Charles Suthakaran (Internal Accountant), and Uros Turcic (Business Development Consultant).",
+      "description": "Samera Business Advisors is a specialist accounting and business advisory firm focused on dentists and healthcare professionals. They offer accounting, tax, finance brokerage, practice sales, and AI-driven business solutions. The firm has over 25 years of experience and has helped over 750 dental practices.",
+      "edited_description": "Samera Business Advisors is a specialist accounting and business advisory firm focused exclusively on dentists and healthcare professionals. With 25+ years of experience and over 750 practices helped, they offer comprehensive services from accounting and tax to finance brokerage and practice sales. Their unique advantage is that they're practice owners themselves, giving them real-world insight into the challenges healthcare businesses face.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Arun Mehra",
+          "title": "CEO",
+          "decision_maker_summary": "Arun Mehra is the CEO and founder of Samera Business Advisors. As a chartered accountant and practice owner, he brings extensive experience in dental accounting, tax planning, and business development. He specializes in helping dental groups and DSOs with dedicated finance and accounting functions.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Dr Smita Mehra",
+          "title": "Clinical Director",
+          "decision_maker_summary": "Dr Smita Mehra is the Clinical Director and co-founder of Samera. As a practicing dentist, she brings clinical expertise combined with business acumen. She specializes in understanding the unique challenges faced by dental practices and healthcare professionals.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Natasha Gnanapragasam",
+          "title": "Accountancy Senior Manager",
+          "decision_maker_summary": "Natasha Gnanapragasam is the Accountancy Senior Manager at Samera. She specializes in dental accountancy and tax services for both associates and practice owners. She's an expert in Making Tax Digital and provides tax saving advice to healthcare professionals.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Folkes Worton LLP",
+      "company_url": "https://www.fwca.co.uk",
+      "office_phone": "+441384376964",
+      "office_email": "enquiries@fwca.co.uk",
+      "associated_emails": [
+        "enquiries@fwca.co.uk",
+        "pd@fwca.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Chartered Accountants based in Stourbridge, West Midlands, established over 100 years ago",
+      "associated_location": "15 & 17 Church Street, Stourbridge, DY8 1LU",
+      "organisational_structure": "LLP with 4 partners and 30+ staff members",
+      "team": "4 partners, 30+ colleagues across audit, accounting, tax, management accounts, payroll, and admin teams",
+      "description": "Folkes Worton LLP is a well-established firm of Chartered Accountants based in the West Midlands, providing audit, accountancy, tax and advisory services to a diverse portfolio of clients. We pride ourselves on delivering high-quality, personalised service and building long-term relationships with our clients.",
+      "edited_description": "Folkes Worton LLP is a 100+ year old Chartered Accountancy firm in Stourbridge offering comprehensive audit, tax, and accounting services. With 4 partners and 30+ staff, they provide personalised service to diverse clients across construction, manufacturing, energy, charities, and education sectors. Their expertise includes R&D tax credits, embedded capital allowances, and Making Tax Digital compliance.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Nigel Meredith",
+          "title": "Senior Partner",
+          "decision_maker_summary": "Senior Partner with FCA and RI qualifications, bringing extensive experience in accountancy and taxation services. Leads the firm's strategic direction and client relationships.",
+          "phone_office": "+441384376964",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": "https://www.linkedin.com/in/nigelmeredithaccountant/"
+        },
+        {
+          "name": "Neil Smith",
+          "title": "Senior Partner",
+          "decision_maker_summary": "Senior Partner with FCA and RI qualifications, specializing in audit services and client management. Provides leadership in the firm's audit practice and strategic growth.",
+          "phone_office": "+441384376964",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": "https://www.linkedin.com/company/folkes-worton-llp/"
+        },
+        {
+          "name": "Matthew Morris",
+          "title": "Tax Partner",
+          "decision_maker_summary": "Tax Partner with FCCA and CTA qualifications, specializing in tax planning, R&D claims, and capital allowances. Expert in helping businesses optimize their tax position and identify savings opportunities.",
+          "phone_office": "+441384376964",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": "https://www.linkedin.com/in/mattmorristaxadvisor/"
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "UWM Accountants",
+      "company_url": "https://www.uwm.co.uk",
+      "office_phone": "+441132310202",
+      "office_email": "mail@uwm.co.uk",
+      "associated_emails": [
+        "mail@uwm.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Xero Gold Partner, Dext Partner, QuickBooks Partner, FreeAgent Partner, Unleashed Accounting Partner",
+      "associated_location": "UWM House, 6 Fusion Court, Leeds, LS25 2GH",
+      "organisational_structure": "Established in 1978, UWM Accountants is a professional accounting firm based in Leeds, Yorkshire with over 40 years of experience serving businesses and individuals across the UK.",
+      "team": "Cutting-edge cloud accounting experts with old-fashioned values, offering personalised customer-first approach with almost 50 years in the industry.",
+      "description": "UWM Accountants is a professional team of accountants in Leeds, Yorkshire offering personalised accounting services with unrivalled customer service, pioneering cloud know-how and number-crunching prowess. They specialise in Xero cloud accounting and provide comprehensive range of accounting services tailored to client needs.",
+      "edited_description": "UWM Accountants is a trusted Leeds-based firm with 40+ years experience helping businesses streamline finances and increase profitability. As Xero Gold Partners, they offer cutting-edge cloud accounting solutions combined with old-fashioned customer service values. Their proactive approach and comprehensive services make them ideal for small to medium businesses seeking personalised financial support.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    },
+    {
+      "company_name": "Old Mill",
+      "company_url": "https://www.om.uk",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Old Mill is a UK-based accounting and financial advisory firm with offices in Exeter, Wells, Chippenham, Yeovil, and Ilminster. They serve over 5,000 clients across the South West region and have a history dating back to the 1920s.",
+      "associated_location": "Exeter, Wells, Chippenham, Yeovil, Ilminster, UK",
+      "organisational_structure": "Partnership structure with multiple partners across different service areas including Rural, Corporate, Tax, and Financial Planning. Over 350 staff members.",
+      "team": "Team of over 350 highly trained and qualified staff including accountants, financial advisors, and support staff. Specializes in various sectors including Food & Drink, Owner-Managed Businesses, Property & Construction, Rural, and Wealth Management.",
+      "description": "Old Mill is a leading financial advisory and accounting firm based in the South West of England. They provide comprehensive financial planning, tax services, corporate finance, and business advisory services to over 5,000 clients. The firm has a rich history dating back to the 1920s and operates from five offices across Somerset, Devon, and Wiltshire.",
+      "edited_description": "Old Mill is a prestigious South West accounting and financial advisory firm with over 90 years of history, serving 5,000+ clients across five strategic locations. They offer comprehensive services including tax planning, corporate finance, and wealth management, with particular expertise in rural, food & drink, and owner-managed business sectors. Their team of 350+ professionals combines traditional values with innovative digital solutions to deliver personalized financial strategies.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Andrew Vickery",
+          "title": "Partner, Head of Rural",
+          "decision_maker_summary": "As Head of Rural, Andrew leads Old Mill's agricultural and rural business division, bringing extensive expertise in farm diversification, succession planning, and rural business advisory services to help farming families achieve their long-term financial goals.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "David Maslen",
+          "title": "Partner, Head of Tax",
+          "decision_maker_summary": "David heads the tax department at Old Mill, providing strategic tax planning and compliance services to businesses and individuals. His expertise spans corporate tax, inheritance tax, and personal tax planning, helping clients optimize their tax positions while ensuring regulatory compliance.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Mark Neath",
+          "title": "CEO, Corporate Finance Partner",
+          "decision_maker_summary": "As CEO and Corporate Finance Partner, Mark leads Old Mill's strategic direction and corporate finance division. He specializes in business acquisitions, disposals, management buyouts, and corporate restructuring, providing expert guidance to businesses throughout their growth journey.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Mercer & Hole LLP",
+      "company_url": "https://www.mercerhole.co.uk",
+      "office_phone": "+442072362601",
+      "office_email": "london@mercerhole.co.uk",
+      "associated_emails": [
+        "london@mercerhole.co.uk",
+        "stalbans@mercerhole.co.uk",
+        "rickmansworth@mercerhole.co.uk",
+        "miltonkeynes@mercerhole.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "UK-based chartered accountancy firm with 28 Partners and almost 300 employees, established in 1905, offering comprehensive accounting, tax, and financial planning services across multiple locations in London and the Home Counties",
+      "associated_location": "21 Lombard Street, London, EC3V 9AH, United Kingdom",
+      "organisational_structure": "28 Partners and almost 300 employees, structured as a LLP with multiple directors across different service lines including Audit, Tax, Corporate Advisory, Financial Planning, and Restructuring",
+      "team": "Large team with diverse expertise across accounting, tax, audit, corporate finance, financial planning, and specialist services, serving business clients across various industry sectors as well as individuals and families",
+      "description": "Mercer & Hole is a forward-thinking accountancy firm with over 120 years of experience, positioned as a top 50 UK accountancy firm and one of the top firms for private client services. The firm offers a comprehensive range of services including business advisory, corporate tax, audit, financial planning, and specialist services across multiple sectors.",
+      "edited_description": "Mercer & Hole is a top 50 UK accountancy firm with 120+ years of experience serving businesses and private clients across London and the Home Counties. With 28 Partners and 300+ staff, they offer comprehensive accounting, tax, audit, and financial planning services across 10+ industry sectors. Their international reach through TAG Alliances provides global support for clients with cross-border needs.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Iain Muffitt",
+          "title": "Financial Planning Managing Director",
+          "decision_maker_summary": "As Financial Planning Managing Director, Iain leads the firm's financial planning division, providing strategic wealth management and financial advisory services to high-net-worth individuals and business owners. His expertise spans comprehensive financial planning, investment strategies, and retirement planning solutions.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Kevin Paget",
+          "title": "Director, Head of Deal Advisory",
+          "decision_maker_summary": "Kevin heads the Deal Advisory team, specializing in mergers, acquisitions, and corporate finance transactions. He provides strategic guidance to businesses on complex financial deals, valuations, and transaction structuring to maximize value for clients.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        },
+        {
+          "name": "Shaun Walker",
+          "title": "Restructuring and Insolvency Director",
+          "decision_maker_summary": "Shaun leads the Restructuring and Insolvency practice, offering expert advice to businesses facing financial difficulties. His experience includes corporate recovery, insolvency procedures, and turnaround strategies to help companies navigate challenging financial situations.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    }
+  ],
+  "out_of_scope_records": [
+    {
+      "company_url": "https://www.psaa.co.uk",
+      "company_name": "Public Sector Audit Appointments Limited",
+      "reason": "PSAA is a government-appointed body responsible for audit appointments and fee setting for public sector entities, not a traditional accounting firm providing accounting services to clients.",
+      "confidence_score": 0.3
+    },
+    {
+      "company_url": "https://www.price.co.uk",
+      "company_name": "Price & Co",
+      "reason": "Website content is empty - no information available about the accounting firm",
+      "confidence_score": 0.0
+    },
+    {
+      "company_url": "https://www.myaccountancyplace.co.uk",
+      "company_name": "My Accountancy Place",
+      "reason": "Website is not configured and returns a 404 error. The domain is pointed at WP Engine but no accounting firm website content is available.",
+      "confidence_score": 0.0
+    },
+    {
+      "company_url": "https://www.sjpraccountants.com",
+      "company_name": "SJP Accountants",
+      "reason": "Website returned 403 Forbidden error - no accessible content to extract accounting firm information",
+      "confidence_score": 0.0
+    },
+    {
+      "company_url": "https://www.langricks.com",
+      "company_name": "Langricks",
+      "reason": "Website content could not be crawled due to technical limitations. The page returned an empty document error, preventing any meaningful extraction of company information, decision makers, or business details.",
+      "confidence_score": 0.0
+    },
+    {
+      "company_url": "https://www.icsuk.com",
+      "company_name": "ICS UK",
+      "reason": "Website content is empty - no information available about the accounting firm",
+      "confidence_score": 0.0
+    }
+  ],
+  "low_confidence_records": [
+    {
+      "company_url": "https://www.pkfsmithcooper.com",
+      "company_name": "PKF Smith Cooper",
+      "confidence_score": 0.3,
+      "reason": "Confidence score 0.3 below threshold"
+    }
+  ],
+  "broken_urls_list": [],
+  "current_index": 49,
+  "start_time": "2026-01-29T19:51:13.539188",
+  "last_update": "2026-01-29T20:04:00.311554",
+  "completed": true,
+  "end_time": "2026-01-29T20:04:00.315553"
+}

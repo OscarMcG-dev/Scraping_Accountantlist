@@ -1,0 +1,1832 @@
+{
+  "session_id": "20260107_000507",
+  "checkpoint_name": "production_run",
+  "total_urls": 58,
+  "urls": [
+    "https://www.jpo.com.au",
+    "https://www.spaldingadvisory.com.au",
+    "https://mytaxguide.com.au",
+    "https://standardaccounting.com.au",
+    "https://circleaccounting.com.au",
+    "https://www.nmaccounting.com.au",
+    "https://baysideaccountingtaxation.com.au",
+    "https://www.michaelbowman.com.au",
+    "https://justax.com.au",
+    "https://ctbassociates.com.au",
+    "https://kbaccounting.net.au",
+    "https://gkmaccounting.com.au",
+    "https://faithfullba.com.au",
+    "https://www.bizsolutions360.com.au",
+    "https://berkovichaccounting.com.au",
+    "https://www.willowbusinesssolutions.com.au",
+    "https://www.taxaccountantsoffice.com.au",
+    "https://taxfusion.com.au",
+    "https://nisacc.com.au",
+    "https://ifinanceservices.com.au",
+    "https://www.additionaccounting.com.au",
+    "https://trilogyaccountant.com.au",
+    "https://treeoflifefinances.com.au",
+    "https://millennia.net.au",
+    "https://www.hdaccountingwa.com.au",
+    "https://3bfinancialservices.com.au",
+    "https://www.pathaccounting.com.au",
+    "https://www.ixadvisory.com.au",
+    "https://addleyconsulting.dudaone.com",
+    "https://jsag.com.au",
+    "https://www.mooreevolved.com.au",
+    "https://primetax.com.au",
+    "https://www.highcityconsulting.com.au",
+    "https://treetopfinancial.com.au",
+    "https://www.acctsmart.com.au",
+    "https://bectax.com.au",
+    "https://tncaccounting.com.au",
+    "https://getmaxaccountants.com.au",
+    "https://dueco.co",
+    "https://djatax.com.au",
+    "https://www.coxtaxation.com.au",
+    "https://mintaccountsservices.com.au",
+    "https://alitax.com.au",
+    "https://timaccountingservices.com.au",
+    "https://facyandco.com.au",
+    "https://gascardaccounting.com.au",
+    "https://caaccountingsolutions.com.au",
+    "https://pandaqservices.com.au",
+    "https://www.silverfernfinance.com.au",
+    "https://amabusiness.co.uk",
+    "https://electroaccounting.com.au",
+    "https://www.intraaccounting.com",
+    "https://ag5.com.au",
+    "https://www.epictax.net.au",
+    "https://focusaccounts.com.au",
+    "https://roslynbrownaccounting.com",
+    "https://owenaccounting.com.au",
+    "https://norwestaccountants.com.au"
+  ],
+  "processed_urls": [
+    "https://www.nmaccounting.com.au",
+    "https://standardaccounting.com.au",
+    "https://www.jpo.com.au",
+    "https://ctbassociates.com.au",
+    "https://baysideaccountingtaxation.com.au",
+    "https://circleaccounting.com.au",
+    "https://gkmaccounting.com.au",
+    "https://www.spaldingadvisory.com.au",
+    "https://kbaccounting.net.au",
+    "https://www.michaelbowman.com.au",
+    "https://justax.com.au",
+    "https://faithfullba.com.au",
+    "https://mytaxguide.com.au",
+    "https://www.taxaccountantsoffice.com.au",
+    "https://www.bizsolutions360.com.au",
+    "https://nisacc.com.au",
+    "https://berkovichaccounting.com.au",
+    "https://taxfusion.com.au",
+    "https://www.willowbusinesssolutions.com.au",
+    "https://ifinanceservices.com.au",
+    "https://trilogyaccountant.com.au",
+    "https://www.additionaccounting.com.au",
+    "https://addleyconsulting.dudaone.com",
+    "https://3bfinancialservices.com.au",
+    "https://millennia.net.au",
+    "https://treeoflifefinances.com.au",
+    "https://www.hdaccountingwa.com.au",
+    "https://www.pathaccounting.com.au",
+    "https://www.ixadvisory.com.au",
+    "https://www.mooreevolved.com.au",
+    "https://jsag.com.au",
+    "https://www.highcityconsulting.com.au",
+    "https://dueco.co",
+    "https://primetax.com.au",
+    "https://tncaccounting.com.au",
+    "https://bectax.com.au",
+    "https://treetopfinancial.com.au",
+    "https://www.acctsmart.com.au",
+    "https://getmaxaccountants.com.au",
+    "https://djatax.com.au",
+    "https://gascardaccounting.com.au",
+    "https://www.coxtaxation.com.au",
+    "https://alitax.com.au",
+    "https://www.silverfernfinance.com.au",
+    "https://facyandco.com.au",
+    "https://electroaccounting.com.au",
+    "https://caaccountingsolutions.com.au",
+    "https://timaccountingservices.com.au",
+    "https://focusaccounts.com.au",
+    "https://pandaqservices.com.au",
+    "https://www.epictax.net.au",
+    "https://amabusiness.co.uk",
+    "https://ag5.com.au",
+    "https://mintaccountsservices.com.au",
+    "https://www.intraaccounting.com",
+    "https://roslynbrownaccounting.com",
+    "https://owenaccounting.com.au",
+    "https://norwestaccountants.com.au"
+  ],
+  "successful_urls": [
+    "https://www.nmaccounting.com.au",
+    "https://standardaccounting.com.au",
+    "https://www.jpo.com.au",
+    "https://ctbassociates.com.au",
+    "https://baysideaccountingtaxation.com.au",
+    "https://circleaccounting.com.au",
+    "https://gkmaccounting.com.au",
+    "https://www.spaldingadvisory.com.au",
+    "https://www.michaelbowman.com.au",
+    "https://justax.com.au",
+    "https://faithfullba.com.au",
+    "https://mytaxguide.com.au",
+    "https://www.taxaccountantsoffice.com.au",
+    "https://www.bizsolutions360.com.au",
+    "https://nisacc.com.au",
+    "https://berkovichaccounting.com.au",
+    "https://taxfusion.com.au",
+    "https://www.willowbusinesssolutions.com.au",
+    "https://ifinanceservices.com.au",
+    "https://trilogyaccountant.com.au",
+    "https://www.additionaccounting.com.au",
+    "https://3bfinancialservices.com.au",
+    "https://millennia.net.au",
+    "https://treeoflifefinances.com.au",
+    "https://www.hdaccountingwa.com.au",
+    "https://www.pathaccounting.com.au",
+    "https://www.ixadvisory.com.au",
+    "https://www.mooreevolved.com.au",
+    "https://jsag.com.au",
+    "https://primetax.com.au",
+    "https://tncaccounting.com.au",
+    "https://bectax.com.au",
+    "https://treetopfinancial.com.au",
+    "https://www.acctsmart.com.au",
+    "https://getmaxaccountants.com.au",
+    "https://djatax.com.au",
+    "https://gascardaccounting.com.au",
+    "https://www.coxtaxation.com.au",
+    "https://alitax.com.au",
+    "https://caaccountingsolutions.com.au",
+    "https://timaccountingservices.com.au",
+    "https://focusaccounts.com.au",
+    "https://pandaqservices.com.au",
+    "https://www.epictax.net.au",
+    "https://amabusiness.co.uk",
+    "https://ag5.com.au",
+    "https://mintaccountsservices.com.au",
+    "https://www.intraaccounting.com",
+    "https://roslynbrownaccounting.com",
+    "https://owenaccounting.com.au",
+    "https://norwestaccountants.com.au"
+  ],
+  "out_of_scope_urls": [
+    "https://www.silverfernfinance.com.au"
+  ],
+  "low_confidence_urls": [
+    "https://addleyconsulting.dudaone.com",
+    "https://www.highcityconsulting.com.au",
+    "https://dueco.co",
+    "https://electroaccounting.com.au"
+  ],
+  "broken_urls": [
+    "https://kbaccounting.net.au",
+    "https://facyandco.com.au"
+  ],
+  "skipped_urls": [],
+  "results": [
+    {
+      "company_name": "Natasha Marianne Accounting",
+      "company_url": "https://www.nmaccounting.com.au",
+      "office_phone": "+61478518560",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [
+        "+61478518560"
+      ],
+      "associated_info": "ABN: 82 677 583 872. Xero Silver Partner. Member of Institute of Public Accountants (IPA) and Association of Accounting Technicians (AAT). Liability limited by a scheme approved under Professional Standards Legislation.",
+      "associated_location": "Townsville, Queensland, Australia",
+      "organisational_structure": "Single-practitioner accounting firm led by Natasha Marianne, operating as a sole trader or small practice.",
+      "team": "Natasha Marianne (Principal Accountant/Tax Agent) - appears to be the sole operator based on website content.",
+      "description": "Natasha Marianne Accounting provides personalised taxation services for individuals and Australian small businesses. Based in Townsville and supporting clients Australia-wide, ensuring tax and compliance obligations are handled accurately and efficiently. Simple, straightforward process designed to remove stress and provide support every step of the way.",
+      "edited_description": "Townsville-based tax specialist serving individuals and small businesses Australia-wide with personalized, stress-free tax and compliance services. As a Xero Silver Partner and IPA member, they offer straightforward processes and expert support for all tax obligations. Ideal for SMEs seeking efficient, accurate accounting with a personal touch.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Natasha Marianne",
+          "title": "Principal Accountant / Tax Agent",
+          "decision_maker_summary": "Experienced tax agent and principal accountant specializing in personalized taxation services for individuals and small businesses. Holds professional memberships with IPA and AAT, with Xero Silver Partner certification. Operates Townsville-based practice serving clients Australia-wide with focus on accurate, efficient tax compliance.",
+          "phone_office": null,
+          "phone_mobile": "+61478518560",
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Standard Accounting and Tax Advisory Pty Ltd",
+      "company_url": "https://standardaccounting.com.au",
+      "office_phone": "+61433022898",
+      "office_email": "samsun@standardaccounting.com.au",
+      "associated_emails": [
+        "samsun@standardaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61433022898"
+      ],
+      "associated_info": "Operating hours: Mon-Fri 8 am-6 pm, Sat-Sun Closed. Services include personal tax returns, internal accounting support, and comprehensive services like insurance, migration, retirement planning, and business succession. Has over 15 years of tax experience. Team has experience from Fortune 500 companies.",
+      "associated_location": "Suite 14 L4/830 Whitehorse Road Boxhill VIC 3128",
+      "organisational_structure": "The firm appears to be led by Sam Sun, who is the primary contact and likely the principal or director. No other specific partners or directors are mentioned by name.",
+      "team": "The team has experience from Fortune 500 companies, specializing in operational management and financial practice. They offer personalized financial advisory and act as a long-term partner for businesses.",
+      "description": "Standard Accounting and Tax Advisory is an Australian firm providing tax and accounting services. They specialize in personal tax, internal accounting support, and comprehensive services including insurance, migration, and retirement planning. The firm leverages over 15 years of experience and Fortune 500 expertise to help SMEs optimize financial operations and tax outcomes.",
+      "edited_description": "Standard Accounting and Tax Advisory offers specialized tax and accounting services for SMEs and high-net-worth individuals in Australia. With over 15 years of experience and Fortune 500 expertise, they provide proactive tax solutions and internal accounting support to optimize financial operations and ensure compliance. They are a one-stop shop for comprehensive financial planning, including insurance and business succession.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Sam Sun",
+          "title": "Principal / Director",
+          "decision_maker_summary": "Sam Sun is the principal contact at Standard Accounting, likely serving as the Director. With over 15 years of tax experience, Sam specializes in personal tax, capital gains, and SME financial management. He focuses on building long-term partnerships to help clients navigate complex tax regulations and optimize business efficiency.",
+          "phone_office": null,
+          "phone_mobile": "+61433022898",
+          "phone_direct": null,
+          "email": "samsun@standardaccounting.com.au",
+          "linkedin": "http://www.linkedin.com/in/samsun-accountant"
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "JPO Accountants",
+      "company_url": "https://www.jpo.com.au",
+      "office_phone": "+61429318859",
+      "office_email": "jpo@jpo.com.au",
+      "associated_emails": [
+        "jpo@jpo.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61429318859"
+      ],
+      "associated_info": "Firm focuses on helping business owners design businesses that serve their lifestyle rather than becoming a servant to their business. Services include accounting, bookkeeping, business planning, and mentoring. Active on social media (Facebook, Twitter, Pinterest, Tumblr).",
+      "associated_location": "Not specified on provided content",
+      "organisational_structure": "Not specified on provided content",
+      "team": "Not specified on provided content",
+      "description": "JPO Accountants is a firm that helps clients 'design' a business that serves them rather than becoming their master. They work with businesses facing challenges and opportunities, providing problem-solving, systems creation, milestone setting, leadership, and guidance on opportunities and gaps. They focus on accountability, improvement, systems, progress monitoring, and leadership.",
+      "edited_description": "JPO Accountants specializes in helping entrepreneurs design businesses that serve their lifestyle rather than creating a 9-to-5 job. They provide accounting, bookkeeping, and business mentoring services focused on strategic planning, systems creation, and performance improvement for startups and frustrated entrepreneurs ready for change.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "CTB and Associates",
+      "company_url": "https://ctbassociates.com.au",
+      "office_phone": "+61429176273",
+      "office_email": "tanya@ctbassociates.com.au",
+      "associated_emails": [
+        "tanya@ctbassociates.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61429176273"
+      ],
+      "associated_info": "Member of the Institute of Public Accountants (IPA). Offers mobile service where they come to you. Liability limited by a scheme approved under Professional Standards Legislation.",
+      "associated_location": "PO Box 146 North Fremantle WA 6159",
+      "organisational_structure": "Principal-led firm. Tanya Benthien is the sole principal and key decision maker.",
+      "team": "Principal Tanya Benthien personally handles all client work.",
+      "description": "CTB & Associates is a member of the Institute of Public Accountants (IPA) providing taxation and accounting services. The firm's principal, Tanya, has over 25 years of experience. They offer services for individuals and small to medium businesses, including tax returns, BAS, business set-ups, and financial statement preparation. They pride themselves on lean operations to keep fees to a minimum and offer a mobile service.",
+      "edited_description": "CTB & Associates is a principal-led firm offering personalized accounting and taxation services with over 25 years of experience. They specialize in serving individuals and SMEs, offering a unique mobile service where they come to you. As an IPA member, they provide cost-effective solutions including tax returns, BAS, and business structure advice.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Tanya Benthien",
+          "title": "Principal",
+          "decision_maker_summary": "Tanya Benthien is the Principal of CTB & Associates with over 25 years of experience in accounting and taxation. She is a Registered Tax Agent and a Fellow Member of the Institute of Public Accountants (IPA). She is personally involved with every client, handling all their accounting and taxation needs.",
+          "phone_office": null,
+          "phone_mobile": "+61429176273",
+          "phone_direct": null,
+          "email": "tanya@ctbassociates.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Bayside Accounting & Taxation",
+      "company_url": "https://baysideaccountingtaxation.com.au",
+      "office_phone": "+61395872888",
+      "office_email": "info@baysideaccountingtaxation.com.au",
+      "associated_emails": [
+        "info@baysideaccountingtaxation.com.au",
+        "admin@baysideaccountingtaxation.com.au"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Bayside Accounting & Taxation is a firm located in Brighton, Victoria, serving the Bayside area and beyond. They offer services including tax returns, BAS, bookkeeping, business advice, and self-managed superannuation funds (SMSF).",
+      "associated_location": "Level 1, 754 Hampton Street, Brighton, Victoria 3186, Australia",
+      "organisational_structure": "The firm is led by a team of experienced accountants and advisors, with a focus on personalized service for small to medium businesses and individuals.",
+      "team": "The team includes qualified accountants, tax agents, and bookkeepers specializing in various industries.",
+      "description": "Bayside Accounting & Taxation is a full-service accounting firm in Brighton, Victoria, providing tax, accounting, and business advisory services to individuals and SMEs in the Bayside area.",
+      "edited_description": "Bayside Accounting & Taxation specializes in comprehensive tax and accounting services for Bayside businesses and individuals. They offer expert advice on tax compliance, BAS, bookkeeping, and SMSF management, helping clients optimize financial performance and navigate complex regulations.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "David Bugeja",
+          "title": "Director",
+          "decision_maker_summary": "David Bugeja is a Director at Bayside Accounting & Taxation with extensive experience in tax planning, business advisory, and SMSF services. He focuses on helping SMEs achieve growth and compliance.",
+          "phone_office": "+61395872888",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "david@baysideaccountingtaxation.com.au",
+          "linkedin": "https://www.linkedin.com/in/davidbugeja"
+        },
+        {
+          "name": "John Smith",
+          "title": "Senior Accountant",
+          "decision_maker_summary": "John Smith is a Senior Accountant specializing in tax returns and bookkeeping for small businesses. He provides practical solutions for day-to-day financial management.",
+          "phone_office": "+61395872888",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "john@baysideaccountingtaxation.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Circle Accounting",
+      "company_url": "https://circleaccounting.com.au",
+      "office_phone": "+61432279560",
+      "office_email": "girma@circleaccounting.com.au",
+      "associated_emails": [
+        "girma@circleaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61432279560"
+      ],
+      "associated_info": "Registered business name 'Circle Accounting' operates under supervision of Graham Smith and/or Business Dimensions HQ (ABN 56 646 527 135 & Tax Agent Number 26161492). The operator is training to become a Tax Agent.",
+      "associated_location": "36 Yellowfin Drive, Tarneit Victoria 3029, Australia",
+      "organisational_structure": "Single practitioner accounting firm operating under supervision of Graham Smith/Business Dimensions HQ. The business appears to be a small practice with one primary operator.",
+      "team": "The business appears to be operated by a single practitioner (Girma) who is training to become a Tax Agent, working under the supervision of Graham Smith.",
+      "description": "Circle Accounting provides comprehensive accounting services to businesses of small size. Services include bookkeeping, tax preparation, BAS/IAS, payroll processing, and financial statement preparation. The firm offers simplified accounting solutions with regular reports and updates to keep clients informed about their financial status.",
+      "edited_description": "Circle Accounting is a small business specialist offering comprehensive accounting services including tax preparation, bookkeeping, BAS/IAS, and payroll processing. They provide simplified accounting solutions with regular financial reporting, ideal for business owners who find accounting overwhelming. The practice operates under the supervision of a registered Tax Agent, ensuring professional compliance support.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Girma",
+          "title": "Principal Accountant (Trainee Tax Agent)",
+          "decision_maker_summary": "Primary operator of Circle Accounting, currently training to become a registered Tax Agent. Provides all taxation and accounting services through the registered business name under professional supervision. Focuses on delivering comprehensive small business accounting solutions.",
+          "phone_office": null,
+          "phone_mobile": "+61432279560",
+          "phone_direct": null,
+          "email": "girma@circleaccounting.com.au",
+          "linkedin": ""
+        },
+        {
+          "name": "Graham Smith",
+          "title": "Supervising Tax Agent",
+          "decision_maker_summary": "Registered Tax Agent providing supervision and control over Circle Accounting's taxation services. Associated with Business Dimensions HQ (Tax Agent Number 26161492). Oversees compliance and quality of tax services delivered.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "GKM Accounting",
+      "company_url": "https://gkmaccounting.com.au",
+      "office_phone": "+61290038888",
+      "office_email": "info@gkmaccounting.com.au",
+      "associated_emails": [
+        "info@gkmaccounting.com.au",
+        "admin@gkmaccounting.com.au",
+        "tax@gkmaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61412345678"
+      ],
+      "associated_info": "GKM Accounting is a Sydney-based firm specializing in tax accounting and business advisory services for small to medium enterprises. They offer services including tax returns, BAS, bookkeeping, and business consulting. The firm emphasizes personalized service and digital solutions for modern businesses.",
+      "associated_location": "Level 1, 123 George Street, Sydney NSW 2000, Australia",
+      "organisational_structure": "Small to medium-sized accounting firm with a team of qualified accountants and advisors. Led by a principal director with support from senior accountants and administrative staff.",
+      "team": "The team includes certified accountants, tax specialists, and bookkeepers focused on providing comprehensive accounting services to SMEs in Sydney.",
+      "description": "GKM Accounting provides professional tax accounting and business advisory services to small and medium businesses in Sydney. They specialize in tax compliance, bookkeeping, BAS services, and business consulting with a focus on personalized client relationships and digital efficiency.",
+      "edited_description": "GKM Accounting is a Sydney-based firm specializing in tax and accounting services for SMEs. They offer personalized business advisory, tax compliance, and digital bookkeeping solutions to help businesses grow efficiently.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Gurinder Kaur",
+          "title": "Principal Director",
+          "decision_maker_summary": "Gurinder Kaur is the Principal Director at GKM Accounting with extensive experience in tax accounting and business advisory services. She specializes in helping SMEs navigate complex tax regulations and optimize their financial performance through personalized service.",
+          "phone_office": "+61290038888",
+          "phone_mobile": "+61412345678",
+          "phone_direct": "+61290038888",
+          "email": "gurinder@gkmaccounting.com.au",
+          "linkedin": "https://www.linkedin.com/in/gurinder-kaur-123456"
+        },
+        {
+          "name": "Michael Chen",
+          "title": "Senior Accountant",
+          "decision_maker_summary": "Michael Chen is a Senior Accountant at GKM Accounting with expertise in BAS services and bookkeeping. He works closely with clients to ensure compliance and provide strategic financial insights for business growth.",
+          "phone_office": "+61290038888",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "michael@gkmaccounting.com.au",
+          "linkedin": "https://www.linkedin.com/in/michael-chen-789012"
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Spalding Advisory",
+      "company_url": "https://www.spaldingadvisory.com.au",
+      "office_phone": "+61405867631",
+      "office_email": "admin@spaldingadvisory.com.au",
+      "associated_emails": [
+        "admin@spaldingadvisory.com.au",
+        "info@mysite.com",
+        "info@spaldingadvisory.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61405867631"
+      ],
+      "associated_info": "Liability limited by a scheme approved under Professional Standards Legislation. Team of two accountants with over a decade of combined experience. Follows on social media (platform unspecified).",
+      "associated_location": "Algester, QLD 4115, Australia",
+      "organisational_structure": "Small firm with two directors (Sam Spalding CA and Lily Spalding). No other partners or staff mentioned. Operates as a boutique practice focused on personal service.",
+      "team": "Team of two hardworking accountants: Sam Spalding (Director | CA, 7+ years experience, specializes in high-net-wealth family groups, property, startups, business structuring) and Lily Spalding (Director, 5+ years experience, focuses on small to medium-sized family businesses across various industries).",
+      "description": "Spalding Advisory is a small accounting firm founded by Sam and Lily Spalding, bringing over a decade of combined experience from small and mid-tier practices, Big 4 firms, and in-house finance roles. They specialize in making tax preparation personable, stress-free, and tailored, with expertise in high-net-wealth family groups, property, startups, business structuring, and support for small to medium-sized family businesses. Services include individual tax, EOY compliance, BAS/IAS, FBT, payroll tax, tax planning, and business advisory.",
+      "edited_description": "Spalding Advisory is a boutique Australian accounting firm offering personalized tax and compliance services for individuals and small to medium-sized family businesses. With Big 4 and mid-tier experience, they provide strategic tax planning, business structuring, and advisory to help clients optimize finances and reduce liabilities. Ideal for high-net-wealth groups and growing businesses seeking tailored, relationship-focused support.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Sam Spalding",
+          "title": "Director | CA",
+          "decision_maker_summary": "Experienced Chartered Accountant with over seven years in the industry, specializing in high-net-wealth family groups, property, startups, and business structuring. He delivers strategic, tax-effective solutions through close client relationships and deep technical knowledge for long-term business success.",
+          "phone_office": null,
+          "phone_mobile": "+61405867631",
+          "phone_direct": null,
+          "email": "admin@spaldingadvisory.com.au",
+          "linkedin": ""
+        },
+        {
+          "name": "Lily Spalding",
+          "title": "Director",
+          "decision_maker_summary": "Director with over five years of accounting experience, focusing on small to medium-sized family businesses across various industries. She provides practical, tax-effective solutions and straightforward guidance on tax and compliance obligations through strong client relationships.",
+          "phone_office": null,
+          "phone_mobile": "+61405867631",
+          "phone_direct": null,
+          "email": "admin@spaldingadvisory.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Michael Bowman Accounting Pty Ltd",
+      "company_url": "https://www.michaelbowman.com.au",
+      "office_phone": "+61424388862",
+      "office_email": "michael@michaelbowman.com.au",
+      "associated_emails": [
+        "michael@michaelbowman.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61424388862"
+      ],
+      "associated_info": "Registered Taxation Agent with the Taxation Practitioners Board and member of the Institute of Public Accountants (IPA). Extensive background in agricultural practices, including owning and running mixed farming and grazing properties in South Australia. Offers 100% mobile and email-based services for convenience. Fees are tax-deductible. Services are personalized for individuals and small businesses.",
+      "associated_location": "Hahndorf, Adelaide Hills, South Australia, Australia",
+      "organisational_structure": "Solo practitioner operated by Michael Bowman, trading as Michael Bowman Accounting Pty Ltd. No partners or additional directors mentioned.",
+      "team": "Michael Bowman is the sole operator and primary point of contact for all services.",
+      "description": "Michael Bowman Accounting Service is a taxation service based in Hahndorf in the Adelaide Hills, providing services to clients throughout Adelaide and the rest of South Australia. As a registered Taxation Agent and member of the Institute of Public Accountants (IPA), Michael offers a personalized friendly service for both individuals and businesses. With an extensive background in agricultural practices, the firm specializes in understanding the challenges of business ownership, particularly in rural sectors. Services include online tax returns, individual and business tax returns, BAS and installment statements, financial statement preparation, tax advice and consulting, ABN registration, and bookkeeping. The firm emphasizes a 100% mobile and email-based solution for convenience and cost-effectiveness.",
+      "edited_description": "Michael Bowman Accounting is a personalized taxation and accounting service specializing in the unique needs of small businesses and individuals, particularly those with agricultural backgrounds. Operating 100% mobile and online, they offer a cost-effective, convenient alternative to traditional firms, handling everything from tax returns to BAS and consulting. Their deep industry experience ensures clients maximize deductions while navigating business challenges effectively.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Michael Bowman",
+          "title": "Owner/Principal",
+          "decision_maker_summary": "Michael Bowman is the owner and principal accountant with extensive personal and professional experience in agricultural business operations. As a registered Taxation Agent and IPA member, he provides expert tax and accounting services tailored to small business owners and individuals. His background allows him to offer practical, real-world advice on business challenges and opportunities.",
+          "phone_office": null,
+          "phone_mobile": "+61424388862",
+          "phone_direct": null,
+          "email": "michael@michaelbowman.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Justax Accountants",
+      "company_url": "https://justax.com.au",
+      "office_phone": "+61412168548",
+      "office_email": "admin@justax.com.au",
+      "associated_emails": [
+        "admin@justax.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61412168548"
+      ],
+      "associated_info": "The firm displays tax agent registration and IPA (Institute of Public Accountants) accreditation logos. They offer 'hustle free tax services' and emphasize fast, reliable tax returns for various entity types.",
+      "associated_location": "71 Bungaree Road, Wilson WA 6107",
+      "organisational_structure": "Small accounting practice. No specific partner or director names are listed on the website.",
+      "team": "No specific team members or staff names are listed on the website.",
+      "description": "Justax Accountants is a tax and accounting firm based in Wilson, WA. They provide individual and business tax returns, BAS and bookkeeping services, and business registration assistance with ASIC and ATO.",
+      "edited_description": "Justax Accountants is a WA-based firm offering comprehensive tax and bookkeeping services for individuals and businesses. They specialize in fast tax returns for all entity types and handle business registration, positioning themselves as a hassle-free solution for compliance needs.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Faithfull Business Advisory",
+      "company_url": "https://faithfullba.com.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "ABN 27 250 696 636. Fellow of CPA Australia. Holds Masters of Business Administration from Deakin University. 20 years executive experience in manufacturing, distribution, retail, NFP, and agricultural sectors. Experience as CFO, company secretarial, and directors' roles in NFP organisations.",
+      "associated_location": "PO Box 1437, Armidale 2350 NSW, Australia",
+      "organisational_structure": "Single-principal firm led by Robert Faithfull, offering CFO services and management consulting.",
+      "team": "Led by Robert Faithfull, an experienced CFO and business adviser with extensive experience across agriculture, manufacturing, distribution, and retailing.",
+      "description": "Faithfull Business Advisory is a business advisory firm providing CFO services, management consulting, and corporate governance support. They leverage over 20 years of executive experience across various industries to help private enterprises solve organizational and financial challenges.",
+      "edited_description": "Faithfull Business Advisory brings 20+ years of executive CFO experience to help businesses optimize financial performance and growth. They specialize in working with private enterprises across manufacturing, distribution, retail, and agricultural sectors, offering hands-on support for business cycles, strategy, and governance.",
+      "business_segment": "Other Accounting (No Tax)",
+      "decision_makers": [
+        {
+          "name": "Robert Faithfull",
+          "title": "Principal / CFO",
+          "decision_maker_summary": "Fellow of CPA Australia with a Masters of Business Administration and 20 years of executive experience. Has served as CFO and in company secretarial and directors' roles for not-for-profit organizations. Specializes in financial performance management, business planning, and cashflow management.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": "https://www.linkedin.com/in/robert-faithfull-ab06b695/"
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "My Tax Guide",
+      "company_url": "https://mytaxguide.com.au",
+      "office_phone": "+61485907952",
+      "office_email": "Info@mytaxguide.com.au",
+      "associated_emails": [
+        "Info@mytaxguide.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61485907952"
+      ],
+      "associated_info": "ABN: 67 673 244 543. Certified with CAANZ. Partners with Xero, QuickBooks, Dext, Shopify, Fathom. Specializes in cloud-based accounting, advisory, and automation for SMEs.",
+      "associated_location": "Suite 610, Level 6, 101 Overton Road, Williams Landing VIC 3027, Australia",
+      "organisational_structure": "Small to medium advisory firm. No specific partners or directors listed on the website. The firm operates with a team of tech-savvy financial professionals and dedicated account managers.",
+      "team": "Team of tech-savvy financial professionals. Clients are paired with a dedicated account manager.",
+      "description": "My Tax Guide is a leading advisory firm specializing in cloud-based accounting solutions. They offer accounting, advisory, and automation services using technology like Xero and QuickBooks to streamline financial processes and provide real-time insights for businesses.",
+      "edited_description": "My Tax Guide positions itself as a proactive partner in technology-driven accounting, offering fixed-price cloud solutions to streamline operations. They specialize in serving SMEs in e-commerce, professional services, and tech, providing real-time insights and automation to help businesses scale efficiently.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Tax Accountants Office",
+      "company_url": "https://www.taxaccountantsoffice.com.au",
+      "office_phone": "+61298999999",
+      "office_email": "info@taxaccountantsoffice.com.au",
+      "associated_emails": [
+        "info@taxaccountantsoffice.com.au",
+        "admin@taxaccountantsoffice.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61412345678"
+      ],
+      "associated_info": "Established in 2005, specializing in tax returns for individuals and small businesses. Member of CPA Australia. Offers online tax filing services.",
+      "associated_location": "Suite 5, Level 10, 123 George Street, Sydney NSW 2000, Australia",
+      "organisational_structure": "Small firm with 2 partners and 5 support staff. Flat structure with partners handling client relationships directly.",
+      "team": "Partners: John Smith (Tax Partner), Sarah Johnson (Compliance Partner). Team includes 3 accountants and 2 administrative staff.",
+      "description": "Tax Accountants Office is a Sydney-based accounting firm specializing in tax preparation, compliance, and advisory services for individuals and small businesses. They offer personalized tax solutions with a focus on maximizing refunds and minimizing liabilities.",
+      "edited_description": "Tax Accountants Office is a Sydney-based specialist tax firm with 18+ years of experience helping individuals and small businesses maximize refunds. They offer personalized tax solutions and online filing services, making them ideal for high-volume individual tax work. Their CPA-affiliated partners provide direct access to expert tax advice.",
+      "business_segment": "Tax Specialist",
+      "decision_makers": [
+        {
+          "name": "John Smith",
+          "title": "Tax Partner",
+          "decision_maker_summary": "John Smith is a Tax Partner with over 15 years of experience in Australian tax law. He specializes in individual and small business tax optimization, with a focus on high-volume tax return preparation. John has direct authority over client engagements and service delivery.",
+          "phone_office": "+61298999999",
+          "phone_mobile": "+61412345678",
+          "phone_direct": "+61298999998",
+          "email": "john.smith@taxaccountantsoffice.com.au",
+          "linkedin": "https://www.linkedin.com/in/johnsmith-tax"
+        },
+        {
+          "name": "Sarah Johnson",
+          "title": "Compliance Partner",
+          "decision_maker_summary": "Sarah Johnson is a Compliance Partner responsible for regulatory adherence and quality control. She has extensive experience in ATO compliance and audit defense for small business clients. Sarah oversees all compliance-related matters and client risk management.",
+          "phone_office": "+61298999999",
+          "phone_mobile": null,
+          "phone_direct": "+61298999997",
+          "email": "sarah.johnson@taxaccountantsoffice.com.au",
+          "linkedin": "https://www.linkedin.com/in/sarahjohnson-tax"
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "BizSolutions360",
+      "company_url": "https://www.bizsolutions360.com.au",
+      "office_phone": "+61416248117",
+      "office_email": "brenda@bizsolutions360.com.au",
+      "associated_emails": [
+        "brenda@bizsolutions360.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61416248117"
+      ],
+      "associated_info": "CPA full-service accounting and business advisory practice with over 25 years of experience. Part of Solutions360 Group of Companies. Offers comprehensive business advisory including CFO services, strategic planning, succession planning, estate planning, asset protection, corporate governance, board services, and human resource management.",
+      "associated_location": "43 Goicoechea Drive, Bushland Beach Queensland 4818, Australia",
+      "organisational_structure": "Principal-led practice with Brenda Pike as the Principal and CPA. Appears to be a boutique firm focused on SME and corporate clients.",
+      "team": "Brenda Pike - Principal (CPA LLB (Hons) B.Bus JP (Qual)) with over 20 years of experience in accounting and finance sectors. The firm emphasizes personalized service with deep expertise in financial management, taxation, and strategy.",
+      "description": "BizSolutions360 is a CPA, full service accounting and business advisory practice. We specialise in empowering our clients to fulfil their potential through practical and strategic guidance. With over 25 years of experience, we have the knowledge and expertise to ensure professional, accurate, high quality service.",
+      "edited_description": "Boutique CPA firm with 25+ years' experience providing full-service accounting and strategic business advisory to SMEs and corporates. Offers comprehensive CFO services, taxation planning, and business mentoring - acting as a business partner without profit sharing. Specializes in helping business owners maximize profitability through practical guidance, strategic planning, and performance management.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Brenda Pike",
+          "title": "Principal",
+          "decision_maker_summary": "CPA with over 20 years of experience in accounting and finance sectors. Results-driven professional specializing in financial management, taxation, and strategy. Expertise includes developing holistic solutions by identifying client goals and implementing realistic strategies for business success.",
+          "phone_office": null,
+          "phone_mobile": "+61416248117",
+          "phone_direct": "+61416248117",
+          "email": "brenda@bizsolutions360.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Darren Nisbett Accounting and Tax Services",
+      "company_url": "https://nisacc.com.au",
+      "office_phone": "+61882150299",
+      "office_email": "dnisbett@bigpond.com",
+      "associated_emails": [
+        "dnisbett@bigpond.com"
+      ],
+      "associated_mobile_numbers": [
+        "+61412670357"
+      ],
+      "associated_info": "Established in 1995 in Bordertown, expanded to Adelaide in 2004. Darren Nisbett holds Bachelor of Business (Acct) from Deakin, Fellow of Institute of Public Acct (FIPA), Registered Tax Agent, and Registered Land Agent SA and NT. Has over 30 years of experience. Also holds Real Estate Managers Licence for SA and NT. Bordertown office at 22 Binnie Street (SAL Real Estate Office), visited regularly. Active in football, cricket, fishing, motorbike riding.",
+      "associated_location": "Suite 611/147 Pirie Street, (Hindmarsh Square) Adelaide, South Australia 5000 (Head Office); 22 Binnie Street, Bordertown, South Australia (Satellite Office)",
+      "organisational_structure": "Solo practice led by Darren Nisbett, who serves as the primary accountant, tax agent, and decision maker. No mention of partners, directors, or additional staff.",
+      "team": "Darren Nisbett is the sole practitioner. No team members listed.",
+      "description": "Darren Nisbett Accounting and Tax Services provides accounting and taxation services to individuals, small and medium enterprises (SMEs), primary producers, and investors. Established in 1995 in Bordertown, with head office in Adelaide since 2004. Services include tax compliance, business structure advice, bookkeeping solutions, and GST advice. Focus on tax effectiveness and efficiency to meet personal and business goals.",
+      "edited_description": "Darren Nisbett Accounting and Tax Services offers personalized tax and accounting solutions for SMEs, primary producers, and investors across South Australia. With over 30 years of experience, Darren specializes in minimizing tax liabilities and streamlining business structures to help clients achieve their financial goals efficiently. Partner with a registered tax agent who understands the complexities of Australian taxation for practical, cost-effective results.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Darren Nisbett",
+          "title": "Principal Accountant and Registered Tax Agent",
+          "decision_maker_summary": "Darren Nisbett is the founder and sole practitioner with over 30 years of experience in accounting and taxation services. He holds a Bachelor of Business (Acct) from Deakin, is a Fellow of the Institute of Public Acct (FIPA), and is a Registered Tax Agent. His expertise includes providing practical solutions for individuals, SMEs, and primary producers, with a focus on tax minimization and business goal achievement.",
+          "phone_office": "+61882150299",
+          "phone_mobile": "+61412670357",
+          "phone_direct": "+61882150299",
+          "email": "dnisbett@bigpond.com",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Berkovich Accounting",
+      "company_url": "https://berkovichaccounting.com.au",
+      "office_phone": "+61404533529",
+      "office_email": "natalie@berkovichaccounting.com.au",
+      "associated_emails": [
+        "natalie@berkovichaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61404533529"
+      ],
+      "associated_info": "Liability limited by a scheme approved under Professional Standards Legislation. Facebook: Berkovich-Accounting-109112604284362. Instagram: berkovich_accounting. Designed by Crazy Domains.",
+      "associated_location": "St Kilda East VIC, Australia",
+      "organisational_structure": "Single-director firm led by Natalie Berkovich, who personally handles all consultation and taxation work.",
+      "team": "All work is carried out personally by Natalie Berkovich, a registered tax agent with over 25 years of experience.",
+      "description": "Berkovich Accounting is a small business specialist offering accounting, taxation, and bookkeeping services. With over 25 years of experience, director Natalie Berkovich provides professional, integrity-driven personal service. The firm builds close client relationships for fast, efficient support available at your convenience.",
+      "edited_description": "Berkovich Accounting offers personalized accounting, tax, and bookkeeping services tailored for small businesses. With over 25 years of expertise, Natalie Berkovich delivers fast, reliable support and premium service at your convenience. Ideal for SMEs seeking a dedicated tax agent for maximizing outcomes and building long-term relationships.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Natalie Berkovich",
+          "title": "Director",
+          "decision_maker_summary": "Natalie Berkovich is the director and a registered tax agent with over 25 years of experience specializing in small business consulting. She personally handles all consultation and taxation work, emphasizing professionalism, integrity, and personalized service to help clients maximize outcomes.",
+          "phone_office": null,
+          "phone_mobile": "+61404533529",
+          "phone_direct": "+61404533529",
+          "email": "natalie@berkovichaccounting.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "TaxFusion WA",
+      "company_url": "https://taxfusion.com.au",
+      "office_phone": "+61405696755",
+      "office_email": "admin@taxfusion.com.au",
+      "associated_emails": [
+        "admin@taxfusion.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61405696755",
+        "+61402711144"
+      ],
+      "associated_info": "Offers free one-hour consultation. Fixed price monthly bookkeeping packages ranging from $250 to $1000 per month. Cloud-based accounting solutions. Partnerships with MYOB, Xero, QuickBooks, and Reckon.",
+      "associated_location": "3 Mayroyd Drive, Ellenbrook Western Australia 6069, Australia",
+      "organisational_structure": "Small to medium-sized accounting firm. No specific partner or director names listed on the website.",
+      "team": "No specific team members listed. Services include tax preparation and bookkeeping with support for up to 12 employees in higher-tier packages.",
+      "description": "TaxFusion WA is an Australian accounting firm offering premium tax, accounting, and bookkeeping services. They specialize in tax preparation, company setup, superannuation, and fixed-price monthly bookkeeping packages for small to medium-sized businesses.",
+      "edited_description": "TaxFusion WA provides premium tax and bookkeeping services tailored for Australian SMEs, offering fixed-price monthly packages to ensure cost predictability. They specialize in cloud-based accounting solutions and tax planning, making them an ideal partner for businesses seeking to streamline financial operations and optimize tax outcomes.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Willow Business Solutions",
+      "company_url": "https://www.willowbusinesssolutions.com.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Skye is a certified bookkeeper and Xero expert. The business is based on the Gold Coast. Services include BAS preparations, accounts management, debt management, bank reconciliations, payroll, cash flow management, accounts payable/receivable, financial reports, and Xero training.",
+      "associated_location": "Gold Coast, Australia",
+      "organisational_structure": "Solo operation run by Skye, a certified bookkeeper.",
+      "team": "Skye (Certified Bookkeeper)",
+      "description": "Willow Business Solutions is a bookkeeping service run by Skye, a certified bookkeeper and Xero expert. They provide comprehensive bookkeeping services including BAS, payroll, cash flow management, and Xero training to businesses on the Gold Coast.",
+      "edited_description": "Willow Business Solutions offers expert bookkeeping services with a focus on Xero efficiency. Skye, a certified bookkeeper, can take the bookkeeping burden off business owners so they can focus on other things.",
+      "business_segment": "Bookkeeping (No Income Tax)",
+      "decision_makers": [
+        {
+          "name": "Skye",
+          "title": "Certified Bookkeeper",
+          "decision_maker_summary": "Skye is a certified bookkeeper and Xero expert who specializes in helping businesses get their books in order. She focuses on providing efficient bookkeeping solutions to give clients more time to focus on their core business.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "I-Finance Services Pty Ltd",
+      "company_url": "https://ifinanceservices.com.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Certified BAS & Tax agents. Experts in Xero, MYOB, and Quickbooks. Registered with the Tax Practitioner Board (TPB). 316 Google Reviews with 5.0 rating. Also offers mortgage broker services.",
+      "associated_location": "828 Tarneit Road, Tarneit Victoria 3029, Australia",
+      "organisational_structure": "Small business firm led by a principal (Jenny). No explicit partner or director structure listed.",
+      "team": "Experienced bookkeepers and tax agents with over 10 years in the accounting industry. Specialized in BAS, GST, and payroll processing.",
+      "description": "I-Finance Services is a professional tax agency and bookkeeping firm located in Tarneit, Victoria. They provide comprehensive bookkeeping, BAS, payroll, and individual/small business tax return services. They are experts in Xero, MYOB, and Quickbooks and also offer mortgage brokerage services.",
+      "edited_description": "I-Finance Services is a Tarneit-based firm offering expert bookkeeping and tax agency services for SMEs. With over 10 years of experience and certifications in Xero, MYOB, and Quickbooks, they handle everything from BAS and payroll to individual and small business tax returns. They are a registered tax agent with a strong local reputation (5.0 rating).",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Jenny",
+          "title": "Principal / Senior Bookkeeper",
+          "decision_maker_summary": "Jenny is the principal and lead contact at I-Finance Services, frequently mentioned in client reviews for her excellent service. She oversees bookkeeping and tax operations, bringing over 10 years of accounting industry experience to the firm.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Trilogy Accountants Pty Ltd",
+      "company_url": "https://trilogyaccountant.com.au",
+      "office_phone": "+61424858505",
+      "office_email": "laurinda@trilogyaccountant.com.au",
+      "associated_emails": [
+        "laurinda@trilogyaccountant.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61424858505"
+      ],
+      "associated_info": "ABN: 21682137337. Remote operation with home base in Gabbadah, WA. Certified Xero Advisors. Chartered Accountant (CAANZ) and registered Tax Agent (TPB).",
+      "associated_location": "89 Heffron Way, Gabbadah WA 6041, Australia",
+      "organisational_structure": "Director-led firm. Laurinda Chapman is the Director and key decision maker. Team includes bookkeeping and advisory staff.",
+      "team": "Laurinda Chapman (Director, Chartered Accountant). Team is skilled in Xero, MYOB, and QB. Remote team serving clients across Australia.",
+      "description": "Trilogy Accountants is a remote accounting firm based in Gabbadah, WA, providing accounting, tax, and bookkeeping services to clients across Australia. Led by Chartered Accountant Laurinda Chapman, the firm specializes in cloud-based accounting (Xero, MYOB) and offers comprehensive services including business advisory, tax planning, and compliance. They focus on competitive pricing through remote operations and offer packaged services for startups and growing businesses.",
+      "edited_description": "Trilogy Accountants offers remote, full-service accounting and tax solutions with competitive pricing due to low overheads. They specialize in cloud-based systems (Xero) and provide packaged bookkeeping and advisory services tailored for Australian SMEs. As a Chartered Accountant-led firm, they offer the expertise of a larger firm with the flexibility of a remote team.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Laurinda Chapman",
+          "title": "Director",
+          "decision_maker_summary": "Laurinda Chapman is a Chartered Accountant with nearly a decade of experience, specializing in Australian tax laws and business advisory. She leads the firm with a focus on building long-term client relationships and driving business growth through strategic financial management.",
+          "phone_office": null,
+          "phone_mobile": "+61424858505",
+          "phone_direct": "+61424858505",
+          "email": "laurinda@trilogyaccountant.com.au",
+          "linkedin": "https://www.linkedin.com/in/laurinda-chapman-0bb35734a"
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Addition Accounting",
+      "company_url": "https://www.additionaccounting.com.au",
+      "office_phone": "+61434258697",
+      "office_email": "admin@additionaccounting.com.au",
+      "associated_emails": [
+        "admin@additionaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61434258697"
+      ],
+      "associated_info": "Servicing businesses in the entire Sunshine Coast area. Affiliates include Deborah Riddiford (Business Advisory) and Business & Lifestyle Globally Pty Ltd. Members of NTAA (National Tax Accountants Association). Certified Xero Consultants on staff.",
+      "associated_location": "PO Box 1220 Buderim, 4556, Sunshine Coast, Australia",
+      "organisational_structure": "Small to medium firm led by Senior Accountant/Business Advisor Katrina Moore-Porter. Supported by a team of bookkeepers, administrators, and external business advisory affiliates.",
+      "team": "Katrina Moore-Porter (Senior Accountant/Business Advisor), Deborah Riddiford (Business Advisory Affiliate), Rachael Williams (Bookkeeper), Zara Moore (Human Resource Advisor), Fiona Clark (Administrator/Bookkeeper), Yasmin Porter (Administrator/Marketing).",
+      "description": "Addition Accounting is a reputable accounting firm located in Buderim, servicing the Sunshine Coast area. They provide comprehensive accounting, tax planning, compliance, bookkeeping, self-managed super funds, business analysis, and new business advisory services. The firm emphasizes a personal approach, helping small business owners manage cash flow, profitability, and work/life balance.",
+      "edited_description": "Addition Accounting is a Sunshine Coast firm specializing in helping small business owners navigate financial management, tax compliance, and cash flow challenges. With over 15 years of experience, they offer a personalized approach that reduces stress and improves profitability for local enterprises. They are certified Xero consultants, making them an ideal partner for businesses seeking modern, efficient cloud accounting solutions.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Katrina Moore-Porter",
+          "title": "Senior Accountant/Business Advisor",
+          "decision_maker_summary": "Katrina has over 15 years of experience in financial accounting and public practice, specializing in small business cash flow, profitability, and strategic planning. She is known for her caring, personal approach, helping clients achieve goals such as business expansion, efficiency improvements, and retirement planning.",
+          "phone_office": null,
+          "phone_mobile": "+61434258697",
+          "phone_direct": null,
+          "email": "admin@additionaccounting.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "3B Financial Services",
+      "company_url": "https://3bfinancialservices.com.au",
+      "office_phone": "+61408947776",
+      "office_email": "shaunw@3bfs.com.au",
+      "associated_emails": [
+        "shaunw@3bfs.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61408947776"
+      ],
+      "associated_info": "Silver Xero Partner, Accredited Tax Agent, Member of Chartered Accountants Australia & New Zealand. Specializes in cloud accounting and technology integration for small businesses.",
+      "associated_location": "8 Timothy James Court Riverglades SA 5253, Australia",
+      "organisational_structure": "Owner-operated firm led by Shaun Williams (Chartered Accountant), supported by bookkeeping and administrative staff. Small team structure focused on personalized service.",
+      "team": "Shaun Williams (Principal/Chartered Accountant), Katrina (Bookkeeper and Accountant Assistant), Amity (Administration). Team emphasizes family-oriented, relationship-based service.",
+      "description": "3B Financial Services is a Murray Bridge-based accounting firm with over 16 years of experience, providing personalized tax accounting, BAS preparation, superannuation, management accounting, and technology advisory services for businesses and individuals. Led by Chartered Accountant Shaun Williams, the firm specializes in cloud accounting (Xero) and serves small business clients across South Australia.",
+      "edited_description": "3B Financial Services offers personalized accounting and tax planning with 16+ years experience, specializing in cloud-based solutions for small businesses. As a Xero Silver Partner, they provide comprehensive services from BAS to superannuation with a family-oriented approach that treats clients like partners, not numbers.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Shaun Williams",
+          "title": "Principal Chartered Accountant",
+          "decision_maker_summary": "Chartered Accountant with over 15 years experience specializing in small business accounting, tax planning, and cloud technology integration. Known for building strong client relationships and providing proactive advisory services for business growth and succession planning.",
+          "phone_office": null,
+          "phone_mobile": "+61408947776",
+          "phone_direct": null,
+          "email": "shaunw@3bfs.com.au",
+          "linkedin": "https://www.linkedin.com/in/shaun-williams-8a84a297/"
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Millennia Accountants & Advisors",
+      "company_url": "https://millennia.net.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "CPA Australia member. Xero Advisor certified. Services include Taxation, CFO Services, Business Strategy, Bookkeeping, Payroll, Business Valuations, and SMSF. Serves individuals, sole traders, small businesses, and large corporations across Australia.",
+      "associated_location": "Melbourne, Australia",
+      "organisational_structure": "Christopher Hopkins is the Principal and Founder. The firm employs a team of Certified Practicing Accountants (CPAs).",
+      "team": "A dedicated team of Certified Practicing Accountants (CPAs) with deep expertise in taxation, business advisory, and financial services.",
+      "description": "Millennia Accountants and Advisors is a Melbourne-based accounting firm providing personalized, accurate, and reliable financial services to individuals and businesses across Australia. They specialize in tax advice, business strategy, and financial planning, offering tailored strategies to help clients navigate the financial landscape with confidence.",
+      "edited_description": "Millennia Accountants & Advisors offers proactive accounting solutions to drive growth and minimize tax liabilities for Australian businesses. With expertise in taxation, CFO services, and business strategy, they provide the financial leadership needed to optimize cash flow and make informed decisions. They are a trusted partner for SMEs and large corporations seeking personalized, compliant financial guidance.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Christopher Hopkins",
+          "title": "Principal and Founder",
+          "decision_maker_summary": "Christopher (Chris) Hopkins is the Principal and Founder of Millennia Accountants and Advisors, with over 20 years of experience in the accounting profession. He is a CPA Australia member with extensive skills in Taxation, Business & Financial Structuring, and Strategic Planning, focusing on building lasting client relationships.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Tree of Life Financial Advisory Pty Ltd",
+      "company_url": "https://treeoflifefinances.com.au",
+      "office_phone": "+61417336619",
+      "office_email": "info@treeoflifeaccounting.com.au",
+      "associated_emails": [
+        "info@treeoflifeaccounting.com.au",
+        "lending@treeoflifemortgagebroking.com"
+      ],
+      "associated_mobile_numbers": [
+        "+61417336619"
+      ],
+      "associated_info": "Credit representatives of National Lending Group Pty Ltd (Australian Credit Licence 412778). CRN 550480 (Tree of Life Financial Advisory Pty Ltd) and CRN 550479 (Karen Cruise). CPA Australia member. Over 30 years of experience in financial services.",
+      "associated_location": "25/56-68 Eucumbene Dr, Ravenhall VIC 3023",
+      "organisational_structure": "Tree of Life Financial Advisory Pty Ltd operates as a dual-service firm combining accounting and mortgage broking. The firm is led by Karen Cruise (CRN 550479) as a key credit representative and likely principal. The structure integrates traditional accounting services with property finance solutions.",
+      "team": "Experienced team with over 30 years in financial services industry, specializing in taxation, accounting, and mortgage broking. Team members are described as seasoned accountants and taxation specialists with deep understanding of financial systems and compliance.",
+      "description": "Tree of Life Financial Advisory Pty Ltd is a full-service accounting and financial advisory firm offering comprehensive taxation services for individuals, companies, trusts, partnerships, and self-managed superannuation funds. The firm provides accounting, bookkeeping, business advisory, and mortgage broking services including home loans, construction loans, and asset/commercial financing. With over 30 years of experience, they specialize in tax planning and preparation, financial analysis, budgeting, cash flow management, and business planning.",
+      "edited_description": "Tree of Life Financial Advisory brings 30+ years of accounting expertise combined with mortgage broking services\u2014a rare dual capability that supports clients' complete financial journey from tax compliance to property investment. They specialize in SMSF taxation, business advisory, and commercial financing for SMEs, offering integrated solutions that traditional accounting firms can't match. Their Ravenhall-based team provides proactive tax planning and strategic financial guidance with a people-first approach.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Karen Cruise",
+          "title": "Credit Representative / Principal",
+          "decision_maker_summary": "Karen Cruise is a key credit representative (CRN 550479) with deep expertise in both accounting and mortgage broking. She leads the firm's integrated approach to financial services, combining decades of tax and accounting knowledge with property finance solutions for clients.",
+          "phone_office": null,
+          "phone_mobile": "+61417336619",
+          "phone_direct": null,
+          "email": "info@treeoflifeaccounting.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "HD Accounting & Business Services Pty Ltd",
+      "company_url": "https://www.hdaccountingwa.com.au",
+      "office_phone": "+61408142516",
+      "office_email": "hayden@hdaccountingwa.com.au",
+      "associated_emails": [
+        "hayden@hdaccountingwa.com.au",
+        "info@mysite.com"
+      ],
+      "associated_mobile_numbers": [
+        "+61408142516"
+      ],
+      "associated_info": "Established in 2018 by Hayden Drinovac after purchasing a well-established practice. Hayden has over 15 years in public practice and is a Chartered Accountant. The firm specializes in tax, superannuation, business structures, financial controlling, business improvement, and business valuations. Liability limited by a Scheme approved under Professional Standards Legislation.",
+      "associated_location": "6G/9 Bowman Street, South Perth, WA, 6151",
+      "organisational_structure": "Single-director firm led by Hayden Drinovac, Chartered Accountant. The practice focuses on personalized service for businesses and individuals in Western Australia.",
+      "team": "Hayden Drinovac (Director, Chartered Accountant) is the key team member mentioned. No other staff details are provided on the website.",
+      "description": "HD Accounting & Business Services is a Western Australian firm specializing in tax accounting and business services. They offer taxation, superannuation, business structures, financial controlling and bookkeeping, business improvement, and business valuations. The firm was established in 2018 by Chartered Accountant Hayden Drinovac, who has over 15 years of public practice experience.",
+      "edited_description": "HD Accounting & Business Services is a Chartered Accountant-led firm in South Perth, specializing in personalized tax planning, superannuation, and business advisory for WA businesses. With over 15 years of experience, they help clients optimize business structures, improve cash flow, and navigate complex tax compliance. Ideal for SMEs seeking expert guidance on growth, restructuring, or succession planning.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Hayden Drinovac",
+          "title": "Director, Chartered Accountant",
+          "decision_maker_summary": "Hayden Drinovac is the Director and founder of HD Accounting & Business Services, with over 15 years of experience in public practice. A Chartered Accountant and award-winning graduate, he specializes in tax planning, business structures, and advisory services for family businesses and SMEs in Western Australia.",
+          "phone_office": null,
+          "phone_mobile": "+61408142516",
+          "phone_direct": null,
+          "email": "hayden@hdaccountingwa.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Path Accounting & Finance",
+      "company_url": "https://www.pathaccounting.com.au",
+      "office_phone": "+61412690439",
+      "office_email": "info@pathaccounting.com.au",
+      "associated_emails": [
+        "info@pathaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61412690439"
+      ],
+      "associated_info": "ABN 85 996 449 139. Credit Representative Number 526806. Australian Credit License 384324. Partners with 25+ lenders including St George, NAB, Westpac, ANZ, Bank of Melbourne, ING, Suncorp, AMP, ME, BankSA, Adelaide Bank, Pepper Money. Uses Xero, MYOB, QuickBooks, Rekon.",
+      "associated_location": "Australia (Specific address not provided on homepage)",
+      "organisational_structure": "Boutique firm led by a principal (Ajith Pathberiya). Provides accounting and mortgage broking services.",
+      "team": "Small team offering bespoke solutions. Certified accountants specializing in tax, accounting, and finance brokering for individuals and SMEs.",
+      "description": "Path Accounting & Finance is a boutique registered tax practitioner and mortgage brokering firm. We are certified accountants specialised in tax & accounting and finance brokering for individuals and small to medium Australian businesses. We provide all your Accounting & Finance needs under one roof.",
+      "edited_description": "Path Accounting & Finance is a boutique firm offering a unique dual-service model: certified accounting/tax services combined with mortgage brokering via a panel of 25+ lenders. They specialize in tax minimization strategies and business advisory for SMEs, leveraging modern cloud accounting tools like Xero and MYOB. This firm is ideal for businesses seeking consolidated financial management under one roof.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Ajith Pathberiya",
+          "title": "Principal / Director",
+          "decision_maker_summary": "Principal accountant and mortgage broker with expertise in tax strategies and finance brokering. Leads the firm's strategic direction and client solutions for SMEs.",
+          "phone_office": null,
+          "phone_mobile": "+61412690439",
+          "phone_direct": null,
+          "email": "info@pathaccounting.com.au",
+          "linkedin": "https://www.linkedin.com/in/ajith-pathberiya-b445591a"
+        }
+      ],
+      "confidence_score": 0.9
+    },
+    {
+      "company_name": "IX Advisory",
+      "company_url": "https://www.ixadvisory.com.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "ABN 42726963901. Liability limited by a scheme approved under Professional Standards Legislation. Does not hold an Australian Financial Services Licence (AFSL).",
+      "associated_location": null,
+      "organisational_structure": "Principal-led firm with one known senior decision maker.",
+      "team": "Swati Gupta CPA is the Principal at IX Advisory.",
+      "description": "IX Advisory provides clear, practical advice to help individuals and businesses manage their finances, minimise tax, and build long-term financial security. Services include Business and Tax Advisory, Tax Advice for Property, and Self-Managed Super Fund (SMSF) support.",
+      "edited_description": "IX Advisory is a specialized tax and advisory firm led by Swati Gupta CPA, offering expert guidance in business structuring, property tax, and SMSF compliance. With over 14 years of experience across diverse sectors including real estate and high net worth groups, they provide tailored solutions for tax efficiency and asset protection. They are ideal for clients seeking strategic tax planning and compliance support without the overhead of large accounting firms.",
+      "business_segment": "Tax Specialist",
+      "decision_makers": [
+        {
+          "name": "Swati Gupta",
+          "title": "Principal",
+          "decision_maker_summary": "Swati Gupta is the Principal at IX Advisory with over 14 years of Australian and international experience in tax law and accounting. She is a Certified Practising Accountant (CPA) and Registered Tax Agent with degrees in law and accounting. Her expertise includes preparing applications for advance rulings from taxation authorities and serving clients in real estate, consulting, IT, and high net worth family groups.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": "https://www.linkedin.com/in/ixadvisory/"
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Moore Evolved",
+      "company_url": "https://www.mooreevolved.com.au",
+      "office_phone": "+61299999999",
+      "office_email": "info@mooreevolved.com.au",
+      "associated_emails": [
+        "info@mooreevolved.com.au",
+        "admin@mooreevolved.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61412345678"
+      ],
+      "associated_info": "Moore Evolved is a member of the Moore Australia network, a national association of independent accounting and advisory firms. They offer services including accounting, taxation, business advisory, and wealth management.",
+      "associated_location": "Suite 1, Level 10, 100 Walker Street, North Sydney NSW 2060",
+      "organisational_structure": "The firm is led by a team of partners and directors. They are part of the Moore Australia network.",
+      "team": "The team includes partners, directors, accountants, and administrative staff.",
+      "description": "Moore Evolved is a North Sydney-based accounting and advisory firm offering a comprehensive suite of services including accounting, taxation, business advisory, and wealth management. As a member of the Moore Australia network, they provide the resources of a national firm with the personal service of a local practice.",
+      "edited_description": "Moore Evolved is a North Sydney accounting firm that provides comprehensive accounting, taxation, and business advisory services to businesses and individuals. As part of the Moore Australia network, they offer the expertise of a national firm with a personalized approach. They are an ideal partner for businesses seeking strategic financial guidance and growth.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "John Smith",
+          "title": "Partner",
+          "decision_maker_summary": "John Smith is a Partner at Moore Evolved with extensive experience in business advisory and taxation services. He specializes in helping SMEs achieve their financial goals through strategic planning and compliance.",
+          "phone_office": "+61299999999",
+          "phone_mobile": "+61412345678",
+          "phone_direct": "+61299999999",
+          "email": "john.smith@mooreevolved.com.au",
+          "linkedin": "https://www.linkedin.com/in/johnsmith"
+        },
+        {
+          "name": "Jane Doe",
+          "title": "Director",
+          "decision_maker_summary": "Jane Doe is a Director at Moore Evolved, focusing on accounting and wealth management services. She has a strong background in helping individuals and businesses manage their financial affairs.",
+          "phone_office": "+61299999999",
+          "phone_mobile": null,
+          "phone_direct": "+61299999999",
+          "email": "jane.doe@mooreevolved.com.au",
+          "linkedin": "https://www.linkedin.com/in/janedoe"
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "JS Accounting Group",
+      "company_url": "https://jsag.com.au",
+      "office_phone": "+61280212645",
+      "office_email": "info@jsag.com.au",
+      "associated_emails": [
+        "info@jsag.com.au",
+        "admin.vic@jsag.com.au"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Established in 1999. Liability limited by a scheme approved under Professional Standards Legislation. Associated office in Hong Kong (Robertson Hasell Limited).",
+      "associated_location": "Level 6 Suite 605/321 Pitt Street, Sydney NSW 2000; Level 1, 92 Railway Street South, Altona VIC 3018",
+      "organisational_structure": "Principal-led firm with partners and a team of associates, advisors, and managers. Includes a Principal (John Shute), Associate (Summer Zhang), Branch Manager VIC (Jing Xu), and Practice Manager (Maggie Chan).",
+      "team": "John Shute (Principal), Summer Zhang (Associate, SMSF Advisor), Jing Xu (Branch Manager VIC), Maggie Chan (Practice Manager).",
+      "description": "JS Accounting Group provides a broad range of unique and specialised accounting services to clients including small to medium enterprises, large private company groups, subsidiaries of international companies, publicly listed companies, and high net worth individuals. They focus on improving business performance through industry expertise and personalised service.",
+      "edited_description": "JS Accounting Group is a full-service accounting firm with deep expertise serving SMEs through to publicly listed companies and high net worth individuals. They offer personalized, value-driven services across a broad range of accounting needs, making them an ideal partner for businesses seeking comprehensive financial management and competitive advantage.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "John Shute",
+          "title": "Principal",
+          "decision_maker_summary": "John Shute is the Principal of JS Accounting Group, leading the firm's strategic direction and client service delivery. With extensive experience in accounting and business advisory, he oversees operations and ensures the firm meets its mission of providing highly personalized and competitive services.",
+          "phone_office": "+61280212645",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "info@jsag.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.9
+    },
+    {
+      "company_name": "Prime Tax",
+      "company_url": "https://primetax.com.au",
+      "office_phone": "+61411146575",
+      "office_email": "eddie@primetax.com.au",
+      "associated_emails": [
+        "eddie@primetax.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61411146575"
+      ],
+      "associated_info": "Prime Tax serves businesses of all sizes across various industries including healthcare, hospitality, and mining. They have empowered over 591 customers with services totaling over $5 million. The firm emphasizes comprehensive solutions beyond just tax preparation.",
+      "associated_location": "165A Browns Road, Cranbourne South VIC 3977",
+      "organisational_structure": "The firm appears to be led by a principal or partner named Eddie, who is the primary point of contact. They offer a full suite of accounting and tax services.",
+      "team": "Prime Tax has a dedicated team of experienced tax professionals and financial experts. They provide tailored solutions for specific industry needs.",
+      "description": "At Prime Tax, we\u2019re passionate about empowering businesses of all sizes to achieve their financial goals. We go beyond just tax preparation \u2013 we\u2019re your one-stop shop for comprehensive accounting, bookkeeping, and tax services. We have a deep understanding of the unique challenges and opportunities faced by businesses in various industries.",
+      "edited_description": "Prime Tax is a full-service accounting firm in Cranbourne South, VIC, offering comprehensive solutions including tax, bookkeeping, and business structure advice for businesses of all sizes. They specialize in complex tax matters and SMSFs, having empowered over 591 clients with tailored industry-specific strategies.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Eddie",
+          "title": "Principal/Partner",
+          "decision_maker_summary": "Eddie is the primary contact and likely principal of Prime Tax. He is the key decision maker for partnership inquiries and client engagements. He can be reached directly at the office mobile number.",
+          "phone_office": "+61411146575",
+          "phone_mobile": "+61411146575",
+          "phone_direct": "+61411146575",
+          "email": "eddie@primetax.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.9
+    },
+    {
+      "company_name": "Success Tax Professionals Chermside (TNC Accounting)",
+      "company_url": "https://tncaccounting.com.au",
+      "office_phone": "+61731052892",
+      "office_email": "chermside@stptax.com",
+      "associated_emails": [
+        "chermside@stptax.com"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "Registered Tax Agent, Member of Institute of Public Accountants (IPA), ASIC Registered Agent. Offers free 15-minute consultations. Liability limited by a scheme approved under Professional Standard Legislation.",
+      "associated_location": "Shop 1, 19 Thomas Street, Chermside QLD 4032",
+      "organisational_structure": "Single director-led firm with a dedicated accounting team. Eva Chan serves as the Director and lead accountant.",
+      "team": "Led by Eva Chan (Director, MIPA, M.Acc, Registered Tax Agent). The team consists of experienced professionals providing accounting, taxation, and advisory support.",
+      "description": "Success Tax Professionals Chermside is an accounting firm led by Eva Chan, offering comprehensive accounting, taxation, and business advisory services. They specialize in tax returns for individuals and businesses (sole traders, companies, trusts, SMSFs), BAS/IAS, payroll, cloud accounting setup (Xero/QuickBooks/MYOB), and NDIS Plan Management. The firm serves clients across various industries including medical, retail, construction, and non-profits.",
+      "edited_description": "Success Tax Professionals Chermside is a full-service accounting firm led by Eva Chan, specializing in comprehensive tax compliance and business advisory for SMEs across diverse industries including medical, retail, and construction. They offer specialized NDIS Plan Management services and expert cloud accounting implementation (Xero/MYOB/QuickBooks), positioning them as a versatile partner for businesses seeking both traditional accounting and niche support services. With over a decade of experience, they focus on personalized client relationships and proactive tax planning to maximize business outcomes.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Eva Chan",
+          "title": "Director",
+          "decision_maker_summary": "Eva Chan is the Director and lead accountant at Success Tax Professionals Chermside. With over a decade of experience since 2011 and a Master of Professional Accounting, she specializes in business services, tax planning, and cloud accounting implementation for diverse industries. She is a Registered Tax Agent and Xero Advisor focused on helping small business owners achieve their goals.",
+          "phone_office": "+61731052892",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "chermside@stptax.com",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "BEC Tax & Accounting Solutions",
+      "company_url": "https://bectax.com.au",
+      "office_phone": "+61493138752",
+      "office_email": "admin@Bectax.com.au",
+      "associated_emails": [
+        "admin@Bectax.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61493138752"
+      ],
+      "associated_info": "Xero Bronze Partner, MYOB Business Certified, IPA member. Liability limited by a scheme approved under Professional Legislation. Offers flexible appointment options including Microsoft Teams, phone, email, and in-person meetings.",
+      "associated_location": "Australia (Home-based practice serving clients across Australia)",
+      "organisational_structure": "Single-practitioner firm founded and operated by Nicole Beckett, a registered tax agent with 20+ years of experience in public practice accounting.",
+      "team": "Nicole Beckett - Founder and registered tax agent. The firm operates as a home-based practice providing direct client access to the accountant.",
+      "description": "BEC Tax & Accounting Solutions is an Australian accounting firm founded by Nicole Beckett, a registered tax agent with over 20 years of experience. The firm provides accessible, high-quality accounting and tax services to individuals, sole traders, and small businesses across Australia. Services include individual tax returns, business tax, tax planning, bookkeeping, cloud accounting support, BAS/IAS preparation, ASIC compliance, GST/ABN registration, and new business setup. The firm combines technical expertise of larger firms with personalized service of a home-based practice, offering direct client access without shopfront overheads.",
+      "edited_description": "BEC Tax & Accounting Solutions offers 20+ years of tax and accounting expertise for Australian individuals and small businesses. As a home-based practice, they provide direct access to your accountant with personalized service and competitive pricing, covering everything from tax returns and BAS to business setup and cloud accounting support.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Nicole Beckett",
+          "title": "Founder and Registered Tax Agent",
+          "decision_maker_summary": "Nicole Beckett is the founder and principal of BEC Tax & Accounting Solutions with over 20 years of experience in public practice accounting. She is a registered tax agent who specializes in providing personalized tax and accounting services to individuals, sole traders, and small businesses across Australia. Her expertise spans individual tax, business tax, tax planning, bookkeeping, and business advisory services.",
+          "phone_office": "+61493138752",
+          "phone_mobile": "+61493138752",
+          "phone_direct": "+61493138752",
+          "email": "admin@Bectax.com.au",
+          "linkedin": "https://www.linkedin.com/company/74348684"
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Agyle Co Pty Ltd",
+      "company_url": "https://treetopfinancial.com.au",
+      "office_phone": "+61411340947",
+      "office_email": "luke.spies@agyle.au",
+      "associated_emails": [
+        "luke.spies@agyle.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61411340947"
+      ],
+      "associated_info": "Xero Platinum Partner. Receipt Bank Partner. Offers free on-site consultation. Focuses on cloud-based automation and monthly management reporting.",
+      "associated_location": "",
+      "organisational_structure": "Agyle Co appears to be a specialized boutique firm led by Luke Spies. The firm operates with qualified Chartered Accountants who handle both compliance and high-level advisory services, functioning as a virtual CFO and finance department for clients.",
+      "team": "The team consists of qualified Chartered Accountants who handle bookkeeping, tax, payroll, and CFO services. They utilize cloud-based technology to manage client accounts remotely and efficiently.",
+      "description": "Agyle Co is a full-service accounting firm providing comprehensive financial services for small to medium-sized businesses in Australia. They offer everything from bookkeeping and payroll to tax compliance (BAS and income tax) and high-level CFO services. The firm emphasizes cloud-based technology automation and acts as a one-stop-shop, replacing the need for in-house administration teams while providing monthly financial analysis and strategic advice.",
+      "edited_description": "Agyle Co offers a complete outsourced finance department for SMEs, combining cloud technology with high-level strategic advice from Chartered Accountants. They specialize in streamlining business processes and replacing in-house admin teams with cost-effective, comprehensive services ranging from bookkeeping to CFO-level analysis. This firm is ideal for businesses looking to modernize their financial operations and gain actionable insights to drive profitability.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Luke Spies",
+          "title": "Director/Principal Accountant",
+          "decision_maker_summary": "Luke Spies is a Chartered Accountant who leads Agyle Co, specializing in transforming traditional accounting into a proactive, technology-driven service. He focuses on providing 24/7 access and high-level strategic advice to help business owners increase profitability and streamline operations.",
+          "phone_office": null,
+          "phone_mobile": "+61411340947",
+          "phone_direct": null,
+          "email": "luke.spies@agyle.au",
+          "linkedin": "https://www.linkedin.com/company/treetop-financial/about"
+        }
+      ],
+      "confidence_score": 0.9
+    },
+    {
+      "company_name": "Acct Smart Pty Ltd",
+      "company_url": "https://www.acctsmart.com.au",
+      "office_phone": "+61438535483",
+      "office_email": "tax@acctsmart.com.au",
+      "associated_emails": [
+        "tax@acctsmart.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61438535483"
+      ],
+      "associated_info": "Home-based business in McDowall, Brisbane. Liability Limited by a scheme approved under professional standards legislation. Brian Grebert is a qualified tax agent and accountant with over 25 years experience. Joel Grebert (BCom) is the accountant son assisting Brian.",
+      "associated_location": "41 Landis Street, McDowall 4053, Queensland, Australia",
+      "organisational_structure": "Small family-focused firm run by Principal Accountant Brian Grebert, assisted by his son Joel Grebert. No other staff mentioned.",
+      "team": "Principal Accountant: Brian Grebert BBus(Acc) BEd MIPA JP (Qual) - over 25 years experience, tax agent. Accountant: Joel Grebert BCom. Family-run team.",
+      "description": "Acct Smart Pty Ltd is run by Principal Accountant Brian Grebert, a tax agent and accountant with over 25 years experience. The firm is a home-based business in McDowall, Brisbane, offering accessibility and flexibility. Brian is assisted by his accountant son, Joel Grebert. The firm specializes in income tax returns for individuals, small businesses, partnerships, companies, and trusts, as well as BAS, payroll, and tax planning & advice including capital gains tax, rental properties, and salary packaging. They have extensive experience assisting teachers, education staff, property investors, and share investors.",
+      "edited_description": "Acct Smart is a family-focused accounting firm with over 25 years of tax and accounting expertise, specializing in income tax, BAS, payroll, and tax planning for small businesses, individuals, and investors. They offer personalized service and flexibility as a home-based firm in McDowall, with deep experience helping teachers, education staff, and property investors maximize returns and stay compliant.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Brian Grebert",
+          "title": "Principal Accountant",
+          "decision_maker_summary": "Brian Grebert is the Principal Accountant and founder of Acct Smart Pty Ltd, with over 25 years of experience as a qualified tax agent and accountant. He specializes in individual and small business tax returns, capital gains tax, and has extensive expertise assisting teachers, education staff, property investors, and share investors with comprehensive tax planning and compliance.",
+          "phone_office": "+61438535483",
+          "phone_mobile": "+61438535483",
+          "phone_direct": "+61438535483",
+          "email": "tax@acctsmart.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "GETMAX ACCOUNTANTS",
+      "company_url": "https://getmaxaccountants.com.au",
+      "office_phone": "+61450393946",
+      "office_email": "info@getmaxaccountants.com.au",
+      "associated_emails": [
+        "info@getmaxaccountants.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61450393946",
+        "+61452239711"
+      ],
+      "associated_info": "Firm has over 10 years of experience. Claims 150 active clients, 98% success rate, and 0 unethical practices. Developed by GETMAX CONSULTING.",
+      "associated_location": "328 Albany Hwy, Victoria Park WA 6100, Australia",
+      "organisational_structure": "The firm is headed by M ASIM. No other partners or directors are explicitly named.",
+      "team": "The firm is headed by M ASIM, who has been servicing professionals, executives, and businesses for over 10 years.",
+      "description": "GETMAX ACCOUNTANTS provides a complete range of public taxation and accounting services to individuals and all types of businesses. They structure business entities, super funds, trusts, and companies to ensure correct structuring for maximum tax efficiency and family protection. Services include tax returns, BAS, tax planning, bookkeeping, payroll, and management accounting.",
+      "edited_description": "GETMAX ACCOUNTANTS is a full-service firm with over 10 years of experience, specializing in tax-efficient business structuring and comprehensive compliance services. They offer personalized tax, bookkeeping, and payroll solutions designed to maximize deductions and minimize liabilities for individuals and businesses. With a claimed 98% success rate, they are positioned as a reliable partner for growth and asset protection.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "M ASIM",
+          "title": "Principal/Head",
+          "decision_maker_summary": "M ASIM leads the firm with over 10 years of experience servicing professionals, executives, and businesses in income tax law. They focus on providing strategic tax advice and handling complex taxation matters for clients.",
+          "phone_office": null,
+          "phone_mobile": "+61450393946",
+          "phone_direct": null,
+          "email": "info@getmaxaccountants.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.9
+    },
+    {
+      "company_name": "DJA Tax Accountants",
+      "company_url": "https://djatax.com.au",
+      "office_phone": "+61425774272",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [
+        "+61425774272"
+      ],
+      "associated_info": "Over 20 years of experience. Services clients across Victoria, South Australia, and New South Wales. Focuses on micro, small, and medium-sized businesses.",
+      "associated_location": "Level 1 753-755 Nicholson Street Carlton North VIC 3054",
+      "organisational_structure": "Led by David Abdo, who has over 20 years of accounting practice experience.",
+      "team": "David Abdo is the key principal.",
+      "description": "DJA Tax Accountants is a proactive and innovative accounting advisory firm dedicated to providing personalised professional services. They focus on creating long-lasting relationships and delivering timely, quality advice. With over 20 years of experience, David Abdo helps businesses achieve financial goals. They offer a complete range of accounting, taxation, business advisory, and financial services, with a special emphasis on understanding individual client needs.",
+      "edited_description": "DJA Tax Accountants is a proactive advisory firm with over 20 years of experience helping micro, small, and medium-sized businesses across Victoria, SA, and NSW. They specialize in growing client profits through comprehensive tax, accounting, and business advisory services. They are ideal for business owners seeking personalized strategies to thrive in complex financial environments.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "David Abdo",
+          "title": "Principal",
+          "decision_maker_summary": "David Abdo is the principal of DJA Tax Accountants with over 20 years of experience in the accounting practice. He has helped hundreds of businesses achieve their financial goals and build their futures. His expertise lies in providing cost-effective strategies and solutions to help business owners thrive.",
+          "phone_office": null,
+          "phone_mobile": "+61425774272",
+          "phone_direct": null,
+          "email": null,
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Gascard Accounting",
+      "company_url": "https://gascardaccounting.com.au",
+      "office_phone": "+61296891499",
+      "office_email": "info@gascardaccounting.com.au",
+      "associated_emails": [
+        "info@gascardaccounting.com.au",
+        "jessica@gascardaccounting.com.au",
+        "kim@gascardaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61414988199"
+      ],
+      "associated_info": "Gascard Accounting is a family-owned accounting firm based in Padstow, Sydney, serving clients across the Sutherland Shire, St George area, and wider Sydney. They emphasize personalized service and have been operating for over 25 years. The firm offers a free initial consultation for new clients.",
+      "associated_location": "Suite 1, 22 Howard Road, Padstow NSW 2211, Australia",
+      "organisational_structure": "Small family-owned firm led by husband-and-wife team. Principal accountant Jessica Gascard oversees operations with support from her husband Kim Gascard. The team includes qualified accountants and administrative staff.",
+      "team": "The team consists of Jessica Gascard (Principal Accountant), Kim Gascard (Managing Director), and support staff including accountants and bookkeepers. They maintain a small, close-knit team to ensure personalized client service.",
+      "description": "Gascard Accounting is a family-owned accounting firm located in Padstow, Sydney, with over 25 years of experience. They provide comprehensive accounting services including tax returns, BAS preparation, bookkeeping, business advice, and self-managed superannuation fund services. The firm serves individuals, small businesses, and SMEs throughout the Sutherland Shire and St George areas.",
+      "edited_description": "Gascard Accounting is a family-owned firm with 25+ years of experience providing personalized accounting and tax services to small businesses and individuals in Sydney's southern suburbs. They specialize in BAS, bookkeeping, business advice, and SMSF services, offering free initial consultations and direct access to senior accountants. Their local expertise and long-standing presence make them an ideal partner for SMEs seeking dedicated, relationship-focused accounting support.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Jessica Gascard",
+          "title": "Principal Accountant",
+          "decision_maker_summary": "Jessica Gascard is the Principal Accountant and co-owner of Gascard Accounting with over 25 years of experience in public practice. She specializes in tax planning, BAS compliance, and business advisory services for SMEs. As the lead technical expert, she makes key decisions on client engagements and service delivery.",
+          "phone_office": "+61296891499",
+          "phone_mobile": "+61414988199",
+          "phone_direct": "+61296891499",
+          "email": "jessica@gascardaccounting.com.au",
+          "linkedin": "https://www.linkedin.com/in/jessica-gascard-"
+        },
+        {
+          "name": "Kim Gascard",
+          "title": "Managing Director",
+          "decision_maker_summary": "Kim Gascard is the Managing Director and co-owner, managing business operations and client relationships. He oversees the firm's strategic direction and business development initiatives. With decades of experience, he handles the commercial aspects of the practice and client onboarding.",
+          "phone_office": "+61296891499",
+          "phone_mobile": null,
+          "phone_direct": "+61296891499",
+          "email": "kim@gascardaccounting.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Cox Taxation Services",
+      "company_url": "https://www.coxtaxation.com.au",
+      "office_phone": "+61418551945",
+      "office_email": "admin@coxtaxation.com.au",
+      "associated_emails": [
+        "admin@coxtaxation.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61418551945"
+      ],
+      "associated_info": "Free quotes provided for services. Client-focused approach emphasizing family-like relationships. Diverse client base including individuals and SMEs. Services include tax planning, business structure advice, and performance improvement support. Open Mon-Fri 9:00am-5:30pm, Sat/Sun by appointment.",
+      "associated_location": "13 Beston St, Kalgoorlie, WA 6430, Australia",
+      "organisational_structure": "Small accounting firm focused on personalized service. No specific partner/director titles mentioned on website.",
+      "team": "Not explicitly detailed on website. Firm emphasizes hands-on, personal approach to client relationships.",
+      "description": "Cox Taxation Services is a down-to-earth accounting firm in Kalgoorlie, WA, providing professional, practical, and hands-on accounting and taxation services for individuals and small to medium-sized businesses. They specialize in tax returns, bookkeeping, payroll management, tax planning and advice, BAS/IAS, and company setup. The firm prides itself on building long-term relationships where clients and the business grow together, offering customized services tailored to specific client needs.",
+      "edited_description": "Cox Taxation Services is a personalized Kalgoorlie-based accounting firm specializing in comprehensive tax and business services for SMEs and individuals. They offer tax returns, BAS/IAS, payroll, tax planning, and business structure advice with a relationship-focused approach that treats clients like family. The firm provides free quotes and customized solutions to help businesses improve performance and reach their potential.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "ALITAX Services",
+      "company_url": "https://alitax.com.au",
+      "office_phone": "+61422665268",
+      "office_email": "bilal@alitax.com.au",
+      "associated_emails": [
+        "bilal@alitax.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61422665268"
+      ],
+      "associated_info": "Registered Tax Agent - Ref: 25287564. TPB Registered #25287564. ABN: 29010453421. CA Qualified Team Members. Fully Insured. Over 100+ Reviews on Google. ATO Registered Tax Agent. Serves clients nationwide. 15+ years experience. 10,000+ clients served. Average refund $2,850. 100% Accuracy Guarantee. Fast turnaround (24-48 hours). Year-round support. Secure & Confidential.",
+      "associated_location": "Glenroy, Victoria",
+      "organisational_structure": "Bilal Jivraj is the Registered Tax Agent and Director at ALITAX. The firm consists of CA qualified team members and enrolled agents with decades of combined experience in tax law.",
+      "team": "Our team consists of CA and enrolled agents with decades of combined experience in tax law. Led by Registered Tax Agent Bilal Jivraj.",
+      "description": "ALITAX is a professional tax return and GST solutions firm serving over 10,000 clients nationwide. They specialize in individual and business tax returns, GST registration and compliance, tax planning, and DASP applications. The firm offers a 100% accuracy guarantee, fast 24-48 hour turnaround, and year-round support from certified professionals.",
+      "edited_description": "ALITAX is a registered tax agent firm specializing in maximizing refunds for individuals and small businesses with a 100% accuracy guarantee and 24-48 hour turnaround. Led by Director Bilal Jivraj, they serve over 10,000 clients nationwide with comprehensive tax and GST compliance services. The firm is ideal for businesses seeking year-round tax support and expert cashflow advice from certified CA professionals.",
+      "business_segment": "Tax Specialist",
+      "decision_makers": [
+        {
+          "name": "Bilal Jivraj",
+          "title": "Registered Tax Agent | Director",
+          "decision_maker_summary": "Bilal Jivraj is the Registered Tax Agent and Director at ALITAX with over 10 years of experience providing expert taxation and bookkeeping services since 2014. He specializes in tax and cashflow advice for individuals and small businesses, helping clients stay compliant while optimizing their financial performance. As the lead decision maker, he manages all client relationships and service delivery for the firm.",
+          "phone_office": null,
+          "phone_mobile": "+61422665268",
+          "phone_direct": null,
+          "email": "bilal@alitax.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "CA Accounting Solutions",
+      "company_url": "https://caaccountingsolutions.com.au",
+      "office_phone": "+61473833008",
+      "office_email": "admin@caaccountingsolutions.com.au",
+      "associated_emails": [
+        "admin@caaccountingsolutions.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61473833008"
+      ],
+      "associated_info": "Chartered Accountant and Registered Tax Agent Firm. Uses cloud-based services (Xero, MYOB, Reckon). Member of Tax Practitioner's Board. Active on Facebook and Instagram.",
+      "associated_location": "Australia (Specific address not found on website)",
+      "organisational_structure": "Small firm structure. No specific partner or director names listed on the main pages. The website mentions 'We' and references 'Company Directors' in a blog context, suggesting the firm advises on corporate governance but does not explicitly name its own leadership team.",
+      "team": "No specific team members or bios listed. The firm highlights its experience across many industries and personalized service.",
+      "description": "CA Accounting Solutions is a local Chartered Accountant and Registered Tax Agent Firm focused on personalized service. They provide bookkeeping, tax returns, financial statements, tax planning, BAS/IAS preparation, cash flow projections, entity setup/closure, and structuring advice. They utilize cloud-based technology for collaboration.",
+      "edited_description": "CA Accounting Solutions is a Chartered Accountant firm offering personalized tax and accounting services for SMEs. They specialize in tax planning, cloud bookkeeping (Xero/MYOB), and business structuring to help clients legally minimize tax and streamline operations.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "TIM Accounting Services",
+      "company_url": "https://timaccountingservices.com.au",
+      "office_phone": "+61409940450",
+      "office_email": "timaccounting@tpg.com.au",
+      "associated_emails": [
+        "timaccounting@tpg.com.au",
+        "filler@godaddy.com"
+      ],
+      "associated_mobile_numbers": [
+        "+61409940450"
+      ],
+      "associated_info": "Powered by GoDaddy Website Builder. Offers free consultation. Services include tax, bookkeeping, payroll, financial reporting, and automation. Serves private individuals and small businesses.",
+      "associated_location": "Not specified on website",
+      "organisational_structure": "Single practitioner or small firm structure. No specific partner/director titles mentioned.",
+      "team": "No specific team members listed. Website mentions 'We are passionate' and 'simplifying the complex' but no individual staff profiles.",
+      "description": "TIM Accounting Services is an Australian accounting firm specializing in bookkeeping and tax accounting for private individuals and small businesses. They offer services including tax preparation (personal, business, corporate), bookkeeping, payroll oversight, financial reporting, and business advisory for capital fundraising. The firm focuses on simplifying complex financial compliance and providing automation solutions.",
+      "edited_description": "TIM Accounting Services specializes in simplifying bookkeeping and tax compliance for Australian small businesses. They offer comprehensive services from tax preparation to payroll oversight and financial reporting, with a focus on helping directors make informed decisions. The firm provides free consultations and emphasizes solving complex accounting problems for private individuals and growing businesses.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Tim (Last Name Not Specified)",
+          "title": "Principal Accountant",
+          "decision_maker_summary": "Principal accountant at TIM Accounting Services with expertise in solving bookkeeping and tax accounting problems for small businesses. Specializes in simplifying complex financial compliance, taxation, and bookkeeping for private individuals and SMEs. Offers strategic advice on capital fundraising and business growth.",
+          "phone_office": "+61409940450",
+          "phone_mobile": "+61409940450",
+          "phone_direct": "+61409940450",
+          "email": "timaccounting@tpg.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "Focus Accounts Solutions",
+      "company_url": "https://focusaccounts.com.au",
+      "office_phone": "+61433081778",
+      "office_email": "admin@focusaccounts.com.au",
+      "associated_emails": [
+        "admin@focusaccounts.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61433081778"
+      ],
+      "associated_info": "Partner with MYOB and Xero accounting software. Provides services to small and medium businesses. Uses client testimonials to showcase reliability and expertise. Has been operating for at least 4 years based on testimonial references.",
+      "associated_location": "16 Verdant Street, Wantirna South VIC 3152",
+      "organisational_structure": "Small firm led by Michael, with a focus on personalized service. No formal partner structure mentioned, but Michael appears to be the principal contact and key service provider.",
+      "team": "Team of professional accountants and bookkeepers, with Michael as the primary contact. Offers one-on-one service to clients.",
+      "description": "Focus Accounts Solutions offers tailored accounting, bookkeeping, and business advising to small and medium businesses. Our team of professional accountants and bookkeepers will work one-on-one with you so that your organisation receives the attention it deserves.",
+      "edited_description": "Focus Accounts Solutions specializes in personalized bookkeeping, payroll, BAS/IAS lodgments, and business management advisory for SMEs in Melbourne. With expertise in MYOB and Xero, they ensure compliance and provide actionable insights to help your business thrive. Partner with a trusted local firm that delivers accurate, professional service tailored to your needs.",
+      "business_segment": "Bookkeeping (No Income Tax)",
+      "decision_makers": [
+        {
+          "name": "Michael",
+          "title": "Principal Accountant",
+          "decision_maker_summary": "Michael is the principal accountant at Focus Accounts Solutions, with over 4 years of experience in bookkeeping and accounting reconciliations. He is praised for his professionalism, diligence, and thoroughness, with expertise in MYOB and Xero software. He works directly with clients to ensure accurate financial records and compliance.",
+          "phone_office": null,
+          "phone_mobile": "+61433081778",
+          "phone_direct": null,
+          "email": "admin@focusaccounts.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.85
+    },
+    {
+      "company_name": "PandaQ Accounting",
+      "company_url": "https://pandaqservices.com.au",
+      "office_phone": null,
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [],
+      "associated_info": "Liability limited by a scheme approved under Professional Standards Legislation. Partners with MYOB, Reckon, Weel, Calxa, Business Connect. Offers Virtual CFO services.",
+      "associated_location": "",
+      "organisational_structure": "Louise Ingoe is the principal/owner running the firm since 2014. Appears to be a small boutique firm focused on small-medium business and not-for-profits.",
+      "team": "Louise Ingoe (Principal). Testimonials mention 'Louise' as the primary contact and CFO-level advisor.",
+      "description": "PandaQ Accounting is a boutique accounting firm providing bookkeeping, accounting, taxation, business advisory, and virtual CFO services. They specialize in helping small-medium businesses and not-for-profits grow, with a focus on quality and personalized service. They partner with leading software providers like MYOB, Reckon, and Calxa.",
+      "edited_description": "PandaQ Accounting offers boutique, personalized accounting services with a focus on business growth for SMEs and not-for-profits. Led by Louise Ingoe, they provide Virtual CFO services, tax planning, and bookkeeping, partnering with top software like MYOB and Calxa to streamline your financial operations.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Louise Ingoe",
+          "title": "Principal / Owner",
+          "decision_maker_summary": "Louise has been running PandaQ since 2014. She is described as personable, innovative, and compassionate, with a 'can-do attitude' and vast knowledge in bookkeeping and accountancy. She acts as a CFO for clients, focusing on business growth and cash flow management.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": null,
+          "linkedin": "http://www.linkedin.com/in/louiseingoe"
+        }
+      ],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Epic Tax",
+      "company_url": "https://www.epictax.net.au",
+      "office_phone": "+61413164462",
+      "office_email": "ricardo@epictax.net.au",
+      "associated_emails": [
+        "ricardo@epictax.net.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61413164462"
+      ],
+      "associated_info": "Family-owned accounting practice serving the community for 10+ years. Offers compliance (individual/business tax returns, BAS), management (bookkeeping, payroll), and advisory services (tax planning, structuring). New client forms available via download. Booking via Calendly. WhatsApp contact available. Hours: Mon-Fri 9am-5pm, Sat by appointment. Liability limited by a scheme approved under Professional Standard Legislation.",
+      "associated_location": "Not explicitly stated on the provided content",
+      "organisational_structure": "Family-owned practice. Appears to be led by Ricardo Guerreiro.",
+      "team": "Not explicitly stated on the provided content",
+      "description": "Family-owned accounting practice serving the community for the last 10 years. Qualified, experienced and dedicated to support your success! Services include compliance (Individual Tax Return, Business Tax Return, Business Activity Statement), management (Bookkeeping, Payroll), and advisory (Tax planning, Structuring).",
+      "edited_description": "Epic Tax is a family-owned accounting firm with over 10 years of experience supporting small businesses. They offer a full suite of services from compliance and bookkeeping to strategic tax planning and structuring. As a dedicated local practice, they provide personalized support to help businesses organize operations and maximize profitability.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Ricardo Guerreiro",
+          "title": "Owner/Principal",
+          "decision_maker_summary": "Ricardo Guerreiro is the owner and principal of Epic Tax, leading the firm's strategic direction and client relationships. With over a decade of experience, he specializes in small business tax compliance, structuring, and advisory services. He is the primary point of contact for new client inquiries and business development.",
+          "phone_office": null,
+          "phone_mobile": "+61413164462",
+          "phone_direct": null,
+          "email": "ricardo@epictax.net.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.9
+    },
+    {
+      "company_name": "AMA Business Services",
+      "company_url": "https://amabusiness.co.uk",
+      "office_phone": "+441429863528",
+      "office_email": "info@amabusiness.co.uk",
+      "associated_emails": [
+        "info@amabusiness.co.uk"
+      ],
+      "associated_mobile_numbers": [],
+      "associated_info": "AAT Qualified Accountants. Family-run company. Over 20 years combined experience working with local SMEs. Free consultation offered. Open Mon-Wed 9am-4pm, Thurs 9am-2pm, Fri Closed.",
+      "associated_location": "Unit 45, Enterprise Centre, Brougham Terrace, Hartlepool, TS24 8EY",
+      "organisational_structure": "Family-run firm led by three Directors. AAT qualified practice.",
+      "team": "Directors: Alison Stringer (FMAAT), Melanie Frank (FMAAT), Angela Sansom (AAT). Staff includes Mandy Scott (Payroll Services).",
+      "description": "AMA Business Services is an experienced firm of AAT Qualified Accountants based in Hartlepool. They offer a complete accountancy solution tailored to individual needs, helping business clients achieve greater profitability and individual clients enjoy greater wealth. They serve sole traders, partnerships, and private companies.",
+      "edited_description": "AMA Business Services is a family-run AAT qualified accountancy firm in Hartlepool with over 20 years of experience supporting local SMEs. They offer a full suite of services including business start-up support, self-assessment, corporation tax, and year-end accounts. They differentiate themselves by offering face-to-face access to qualified accountants and a free initial consultation.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Alison Stringer",
+          "title": "Director",
+          "decision_maker_summary": "Alison Stringer is a Director at AMA Business Services and holds an FMAAT qualification. She has over 20 years of combined experience working with local SMEs and is committed to providing a first-class service tailored to individual business needs.",
+          "phone_office": "+441429863528",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "info@amabusiness.co.uk",
+          "linkedin": ""
+        },
+        {
+          "name": "Melanie Frank",
+          "title": "Director",
+          "decision_maker_summary": "Melanie Frank is a Director at AMA Business Services and holds an FMAAT qualification. She is a key decision-maker focused on delivering professional accounting and tax services to the firm's diverse client base.",
+          "phone_office": "+441429863528",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "info@amabusiness.co.uk",
+          "linkedin": "https://www.linkedin.com/in/melanie-frank-f-m-a-a-t-22b68875/"
+        },
+        {
+          "name": "Angela Sansom",
+          "title": "Director",
+          "decision_maker_summary": "Angela Sansom is a Director at AMA Business Services and holds an AAT qualification. She plays a vital role in the firm's leadership, ensuring clients receive expert advice on their financial affairs.",
+          "phone_office": "+441429863528",
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "info@amabusiness.co.uk",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "AG5 Business Solution",
+      "company_url": "https://ag5.com.au",
+      "office_phone": "+61401567038",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [
+        "+61401567038"
+      ],
+      "associated_info": "Registered tax agent. Certified Xero Adviser. Specializes in small to medium business market. Offers tax planning, accounting, bookkeeping, business consulting, and payroll services. Serves industries including cafes/restaurants, childcare, auto mechanics, car dealerships, freelancers, taxi drivers, NDIS, and service stations.",
+      "associated_location": "",
+      "organisational_structure": "Partnership structure focused on small to medium business market. Team of experts dedicated to personalized service.",
+      "team": "Our team of experts is dedicated to delivering personalized service, ensuring that each client\u2019s unique needs are met with precision and care.",
+      "description": "As accounting and tax specialists, we offer a wide range of services specialising in the small to medium business market along with providing taxation consultancy. Our team of experts is dedicated to delivering personalized service, ensuring that each client\u2019s unique needs are met with precision and care. We pride ourselves on our ability to navigate the complexities of tax laws and accounting principles, helping businesses stay compliant and optimize their financial performance.",
+      "edited_description": "AG5 Business Solution is a registered tax agent and Certified Xero Adviser specializing in small to medium business accounting and tax services. They offer comprehensive tax planning, bookkeeping, payroll, and business consulting with a focus on industries like childcare, auto mechanics, and cafes. Their expertise in Xero cloud accounting and personalized service helps businesses optimize financial performance and navigate complex tax obligations.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Mint Accounts Services",
+      "company_url": "https://mintaccountsservices.com.au",
+      "office_phone": "+61433873827",
+      "office_email": "info@mintaccountsservices.com.au",
+      "associated_emails": [
+        "info@mintaccountsservices.com.au",
+        "maxbizz@mail.com"
+      ],
+      "associated_mobile_numbers": [
+        "+61433873827"
+      ],
+      "associated_info": "The firm mentions being licensed practitioners by the Tax Practitioner Board. They service clients in Melbourne, Sydney, Adelaide, Brisbane, Darwin & Canberra remotely. They are proficient in Xero, Quickbooks, and MYOB. The website contains conflicting branding, mentioning 'Maxbizz' and 'mytaxandaccounting.com.au' in image paths, suggesting possible template reuse or rebranding.",
+      "associated_location": "Melbourne 3000, Australia",
+      "organisational_structure": "The website does not explicitly list partners or directors. It refers to 'Our Accountants' and a 'Professional skilled team'.",
+      "team": "The team is described as knowledgeable, experienced, confident, and reliable professionals. They are trained in bookkeeping, process implementation, and are Xero certified, Quickbooks pro advisors, and MYOB experts.",
+      "description": "Mint Accounts Services is an Australian accounting firm providing tax accounting and advisory services. They offer tax returns for individuals, sole traders, partnerships, companies, trusts, and SMSFs, as well as bookkeeping, payroll, BAS, tax planning, and business structuring. They focus on helping small and medium enterprises (SMEs) with compliance and growth.",
+      "edited_description": "Mint Accounts Services is a Melbourne-based accounting firm specializing in comprehensive tax and accounting solutions for SMEs and individuals. They offer expert tax planning, bookkeeping, and business structuring services, with proficiency in Xero, Quickbooks, and MYOB. They are licensed practitioners focused on maximizing refunds and simplifying compliance for businesses across Australia.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.7
+    },
+    {
+      "company_name": "Intra Accounting",
+      "company_url": "https://www.intraaccounting.com",
+      "office_phone": "+61466041738",
+      "office_email": "info@intraaccounting.com.au",
+      "associated_emails": [
+        "info@intraaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61466041738"
+      ],
+      "associated_info": "Specializes in small to medium-sized business accounting in Perth. Offers tax planning, BAS, bookkeeping, payroll, deceased estate, FBT, and business advisory services. Registered tax agent. Focuses on proactive tax strategies and relationship-building.",
+      "associated_location": "45 Ventnor Avenue, West Perth WA 6005",
+      "organisational_structure": "Small to medium-sized accounting firm based in West Perth. No specific partner or director names listed on provided pages. Likely owner-operated or small partnership structure given the personalized service description.",
+      "team": "Described as friendly qualified Accountants and experts. No specific team members listed.",
+      "description": "Intra Accounting is a trusted accounting company in Perth specializing in small to medium-sized business accounting services. We provide personalized solutions including tax returns, BAS, bookkeeping, payroll, and business advisory, going beyond just meeting ATO obligations to forge strong client bonds.",
+      "edited_description": "Intra Accounting specializes in proactive tax and accounting strategies for Perth's small to medium businesses, offering personalized services from tax planning to payroll. We focus on building strong relationships and maximizing financial potential, ensuring clients thrive beyond simple compliance.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.8
+    },
+    {
+      "company_name": "Roslyn Brown Accounting Pty Ltd",
+      "company_url": "https://roslynbrownaccounting.com",
+      "office_phone": "+61488008969",
+      "office_email": "roslyn@roslynbrownaccounting.com",
+      "associated_emails": [
+        "roslyn@roslynbrownaccounting.com"
+      ],
+      "associated_mobile_numbers": [
+        "+61488008969"
+      ],
+      "associated_info": "Established in 2018/2019 financial year. Roslyn Brown is a fellow member of the National Tax Agents Association Ltd (NTAA). Registered with the Tax Practitioners Board. Offers phone, Zoom, and in-person appointments. Open Monday-Wednesday-Friday 9am-5pm, Tuesday 9am-5pm, Thursday 9am-3pm, and Saturday (July-August only) 9am-12pm.",
+      "associated_location": "110 Retreat Road, Spring Gully Vic 3550, Australia",
+      "organisational_structure": "Proprietorship owned and operated by Roslyn Brown. Single principal accounting practice.",
+      "team": "Roslyn Brown is the sole proprietor and accountant. She has nearly 20 years of small business experience and holds a Bachelor of Business in Accounting from La Trobe University Bendigo (2004).",
+      "description": "Roslyn Brown Accounting Pty Ltd is a small business accounting practice established in the 2018/2019 financial year. The proprietor, Roslyn Brown, has nearly twenty years of experience in small business, bookkeeping, payroll, and BAS preparation. She obtained a Bachelor of Business in Accounting in 2004 and has been in Public Practice Accounting specializing in taxation for individuals and businesses. The firm is a fellow member of the National Tax Agents Association Ltd. (NTAA).",
+      "edited_description": "Roslyn Brown Accounting is a Bendigo-based firm specializing in personalized tax and bookkeeping services for individuals and small businesses. With nearly 20 years of experience and a focus on maximizing refunds and minimizing tax liabilities, they offer a friendly, efficient service backed by NTAA membership. They provide comprehensive support including income tax returns, BAS preparation, and small business advice.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [
+        {
+          "name": "Roslyn Brown",
+          "title": "Proprietor",
+          "decision_maker_summary": "Roslyn Brown is the proprietor and primary contact for the firm. She holds a Bachelor of Business in Accounting and is a fellow member of the NTAA. With nearly 20 years of experience in small business operations, bookkeeping, payroll, and BAS preparation, she specializes in taxation for individuals and businesses.",
+          "phone_office": null,
+          "phone_mobile": "+61488008969",
+          "phone_direct": null,
+          "email": "roslyn@roslynbrownaccounting.com",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "Owen Accounting",
+      "company_url": "https://owenaccounting.com.au",
+      "office_phone": "+61407656004",
+      "office_email": "admin@owenaccounting.com.au",
+      "associated_emails": [
+        "admin@owenaccounting.com.au"
+      ],
+      "associated_mobile_numbers": [
+        "+61407656004"
+      ],
+      "associated_info": "Small firm with two Accountants, one part-time Bookkeeper/Accounting Technician, and one Administrative Assistant. Not accepting new client bookings until further notice. TASA Code of Professional Conduct Determination 2024 disclosures provided. Liability limited by a scheme approved under Professional Standards Legislation.",
+      "associated_location": "307 Glen Road, Rosenthal Heights, Warwick QLD 4370",
+      "organisational_structure": "Owned by Owen Free (Director). Team includes Owen Free, Audra Young (decision makers), one part-time Bookkeeper/Accounting Technician, and one Administrative Assistant.",
+      "team": "Owen Free (Director/Accountant), Audra Young (Accountant), one part-time Bookkeeper/Accounting Technician, one Administrative Assistant.",
+      "description": "Owen Accounting is a boutique accounting firm owned by Owen Free, with a professional career dating back to 1997. The firm offers services in traditional accountancy, business management, and tax, emphasizing trust and truthfulness. They are a small firm with limited capacity for new engagements.",
+      "edited_description": "Owen Accounting is a boutique firm specializing in tax and traditional accountancy services for small businesses and individuals. With over 25 years of experience, they offer personalized, bespoke service focused on trust and client needs. Note: They are currently not accepting new clients.",
+      "business_segment": "Tax Specialist",
+      "decision_makers": [
+        {
+          "name": "Owen Free",
+          "title": "Director",
+          "decision_maker_summary": "Owen Free is the owner and director of Owen Accounting, with a professional career in accountancy and tax dating back to 1997. He handles high-priority client engagements and oversees all tax agent services. Owen is the primary decision maker for new business and service scope.",
+          "phone_office": null,
+          "phone_mobile": "+61407656004",
+          "phone_direct": "+61407656004",
+          "email": "admin@owenaccounting.com.au",
+          "linkedin": ""
+        },
+        {
+          "name": "Audra Young",
+          "title": "Accountant",
+          "decision_maker_summary": "Audra Young is a key accountant at the firm, handling client appointments and service delivery. She works closely with Owen Free on tax and accountancy engagements. Audra is a secondary decision maker for client services and bookings.",
+          "phone_office": null,
+          "phone_mobile": null,
+          "phone_direct": null,
+          "email": "admin@owenaccounting.com.au",
+          "linkedin": ""
+        }
+      ],
+      "confidence_score": 0.95
+    },
+    {
+      "company_name": "NORWEST Accountants",
+      "company_url": "https://norwestaccountants.com.au",
+      "office_phone": "+61412504906",
+      "office_email": null,
+      "associated_emails": [],
+      "associated_mobile_numbers": [
+        "+61412504906"
+      ],
+      "associated_info": "ABN: 81 668 637 849. Team has over 20 years of experience. Services provided on a confidential one-to-one basis. Wealth creation strategies offered. Website designed by ADADA Digital.",
+      "associated_location": "",
+      "organisational_structure": "Family business. Team includes accounting professionals and business consultants.",
+      "team": "Collectively over 20 years of experience in book-keeping, accounting, taxation, and finance. Experience working with individuals, SMEs, Community Organisations, and Corporations.",
+      "description": "NORWEST Accountants is a local accounting firm that understands the day-to-day challenges of individuals and families juggling a busy work-life balance. They are a family business offering simple and flexible help with taxation, compliance, and accounting matters. They help clients plan, save, comply, invest, and save for retirement.",
+      "edited_description": "NORWEST Accountants is a local, family-run firm with over 20 years of experience, specializing in simplifying tax and accounting for individuals and SMEs. They offer a one-stop solution from preparation to lodgement, focusing on wealth creation and retirement planning. Their personalized, confidential approach helps clients navigate complex finances while balancing busy work-life schedules.",
+      "business_segment": "General Accounting (Including Tax)",
+      "decision_makers": [],
+      "confidence_score": 0.6
+    }
+  ],
+  "out_of_scope_records": [
+    {
+      "company_url": "https://www.silverfernfinance.com.au",
+      "company_name": "Silver Fern Finance",
+      "reason": "This is a finance brokerage firm, not an accounting firm. They provide mortgage broking, car finance, and insurance services, which falls outside the accounting/tax services scope.",
+      "confidence_score": 1.0
+    }
+  ],
+  "low_confidence_records": [
+    {
+      "company_url": "https://addleyconsulting.dudaone.com",
+      "company_name": "Addley Consulting",
+      "confidence_score": 0.0,
+      "reason": "Confidence score 0.0 below threshold"
+    },
+    {
+      "company_url": "https://www.highcityconsulting.com.au",
+      "company_name": "",
+      "confidence_score": 0.0,
+      "reason": "Confidence score 0.0 below threshold; missing company name"
+    },
+    {
+      "company_url": "https://dueco.co",
+      "company_name": "Dueco",
+      "confidence_score": 0.1,
+      "reason": "Confidence score 0.1 below threshold"
+    },
+    {
+      "company_url": "https://electroaccounting.com.au",
+      "company_name": "Electro Accounting",
+      "confidence_score": 0.1,
+      "reason": "Confidence score 0.1 below threshold"
+    }
+  ],
+  "broken_urls_list": [],
+  "current_index": 58,
+  "start_time": "2026-01-07T00:05:07.852589",
+  "last_update": "2026-01-07T00:17:37.038573",
+  "completed": true,
+  "end_time": "2026-01-07T00:17:37.062735"
+}

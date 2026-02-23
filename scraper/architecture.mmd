@@ -1,0 +1,37 @@
+flowchart TD
+    subgraph inputs["Input Sources"]
+        A1["urls.txt / firms.csv"]
+        A2["Attio People CSV export"]
+        A3["accountantlist.com.au"]
+    end
+
+    A1 --> S1["enrich_urls.py"]
+    A2 --> S2["enrich_justcall.py"]
+    A3 --> S3["main.py Phase 1: Directory Harvest"]
+    S3 --> S1_2["main.py Phase 2+3"]
+
+    S1 --> engine
+    S2 --> engine
+    S1_2 --> engine
+
+    subgraph engine["Enrichment Engine (website_enricher.py)"]
+        direction TB
+        P1["Crawl homepage<br/>(browser pool, 4 contexts)"]
+        P1 --> P2{"Internal links found?"}
+        P2 -->|"> 3 links"| P3["LLM Link Triage<br/>Grok picks best 2-3 pages"]
+        P2 -->|"<= 3 links"| P4["Keyword prioritisation<br/>(team/about to contact)"]
+        P3 --> P5["Crawl sub-pages<br/>(max 3, 40s hard timeout)"]
+        P4 --> P5
+        P5 --> P6["LLM Extraction<br/>Grok 4.1 Fast + strict JSON Schema"]
+        P6 --> P7{"DMs found?"}
+        P7 -->|No| P8["Web Search Fallback<br/>Grok :online<br/>(LinkedIn, CPA, CAANZ)"]
+        P7 -->|Yes| P9["EnrichmentData"]
+        P8 --> P9
+
+        P1 -->|"crawl fails<br/>(DNS, timeout)"| P10{"Web search enabled?"}
+        P10 -->|Yes| P8
+        P10 -->|No| P11["Skip firm"]
+    end
+
+    engine --> O1["companies.csv"]
+    engine --> O2["people.csv"]

@@ -1,0 +1,12 @@
+# Core dependencies
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+phonenumbers
+openai>=1.0.0
+pandas>=2.0.0
+crawl4ai>=0.7.0
+structlog>=24.0.0
+
+# Development
+pytest
+python-dotenv
