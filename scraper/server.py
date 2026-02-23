@@ -19,7 +19,7 @@ from pathlib import Path
 from pydantic import BaseModel
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 
 # Use volume path on Railway if set; otherwise local data/
 DATA_DIR = Path(os.environ.get("DATA_DIR", "data"))
@@ -48,20 +48,37 @@ def ensure_dirs():
     STATE_DIR.mkdir(parents=True, exist_ok=True)
 
 
+def _dashboard_html() -> str:
+    path = Path(__file__).resolve().parent / "static" / "dashboard.html"
+    if path.is_file():
+        return path.read_text(encoding="utf-8")
+    return "<!DOCTYPE html><html><body><p>Dashboard not found.</p><a href='/'>API</a></body></html>"
+
+
 @app.get("/")
 def root():
     ensure_dirs()
     return {
         "message": "Scraper API",
+        "dashboard": "GET /dashboard — shareable web UI (upload, run, logs, download)",
         "endpoints": {
             "upload": "POST /upload — upload CSV/TXT",
-            "run": "POST /run — body: {\"script\": \"enrich_justcall\"|\"main\", \"input_file\": \"name.csv\"}",
-            "run_status": "GET /run/status — running? + live log tail (observability)",
+            "run": "POST /run — body: {\"script\": \"enrich_justcall\"|\"main\", \"input_file\": \"name.csv\", \"concurrency\": 4}",
+            "run_status": "GET /run/status — running? + live log tail",
+            "input_list": "GET /input — list uploaded files",
             "output_list": "GET /output — list output files",
             "output_download": "GET /output/{filename} — download file",
+            "state_list": "GET /state — list state/checkpoint files",
+            "state_download": "GET /state/{filename} — download state file",
         },
         "timeout_seconds": RUN_TIMEOUT,
     }
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+def dashboard():
+    """Shareable web UI: upload files, start runs with config, watch logs, download output/state."""
+    return HTMLResponse(content=_dashboard_html())
 
 
 @app.get("/health")
@@ -88,6 +105,7 @@ async def upload(file: UploadFile = File(...)):
 class RunRequest(BaseModel):
     script: str  # "enrich_justcall" | "main"
     input_file: str | None = None  # required for enrich_justcall
+    concurrency: int | None = None  # optional; e.g. 4 for enrich_justcall / main
 
 
 @app.post("/run")
@@ -99,6 +117,7 @@ async def run(body: RunRequest):
     """
     script = body.script
     input_file = body.input_file
+    concurrency = body.concurrency
     ensure_dirs()
     if script not in ("enrich_justcall", "main"):
         raise HTTPException(
@@ -127,6 +146,8 @@ async def run(body: RunRequest):
             "--output", str(output_path),
             "--checkpoint", str(checkpoint_path),
         ]
+        if concurrency is not None:
+            cmd.extend(["--concurrency", str(concurrency)])
     else:
         # main.py: full directory pipeline (phase 1–3)
         checkpoint_path = STATE_DIR / "checkpoint.json"
@@ -138,6 +159,9 @@ async def run(body: RunRequest):
 
     env = os.environ.copy()
     env["OUTPUT_DIR"] = str(OUTPUT_DIR)
+    if concurrency is not None:
+        env["MAX_CONCURRENT_CRAWLS"] = str(concurrency)
+        env["DIRECTORY_MAX_CONCURRENT"] = str(concurrency)
 
     global _running, _last_exit_code
     cwd = Path(__file__).resolve().parent
@@ -233,6 +257,40 @@ def list_output():
 def download_output(filename: str):
     """Download an output file by name."""
     path = OUTPUT_DIR / Path(filename).name
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(path, filename=filename)
+
+
+@app.get("/input")
+def list_input():
+    """List uploaded input files in DATA_DIR/input."""
+    ensure_dirs()
+    files = [f.name for f in INPUT_DIR.iterdir() if f.is_file()]
+    return {"files": sorted(files)}
+
+
+@app.get("/input/{filename}")
+def download_input(filename: str):
+    """Download an input file by name."""
+    path = INPUT_DIR / Path(filename).name
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(path, filename=filename)
+
+
+@app.get("/state")
+def list_state():
+    """List state/checkpoint files in DATA_DIR/state."""
+    ensure_dirs()
+    files = [f.name for f in STATE_DIR.iterdir() if f.is_file()]
+    return {"files": sorted(files)}
+
+
+@app.get("/state/{filename}")
+def download_state(filename: str):
+    """Download a state file by name (e.g. checkpoint JSON, run.log)."""
+    path = STATE_DIR / Path(filename).name
     if not path.is_file():
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(path, filename=filename)

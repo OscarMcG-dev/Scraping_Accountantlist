@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scraper Dashboard</title>
+  <style>
+    :root { --bg: #0f0f12; --card: #1a1a20; --border: #2a2a32; --text: #e4e4e7; --muted: #71717a; --accent: #22c55e; --danger: #ef4444; }
+    * { box-sizing: border-box; }
+    body { font-family: ui-sans-serif, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 1rem; line-height: 1.5; }
+    h1 { font-size: 1.25rem; margin: 0 0 1rem; }
+    h2 { font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--muted); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
+    label { display: block; margin-bottom: 0.25rem; font-size: 0.875rem; color: var(--muted); }
+    input[type="file"], input[type="number"], select { padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+    button { padding: 0.5rem 1rem; border-radius: 6px; border: none; background: var(--accent); color: #000; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.secondary { background: var(--border); color: var(--text); }
+    .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+    .badge.running { background: #166534; color: #86efac; }
+    .badge.done { background: #1e3a5f; color: #93c5fd; }
+    .badge.failed { background: #7f1d1d; color: #fca5a5; }
+    #log { font-family: ui-monospace, monospace; font-size: 0.8rem; white-space: pre-wrap; word-break: break-all; max-height: 320px; overflow-y: auto; background: #000; padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem; }
+    .file-list { list-style: none; padding: 0; margin: 0; }
+    .file-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .file-list li:last-child { border-bottom: none; }
+    .msg { margin-top: 0.5rem; font-size: 0.875rem; }
+    .msg.err { color: var(--danger); }
+    .msg.ok { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>Scraper Dashboard</h1>
+  <p style="color: var(--muted); margin: 0 0 1rem;">Share this link to upload files, start runs, watch logs, and download outputs.</p>
+
+  <div class="card">
+    <h2>Upload input file</h2>
+    <div class="row">
+      <div>
+        <label for="file">CSV or TXT</label>
+        <input type="file" id="file" accept=".csv,.txt">
+      </div>
+      <button type="button" id="uploadBtn">Upload</button>
+    </div>
+    <div id="uploadMsg" class="msg"></div>
+    <h2 style="margin-top: 1rem;">Uploaded inputs</h2>
+    <ul id="inputList" class="file-list"></ul>
+    <button type="button" class="secondary" id="refreshInput">Refresh</button>
+  </div>
+
+  <div class="card">
+    <h2>Start scrape</h2>
+    <div class="row" style="gap: 1.5rem;">
+      <div>
+        <label for="script">Script</label>
+        <select id="script">
+          <option value="enrich_justcall">enrich_justcall (Attio People)</option>
+          <option value="main">main (full directory pipeline)</option>
+        </select>
+      </div>
+      <div id="inputFileWrap">
+        <label for="inputFile">Input file</label>
+        <select id="inputFile"><option value="">— select after upload —</option></select>
+      </div>
+      <div>
+        <label for="concurrency">Concurrency</label>
+        <input type="number" id="concurrency" min="1" max="20" value="4" style="width: 4rem;">
+      </div>
+      <button type="button" id="runBtn">Start run</button>
+    </div>
+    <div id="runMsg" class="msg"></div>
+    <h2 style="margin-top: 1rem;">Run status</h2>
+    <div id="statusBadge"></div>
+    <div id="log" aria-label="Live log"></div>
+    <button type="button" class="secondary" id="refreshStatus">Refresh status</button>
+  </div>
+
+  <div class="card">
+    <h2>Output files</h2>
+    <ul id="outputList" class="file-list"></ul>
+    <button type="button" class="secondary" id="refreshOutput">Refresh</button>
+  </div>
+
+  <div class="card">
+    <h2>State / checkpoint files</h2>
+    <ul id="stateList" class="file-list"></ul>
+    <button type="button" class="secondary" id="refreshState">Refresh</button>
+  </div>
+
+  <script>
+    const base = '';
+    function api(path) { return base + path; }
+
+    async function json(path) {
+      const r = await fetch(api(path));
+      if (!r.ok) throw new Error(await r.text());
+      return r.json();
+    }
+
+    function setMsg(elId, text, isErr) {
+      const el = document.getElementById(elId);
+      el.textContent = text;
+      el.className = 'msg' + (isErr ? ' err' : ' ok');
+    }
+
+    async function refreshInputList() {
+      const list = document.getElementById('inputList');
+      const select = document.getElementById('inputFile');
+      try {
+        const { files } = await json('/input');
+        list.innerHTML = files.length ? files.map(f => `<li><span>${f}</span><a href="${api('/input/' + encodeURIComponent(f))}" download>Download</a></li>`).join('') : '<li>No files</li>';
+        const opts = files.map(f => `<option value="${f}">${f}</option>`).join('');
+        select.innerHTML = '<option value="">— select —</option>' + opts;
+      } catch (e) {
+        list.innerHTML = '<li>Error loading list</li>';
+      }
+    }
+
+    async function refreshOutputList() {
+      const list = document.getElementById('outputList');
+      try {
+        const { files } = await json('/output');
+        list.innerHTML = files.length ? files.map(f => `<li><span>${f}</span><a href="${api('/output/' + encodeURIComponent(f))}" download>Download</a></li>`).join('') : '<li>No files</li>';
+      } catch (e) {
+        list.innerHTML = '<li>Error loading list</li>';
+      }
+    }
+
+    async function refreshStateList() {
+      const list = document.getElementById('stateList');
+      try {
+        const { files } = await json('/state');
+        list.innerHTML = files.length ? files.map(f => `<li><span>${f}</span><a href="${api('/state/' + encodeURIComponent(f))}" download>Download</a></li>`).join('') : '<li>No files</li>';
+      } catch (e) {
+        list.innerHTML = '<li>Error loading list</li>';
+      }
+    }
+
+    let statusInterval = null;
+    async function refreshStatus() {
+      try {
+        const s = await json('/run/status');
+        const badge = document.getElementById('statusBadge');
+        if (s.running) {
+          badge.innerHTML = '<span class="badge running">Running</span>';
+          if (!statusInterval) statusInterval = setInterval(refreshStatus, 2000);
+        } else {
+          if (statusInterval) { clearInterval(statusInterval); statusInterval = null; }
+          if (s.last_exit_code === 0) badge.innerHTML = '<span class="badge done">Last run: success</span>';
+          else if (s.last_exit_code != null) badge.innerHTML = '<span class="badge failed">Last run: exit ' + s.last_exit_code + '</span>';
+          else badge.innerHTML = '';
+        }
+        const logEl = document.getElementById('log');
+        logEl.textContent = s.log_tail || '(no log yet)';
+        logEl.scrollTop = logEl.scrollHeight;
+      } catch (e) {
+        document.getElementById('statusBadge').innerHTML = '<span class="badge failed">Error</span>';
+      }
+    }
+
+    document.getElementById('uploadBtn').onclick = async () => {
+      const input = document.getElementById('file');
+      if (!input.files?.length) { setMsg('uploadMsg', 'Choose a file', true); return; }
+      setMsg('uploadMsg', 'Uploading…');
+      const fd = new FormData();
+      fd.append('file', input.files[0]);
+      try {
+        const r = await fetch(api('/upload'), { method: 'POST', body: fd });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) { setMsg('uploadMsg', data.detail || r.statusText, true); return; }
+        setMsg('uploadMsg', 'Uploaded: ' + (data.filename || 'ok'));
+        refreshInputList();
+      } catch (e) {
+        setMsg('uploadMsg', e.message, true);
+      }
+    };
+
+    document.getElementById('runBtn').onclick = async () => {
+      const script = document.getElementById('script').value;
+      const inputFile = document.getElementById('inputFile').value;
+      const concurrency = parseInt(document.getElementById('concurrency').value, 10) || 4;
+      if (script === 'enrich_justcall' && !inputFile) { setMsg('runMsg', 'Select an input file for enrich_justcall', true); return; }
+      setMsg('runMsg', 'Starting…');
+      document.getElementById('runBtn').disabled = true;
+      const body = { script, concurrency };
+      if (script === 'enrich_justcall') body.input_file = inputFile;
+      try {
+        const r = await fetch(api('/run'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          setMsg('runMsg', data.detail?.message || data.detail || r.statusText, true);
+          document.getElementById('runBtn').disabled = false;
+          refreshStatus();
+          return;
+        }
+        setMsg('runMsg', data.output_file ? 'Output: ' + data.output_file : (data.message || 'Run started'));
+        refreshStatus();
+        statusInterval = setInterval(refreshStatus, 2000);
+      } catch (e) {
+        setMsg('runMsg', e.message, true);
+      }
+      document.getElementById('runBtn').disabled = false;
+    };
+
+    document.getElementById('refreshInput').onclick = refreshInputList;
+    document.getElementById('refreshOutput').onclick = refreshOutputList;
+    document.getElementById('refreshState').onclick = refreshStateList;
+    document.getElementById('refreshStatus').onclick = refreshStatus;
+
+    document.getElementById('script').onchange = () => {
+      document.getElementById('inputFileWrap').style.display = document.getElementById('script').value === 'enrich_justcall' ? 'block' : 'none';
+    };
+    document.getElementById('script').dispatchEvent(new Event('change'));
+
+    refreshInputList();
+    refreshOutputList();
+    refreshStateList();
+    refreshStatus();
+  </script>
+</body>
+</html>
