@@ -294,9 +294,53 @@ See `config.py` for the full list with defaults and validation ranges.
 
 ### Running on Railway (keys don’t carry over from GitHub)
 
-**Fix “Error creating build plan with Railpack”:** Your app lives in `scraper/`, but Railway builds from the repo root by default, so it doesn’t see `requirements.txt`. In the Railway dashboard: open your **service** → **Settings** → **Root Directory** → set to **`scraper`** and save. Redeploy so the build runs from `scraper/` and Railpack detects Python. The repo root has a `railway.json` that sets the start command to `python main.py`; change it in Railway or in that file if you want a different entry point (e.g. `enrich_justcall.py`).
+**Fix “Error creating build plan with Railpack”:** Railway may be building from the repo root and seeing CSVs/other files instead of a clear Python app. Use either: **Option A (recommended):** A **Dockerfile** at the repo root is provided—Railway will use it automatically and build the `scraper/` app (no Root Directory change needed). **Option B:** In Railway **service** → **Settings** → **Root Directory** set to **`scraper`** and save, then redeploy so Railpack sees `requirements.txt` and Python.
 
-`.env` is **not** in the repo (it’s in `.gitignore`), so your API keys are never pushed. On Railway you set the same variables in the dashboard; the app already reads from `os.environ`, so no code changes are needed.
+The deploy runs a **small API server** (`server.py`) so you can feed input and pull output over HTTP.
+
+#### Feeding data and pulling output (API)
+
+1. **Add a volume (recommended)** so uploads and output persist across deploys:  
+   **Service** → **Settings** → **Volumes** → **Add volume**, mount path **`/data`**.  
+   In **Variables**, add **`DATA_DIR=/data`**. Input/output will live under `/data/input` and `/data/output`.
+
+2. **Expose the service** so you can call it: **Settings** → **Networking** → **Generate domain** (e.g. `your-app.up.railway.app`).
+
+3. **Use the API** (replace `https://your-app.up.railway.app` with your URL):
+
+   - **Upload input** (e.g. Attio People CSV or URLs TXT):
+     ```bash
+     curl -X POST -F "file=@attio_people_export.csv" https://your-app.up.railway.app/upload
+     ```
+   - **Run the scraper**  
+     - Attio People enrichment (needs an uploaded CSV):
+       ```bash
+       curl -X POST https://your-app.up.railway.app/run \
+         -H "Content-Type: application/json" \
+         -d '{"script": "enrich_justcall", "input_file": "attio_people_export.csv"}'
+       ```
+     - Full directory pipeline (accountantlist.com.au harvest → enrich → dedup):
+       ```bash
+       curl -X POST https://your-app.up.railway.app/run \
+         -H "Content-Type: application/json" \
+         -d '{"script": "main"}'
+       ```
+   - **List output files:**
+     ```bash
+     curl https://your-app.up.railway.app/output
+     ```
+   - **Download a file:**
+     ```bash
+     curl -o result.csv "https://your-app.up.railway.app/output/attio_people_enriched_abc123.csv"
+     ```
+
+Runs can take a long time (enrichment/crawling); the request will wait until the script finishes or times out. **Max run time** is set by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 3600 = 1 hour). Increase it in Railway Variables if you need longer runs (e.g. `SCRAPER_RUN_TIMEOUT_SECONDS=7200` for 2 hours).
+
+**Observability:** While a run is in progress (or after it fails), call **GET /run/status** to see whether a run is active and the **tail of live logs** (stdout/stderr from the scraper). That way you can confirm it isn’t silently failing. Example: `curl https://your-app.up.railway.app/run/status`. Only one run can be in progress at a time; starting another returns 409 until the current one finishes.
+
+#### Env vars on Railway
+
+`.env` is not in the repo; set variables in the Railway dashboard so the scraper can call OpenRouter, Attio, etc.
 
 1. **Railway dashboard** → your project → **Variables** (or **Settings** → **Variables**).
 2. Add each variable from `.env.example` with the same **name** and your real **value**:
@@ -319,6 +363,8 @@ See `config.py` for the full list with defaults and validation ranges.
    | `WEB_SEARCH_MODEL` | No | e.g. `x-ai/grok-4.1-fast:online` |
    | `LLM_LINK_TRIAGE` | No | `true` / `false` |
    | `OUTPUT_DIR` | No | e.g. `data/output` |
+   | `DATA_DIR` | For API + volume | e.g. `/data` when using a mounted volume |
+   | `SCRAPER_RUN_TIMEOUT_SECONDS` | No | Max run time in seconds (default `3600` = 1 hour) |
 
 3. Redeploy so the new variables are picked up.
 

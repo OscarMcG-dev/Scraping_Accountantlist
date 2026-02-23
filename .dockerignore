@@ -1,0 +1,10 @@
+# Don't send these to the build context
+scraper/.env
+scraper/venv
+scraper/__pycache__
+scraper/**/__pycache__
+scraper/*.log
+scraper/data
+.git
+.DS_Store
+*.zip
