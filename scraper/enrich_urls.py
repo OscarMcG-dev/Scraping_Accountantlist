@@ -2,27 +2,29 @@
 Standalone URL enrichment: crawl a list of firm websites and extract
 structured company + people data into Attio-ready CSVs.
 
-Accepts a CSV or TXT file of URLs. CSV can optionally include a 'name'
-column; otherwise the domain is used as the firm name.
+Accepts a CSV or TXT file of URLs. TXT = one URL per line (no headers).
+CSV can optionally include a 'name' column; otherwise the domain is used.
 
 Input formats:
-  - TXT: one URL per line
+  - TXT: one URL per line (blank lines and # comments ignored)
   - CSV: must have a 'url' or 'website' or 'domain' column.
          Optional 'name' / 'firm' / 'company' column.
 
-Outputs:
-  - companies.csv   — company records with enrichment data
-  - people.csv      — decision maker / contact records
+Output formats (--output-format):
+  - default: companies.csv + people.csv (company and people records)
+  - justcall: single CSV matching enrich_justcall.py columns (Record ID, Company,
+    Company > Domains, Phone numbers, Email addresses, first_name, last_name,
+    Job title, Description, LinkedIn, enrichment_status) for Attio People import.
 
 Usage:
     python enrich_urls.py --input urls.txt
+    python enrich_urls.py --input urls.txt --output-format justcall
     python enrich_urls.py --input firms.csv --output data/output/my_run
-    python enrich_urls.py --input urls.txt --concurrency 4 --skip-dedup
+    python enrich_urls.py --input urls.txt --concurrency 4
     python enrich_urls.py --input urls.txt --limit 10 --dry-run
 """
 import argparse
 import asyncio
-import csv
 import logging
 import sys
 import time
@@ -37,9 +39,8 @@ load_dotenv()
 from config import Settings
 from checkpoint import Checkpoint
 from website_enricher import WebsiteEnricher
-from models import EnrichmentData, DecisionMaker, PersonRecord
-from phone_utils import normalize_to_e164
-from attio_dedup import export_attio_lookups, extract_domain
+from models import EnrichmentData, DecisionMaker
+from attio_dedup import extract_domain
 
 logging.basicConfig(
     level=logging.INFO,
@@ -167,9 +168,35 @@ def _build_company_row(url: str, name: str, enrichment: Optional[EnrichmentData]
     return row
 
 
+def _fill_phones_from_dm(row: dict, dm: DecisionMaker) -> None:
+    """Back-fill phone from DM's personal numbers when the record has none."""
+    phones = []
+    for p in (dm.phone_office, dm.phone_mobile, dm.phone_direct):
+        if p and p not in phones:
+            phones.append(p)
+    if phones:
+        row["Phone numbers"] = "; ".join(phones)
+
+
+def _fill_phones_from_enrichment(row: dict, enrichment: EnrichmentData) -> None:
+    """Back-fill phone(s) from enrichment when the record has none."""
+    if row.get("Phone numbers"):
+        return
+    phones = []
+    if enrichment.office_phone:
+        phones.append(enrichment.office_phone)
+    if enrichment.associated_mobiles:
+        for p in enrichment.associated_mobiles:
+            if p and p not in phones:
+                phones.append(p)
+    if phones:
+        row["Phone numbers"] = "; ".join(phones)
+
+
 def _build_people_rows(
     url: str, name: str, enrichment: Optional[EnrichmentData],
 ) -> List[dict]:
+    """Build people rows (default format: first_name, last_name, job_title, etc.)."""
     if not enrichment or enrichment.out_of_scope:
         return []
 
@@ -199,7 +226,6 @@ def _build_people_rows(
         orphan_email = enrichment.office_email
         if not orphan_email and enrichment.associated_emails:
             orphan_email = enrichment.associated_emails[0]
-
         if orphan_phones or orphan_email:
             rows.append({
                 "first_name": "Contact at",
@@ -207,10 +233,85 @@ def _build_people_rows(
                 "email_addresses": orphan_email or "",
                 "job_title": "Office Contact",
                 "phone_numbers": "; ".join(orphan_phones),
-                "linkedin": "",
+                "linkedin": enrichment.linkedin or "",
                 "company_name": name,
                 "company_domain": domain or "",
             })
+
+    return rows
+
+
+# Columns matching enrich_justcall.py output for Attio People import
+JUSTCALL_COLUMNS = [
+    "Record ID", "Company", "Company > Domains", "Phone numbers", "Email addresses",
+    "first_name", "last_name", "Job title", "Description", "LinkedIn", "enrichment_status",
+]
+
+
+def _build_people_rows_justcall_format(
+    url: str, name: str, enrichment: Optional[EnrichmentData], record_id_base: str = "",
+) -> List[dict]:
+    """Build people rows with same columns as enrich_justcall output (Attio People CSV)."""
+    if not enrichment or enrichment.out_of_scope:
+        return []
+
+    domain = extract_domain(url) or ""
+    rows = []
+    seq = 0
+
+    for dm in enrichment.decision_makers:
+        if not dm.name:
+            continue
+        seq += 1
+        first, last = _split_name(dm.name)
+        row = {
+            "Record ID": f"{record_id_base}-{seq}" if record_id_base else "",
+            "Company": name,
+            "Company > Domains": domain,
+            "Phone numbers": "",
+            "Email addresses": dm.email or "",
+            "first_name": first,
+            "last_name": last,
+            "Job title": dm.title or "",
+            "Description": enrichment.edited_description or "",
+            "LinkedIn": dm.linkedin or "",
+            "enrichment_status": "dm",
+        }
+        _fill_phones_from_dm(row, dm)
+        if not row["Phone numbers"]:
+            row["Phone numbers"] = "; ".join(
+                p for p in [dm.phone_office, dm.phone_mobile, dm.phone_direct] if p
+            )
+        rows.append(row)
+
+    if not rows:
+        has_contact = bool(
+            enrichment.office_phone or enrichment.associated_mobiles
+            or enrichment.office_email or enrichment.associated_emails
+        )
+        if has_contact:
+            orphan_email = enrichment.office_email
+            if not orphan_email and enrichment.associated_emails:
+                orphan_email = enrichment.associated_emails[0]
+            row = {
+                "Record ID": record_id_base or "",
+                "Company": name,
+                "Company > Domains": domain,
+                "Phone numbers": "",
+                "Email addresses": orphan_email or "",
+                "first_name": "Contact at",
+                "last_name": name,
+                "Job title": "Office Contact",
+                "Description": enrichment.edited_description or "",
+                "LinkedIn": enrichment.linkedin or "",
+                "enrichment_status": "no_dm_found_contact_only",
+            }
+            _fill_phones_from_enrichment(row, enrichment)
+            rows.append(row)
+
+    for row in rows:
+        if not row.get("LinkedIn") and enrichment and enrichment.linkedin:
+            row["LinkedIn"] = enrichment.linkedin
 
     return rows
 
@@ -223,8 +324,14 @@ async def run(
     delay: float = 1.0,
     limit: Optional[int] = None,
     dry_run: bool = False,
-    skip_dedup: bool = False,
+    output_format: str = "default",
+    justcall_output_path: Optional[str] = None,
 ):
+    """
+    output_format: "default" -> companies.csv + people.csv
+                   "justcall" -> single CSV with enrich_justcall columns (Attio People)
+    justcall_output_path: when set and output_format=justcall, write CSV to this path (e.g. for unique filenames).
+    """
     settings = Settings()
     entries = _load_input(input_path)
     logger.info(f"Loaded {len(entries)} URLs from {input_path}")
@@ -241,18 +348,34 @@ async def run(
             logger.info(f"  ... and {len(entries) - 20} more")
         return
 
+    # Key checkpoint by domain so we only crawl each domain once
+    def _domain(url: str) -> str:
+        d = extract_domain(url)
+        return (d or url).strip().lower()
+
     checkpoint = Checkpoint(checkpoint_path)
     enrichments: Dict[str, EnrichmentData] = {}
 
-    for url, data in checkpoint.get_all_enrichments().items():
+    for stored_key, data in checkpoint.get_all_enrichments().items():
         try:
-            enrichments[url] = EnrichmentData(**data)
+            enrichments[stored_key] = EnrichmentData(**data)
         except Exception:
             pass
 
     already_done = checkpoint.get_enriched_urls()
-    remaining = [e for e in entries if e["url"] not in already_done]
-    logger.info(f"Enriching {len(remaining)} URLs ({len(already_done)} cached) with concurrency={concurrency}")
+    # Remaining = entries whose domain we haven't enriched yet
+    domains_seen = set()
+    remaining = []
+    for e in entries:
+        dom = _domain(e["url"])
+        if dom in already_done:
+            continue
+        if dom in domains_seen:
+            continue
+        domains_seen.add(dom)
+        remaining.append(e)
+
+    logger.info(f"Enriching {len(remaining)} unique domains ({len(already_done)} cached) with concurrency={concurrency}")
 
     if remaining:
         enricher = WebsiteEnricher(settings)
@@ -264,25 +387,26 @@ async def run(
         async def _enrich_one(entry: dict) -> None:
             async with semaphore:
                 url, name = entry["url"], entry["name"]
+                domain = _domain(url)
                 counter["done"] += 1
                 idx = counter["done"]
                 elapsed = time.monotonic() - counter["start_time"]
                 rate = idx / elapsed * 60 if elapsed > 0 else 0
                 eta = (total - idx) / rate if rate > 0 else 0
-                logger.info(f"[{idx}/{total}] {name} ({url}) [{rate:.1f}/min, ETA {eta:.0f}min]")
+                logger.info(f"[{idx}/{total}] {name} ({domain}) [{rate:.1f}/min, ETA {eta:.0f}min]")
 
                 try:
                     enrichment = await enricher.enrich(url, name)
                     if enrichment:
-                        enrichments[url] = enrichment
-                        checkpoint.save_enrichment(url, enrichment.model_dump())
+                        enrichments[domain] = enrichment
+                        checkpoint.save_enrichment(domain, enrichment.model_dump())
                         logger.info(f"  -> {len(enrichment.decision_makers)} DM(s)")
                     else:
-                        checkpoint.mark_enriched(url)
+                        checkpoint.mark_enriched(domain)
                         logger.info("  -> No data")
                 except Exception as e:
                     logger.error(f"  -> Failed: {e}")
-                    checkpoint.mark_enriched(url)
+                    checkpoint.mark_enriched(domain)
 
                 await asyncio.sleep(delay)
 
@@ -295,16 +419,43 @@ async def run(
             await enricher.stop_pool()
 
         elapsed_total = time.monotonic() - counter["start_time"]
-        logger.info(f"Done: {counter['done']} URLs in {elapsed_total/60:.1f}min ({counter['done']/elapsed_total*60:.1f}/min)")
+        logger.info(f"Done: {counter['done']} domains in {elapsed_total/60:.1f}min ({counter['done']/elapsed_total*60:.1f}/min)")
 
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
+
+    if output_format == "justcall":
+        # Single CSV with enrich_justcall columns: one row per DM, or one "Contact at" per domain
+        justcall_rows = []
+        seen_domains = set()
+        for i, entry in enumerate(entries):
+            url, name = entry["url"], entry["name"]
+            domain = _domain(url)
+            if domain in seen_domains:
+                continue
+            seen_domains.add(domain)
+            enrichment = enrichments.get(domain)
+            record_id_base = f"domain-{i+1}"
+            justcall_rows.extend(
+                _build_people_rows_justcall_format(url, name, enrichment, record_id_base=record_id_base)
+            )
+        justcall_filename = Path(justcall_output_path) if justcall_output_path else (out / "people_justcall_format.csv")
+        if justcall_rows:
+            df = pd.DataFrame(justcall_rows)[JUSTCALL_COLUMNS].fillna("")
+            df.to_csv(justcall_filename, index=False, quoting=1)
+            logger.info(f"Wrote {len(df)} people rows (justcall format) to {justcall_filename}")
+        else:
+            pd.DataFrame(columns=JUSTCALL_COLUMNS).to_csv(justcall_filename, index=False, quoting=1)
+            logger.info(f"Wrote 0 people rows to {justcall_filename}")
+        logger.info(f"Summary: {len(justcall_rows)} people records (Attio People format)")
+        return
 
     company_rows = []
     people_rows = []
     for entry in entries:
         url, name = entry["url"], entry["name"]
-        enrichment = enrichments.get(url)
+        domain = _domain(url)
+        enrichment = enrichments.get(domain)
         company_rows.append(_build_company_row(url, name, enrichment))
         people_rows.extend(_build_people_rows(url, name, enrichment))
 
@@ -331,11 +482,21 @@ def main():
     parser.add_argument("--input", required=True, help="Path to input file (.txt or .csv)")
     parser.add_argument("--output", default="data/output/url_enrichment", help="Output directory")
     parser.add_argument("--checkpoint", default="data/state/url_enrichment_checkpoint.json", help="Checkpoint file")
+    parser.add_argument(
+        "--output-format",
+        choices=("default", "justcall"),
+        default="default",
+        help="default: companies.csv + people.csv; justcall: single Attio People CSV (same columns as enrich_justcall)",
+    )
+    parser.add_argument(
+        "--justcall-output",
+        default=None,
+        help="When --output-format justcall: write CSV to this path (default: <output-dir>/people_justcall_format.csv)",
+    )
     parser.add_argument("--concurrency", type=int, default=4, help="Concurrent crawls (default: 4)")
     parser.add_argument("--delay", type=float, default=1.0, help="Delay between crawls in seconds")
     parser.add_argument("--limit", type=int, default=None, help="Limit to N URLs (for testing)")
     parser.add_argument("--dry-run", action="store_true", help="Preview URLs without crawling")
-    parser.add_argument("--skip-dedup", action="store_true", help="Skip Attio dedup")
     args = parser.parse_args()
 
     asyncio.run(run(
@@ -346,7 +507,8 @@ def main():
         delay=args.delay,
         limit=args.limit,
         dry_run=args.dry_run,
-        skip_dedup=args.skip_dedup,
+        output_format=args.output_format,
+        justcall_output_path=args.justcall_output,
     ))
 
 

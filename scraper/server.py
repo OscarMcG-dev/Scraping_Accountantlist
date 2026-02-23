@@ -60,7 +60,7 @@ def ensure_dirs():
 
 def _progress_from_checkpoint() -> dict | None:
     """Read checkpoint JSON(s) and return enriched/done counts if present."""
-    for name in ("justcall_checkpoint.json", "checkpoint.json"):
+    for name in ("justcall_checkpoint.json", "url_enrichment_checkpoint.json", "checkpoint.json"):
         path = STATE_DIR / name
         if not path.is_file():
             continue
@@ -90,7 +90,7 @@ def root():
         "dashboard": "GET /dashboard — shareable web UI (upload, run, logs, download)",
         "endpoints": {
             "upload": "POST /upload — upload CSV/TXT",
-            "run": "POST /run — body: {\"script\", \"input_file\"?, \"concurrency\"?}",
+            "run": "POST /run — body: {\"script\", \"input_file\"?, \"output_format\"?, \"concurrency\"?} (script: enrich_justcall | enrich_urls | main)",
             "run_status": "GET /run/status — running?, log tail, uptime, progress, last_run",
             "run_cancel": "POST /run/cancel — cancel current run",
             "config": "GET /config — data_dir, timeout_seconds (read-only)",
@@ -132,26 +132,29 @@ async def upload(file: UploadFile = File(...)):
 
 
 class RunRequest(BaseModel):
-    script: str  # "enrich_justcall" | "main"
-    input_file: str | None = None  # required for enrich_justcall
-    concurrency: int | None = None  # optional; e.g. 4 for enrich_justcall / main
+    script: str  # "enrich_justcall" | "main" | "enrich_urls"
+    input_file: str | None = None  # required for enrich_justcall and enrich_urls
+    output_format: str | None = None  # for enrich_urls: "default" | "justcall"
+    concurrency: int | None = None  # optional; e.g. 4 for enrich_justcall / enrich_urls / main
 
 
 @app.post("/run")
 async def run(body: RunRequest):
     """
     Run a scraper script.
-    - script: "enrich_justcall" | "main"
-    - input_file: required for enrich_justcall (filename under input/); ignored for main.
+    - script: "enrich_justcall" | "main" | "enrich_urls"
+    - input_file: required for enrich_justcall and enrich_urls (filename under input/); ignored for main.
+    - output_format: for enrich_urls only — "default" (companies + people) or "justcall" (single Attio People CSV).
     """
     script = body.script
     input_file = body.input_file
+    output_format = body.output_format
     concurrency = body.concurrency
     ensure_dirs()
-    if script not in ("enrich_justcall", "main"):
+    if script not in ("enrich_justcall", "main", "enrich_urls"):
         raise HTTPException(
             status_code=400,
-            detail="script must be 'enrich_justcall' or 'main'",
+            detail="script must be 'enrich_justcall', 'main', or 'enrich_urls'",
         )
 
     if script == "enrich_justcall":
@@ -175,6 +178,35 @@ async def run(body: RunRequest):
             "--output", str(output_path),
             "--checkpoint", str(checkpoint_path),
         ]
+        if concurrency is not None:
+            cmd.extend(["--concurrency", str(concurrency)])
+    elif script == "enrich_urls":
+        if not input_file:
+            raise HTTPException(
+                status_code=400,
+                detail="input_file required for enrich_urls (e.g. urls.txt or firms.csv). Upload via POST /upload.",
+            )
+        input_path = INPUT_DIR / Path(input_file).name
+        if not input_path.exists():
+            raise HTTPException(
+                status_code=404,
+                detail=f"Input file not found: {input_file}. Upload it first via POST /upload.",
+            )
+        of = (output_format or "justcall").lower()
+        if of not in ("default", "justcall"):
+            of = "justcall"
+        checkpoint_path = STATE_DIR / "url_enrichment_checkpoint.json"
+        cmd = [
+            "python", "-m", "enrich_urls",
+            "--input", str(input_path),
+            "--output", str(OUTPUT_DIR),
+            "--checkpoint", str(checkpoint_path),
+            "--output-format", of,
+        ]
+        out_name = None
+        if of == "justcall":
+            out_name = f"url_enrichment_people_{uuid.uuid4().hex[:8]}.csv"
+            cmd.extend(["--justcall-output", str(OUTPUT_DIR / out_name)])
         if concurrency is not None:
             cmd.extend(["--concurrency", str(concurrency)])
     else:
@@ -251,6 +283,11 @@ async def run(body: RunRequest):
     if script == "enrich_justcall":
         return {
             "message": "Run started in background. Poll GET /run/status for progress and log tail. When done, list GET /output and download the new file.",
+            "output_file_when_done": out_name,
+        }
+    if script == "enrich_urls":
+        return {
+            "message": "Run started in background. Poll GET /run/status for progress. When done, list GET /output and download the output file(s).",
             "output_file_when_done": out_name,
         }
     return {

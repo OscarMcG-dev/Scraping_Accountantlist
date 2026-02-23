@@ -298,6 +298,17 @@ class WebsiteEnricher:
     _DNS_MARKERS = ("ERR_NAME_NOT_RESOLVED", "DNS_PROBE")
     _CONN_MARKERS = ("ERR_CONNECTION_REFUSED", "ERR_CONNECTION_RESET", "ERR_CONNECTION_TIMED_OUT")
     _TLS_MARKERS = ("ERR_SSL", "ERR_CERT", "ERR_TLS")
+    _BROWSER_CLOSED_MARKERS = (
+        "browser has been closed",
+        "Target page, context or browser has been closed",
+        "Target closed",
+        "Protocol error (Target.closeTarget)",
+    )
+
+    def _is_browser_closed_error(self, err: Exception) -> bool:
+        """True if the exception indicates the pooled browser/context is dead (do not reuse)."""
+        msg = (str(err) or "").lower()
+        return any(m.lower() in msg for m in self._BROWSER_CLOSED_MARKERS)
 
     def _classify_error(self, err_str: str) -> str:
         """Classify a crawl error into a category for retry/fallback logic."""
@@ -322,6 +333,7 @@ class WebsiteEnricher:
         """
         max_pages = 1 + self.settings.max_crawl_subpages
         pooled_crawler = None
+        crawler_dead = False
         try:
             if self._pool_queue is not None:
                 pooled_crawler = await self._pool_queue.get()
@@ -335,6 +347,9 @@ class WebsiteEnricher:
                 async with AsyncWebCrawler(config=self.browser_config) as crawler:
                     return await self._do_crawl(crawler, url, max_pages, firm_name)
         except Exception as e:
+            crawler_dead = self._is_browser_closed_error(e)
+            if crawler_dead:
+                logger.warning(f"Pooled browser/context closed for {url}, replacing crawler in pool")
             err_type = self._classify_error(str(e))
             if err_type == "dns":
                 logger.warning(f"DNS resolution failed for {url}")
@@ -343,7 +358,22 @@ class WebsiteEnricher:
             return None, err_type
         finally:
             if pooled_crawler is not None and self._pool_queue is not None:
-                self._pool_queue.put_nowait(pooled_crawler)
+                if crawler_dead:
+                    try:
+                        await pooled_crawler.__aexit__(None, None, None)
+                    except Exception:
+                        pass
+                    try:
+                        if pooled_crawler in self._crawler_pool:
+                            self._crawler_pool.remove(pooled_crawler)
+                        new_crawler = AsyncWebCrawler(config=self.browser_config)
+                        await new_crawler.__aenter__()
+                        self._crawler_pool.append(new_crawler)
+                        self._pool_queue.put_nowait(new_crawler)
+                    except Exception as ex:
+                        logger.warning(f"Could not replace dead crawler in pool: {ex}")
+                else:
+                    self._pool_queue.put_nowait(pooled_crawler)
 
     async def _do_crawl(
         self, crawler: Any, url: str, max_pages: int, firm_name: str,

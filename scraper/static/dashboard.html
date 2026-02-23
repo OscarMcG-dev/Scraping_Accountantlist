@@ -59,13 +59,21 @@
       <div>
         <label for="script">Script</label>
         <select id="script">
-          <option value="enrich_justcall">enrich_justcall (Attio People)</option>
+          <option value="enrich_justcall">enrich_justcall (Attio People CSV)</option>
+          <option value="enrich_urls">enrich_urls (URL list → People CSV)</option>
           <option value="main">main (full directory pipeline)</option>
         </select>
       </div>
       <div id="inputFileWrap">
         <label for="inputFile">Input file</label>
         <select id="inputFile"><option value="">— select after upload —</option></select>
+      </div>
+      <div id="urlOutputFormatWrap" style="display: none;">
+        <label for="urlOutputFormat">Output format</label>
+        <select id="urlOutputFormat">
+          <option value="justcall">Justcall (single Attio People CSV)</option>
+          <option value="default">Default (companies.csv + people.csv)</option>
+        </select>
       </div>
       <div>
         <label for="concurrency">Concurrency</label>
@@ -242,11 +250,18 @@
       const script = document.getElementById('script').value;
       const inputFile = document.getElementById('inputFile').value;
       const concurrency = parseInt(document.getElementById('concurrency').value, 10) || 4;
-      if (script === 'enrich_justcall' && !inputFile) { setMsg('runMsg', 'Select an input file for enrich_justcall', true); return; }
+      if ((script === 'enrich_justcall' || script === 'enrich_urls') && !inputFile) {
+        setMsg('runMsg', 'Select an input file (' + (script === 'enrich_urls' ? 'e.g. urls.txt' : 'Attio CSV') + ')', true);
+        return;
+      }
       setMsg('runMsg', 'Starting…');
       document.getElementById('runBtn').disabled = true;
       const body = { script, concurrency };
       if (script === 'enrich_justcall') body.input_file = inputFile;
+      if (script === 'enrich_urls') {
+        body.input_file = inputFile;
+        body.output_format = document.getElementById('urlOutputFormat').value;
+      }
       try {
         const r = await fetch(api('/run'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
         const data = await r.json().catch(() => ({}));
@@ -301,7 +316,9 @@
     document.getElementById('refreshStatus').onclick = refreshStatus;
 
     document.getElementById('script').onchange = () => {
-      document.getElementById('inputFileWrap').style.display = document.getElementById('script').value === 'enrich_justcall' ? 'block' : 'none';
+      const script = document.getElementById('script').value;
+      document.getElementById('inputFileWrap').style.display = (script === 'enrich_justcall' || script === 'enrich_urls') ? 'block' : 'none';
+      document.getElementById('urlOutputFormatWrap').style.display = script === 'enrich_urls' ? 'block' : 'none';
     };
     document.getElementById('script').dispatchEvent(new Event('change'));
 
