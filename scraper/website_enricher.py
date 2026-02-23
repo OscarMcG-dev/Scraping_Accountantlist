@@ -78,8 +78,23 @@ class WebsiteEnricher:
             api_key=settings.openrouter_api_key,
             base_url=settings.openrouter_base_url,
         )
+        # extra_args reduce "Page crashed" / "Target crashed" in Docker/low-memory environments
         self.browser_config = BrowserConfig(
-            headless=True, viewport_width=1920, viewport_height=1080,
+            headless=True,
+            viewport_width=1920,
+            viewport_height=1080,
+            extra_args=[
+                "--disable-dev-shm-usage",  # use /tmp instead of /dev/shm (helps in containers)
+                "--no-sandbox",
+                "--disable-gpu",
+                "--disable-software-rasterizer",
+                "--disable-extensions",
+                "--disable-background-networking",
+                "--disable-default-apps",
+                "--disable-sync",
+                "--mute-audio",
+                "--no-first-run",
+            ],
         )
         self._enrichment_schema = get_enrichment_json_schema()
         self._web_search_schema = get_web_search_json_schema()
