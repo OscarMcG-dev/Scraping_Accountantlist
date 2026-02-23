@@ -79,6 +79,14 @@
         <label for="concurrency">Concurrency</label>
         <input type="number" id="concurrency" min="1" max="20" value="4" style="width: 4rem;">
       </div>
+      <div>
+        <label for="forceRecrawl">Force recrawl</label>
+        <select id="forceRecrawl">
+          <option value="">None (use cache)</option>
+          <option value="no-dm">Re-crawl no-DM domains</option>
+          <option value="all">Re-crawl everything</option>
+        </select>
+      </div>
       <button type="button" id="runBtn">Start run</button>
     </div>
     <div id="runMsg" class="msg"></div>
@@ -97,6 +105,13 @@
       <button type="button" id="cancelBtn" class="secondary" style="display: none; background: var(--danger); color: #fff; margin-left: 0.5rem;">Cancel run</button>
     </div>
     <div id="log" aria-label="Live log"></div>
+  </div>
+
+  <div class="card">
+    <h2>Checkpoint stats</h2>
+    <p style="color: var(--muted); font-size: 0.875rem; margin: 0 0 0.5rem;">Current enrichment coverage across cached checkpoint data.</p>
+    <div id="checkpointStats" style="font-size: 0.875rem; color: var(--muted);"></div>
+    <button type="button" class="secondary" id="refreshCheckpoint" style="margin-top: 0.5rem;">Refresh</button>
   </div>
 
   <div class="card">
@@ -300,7 +315,8 @@
       }
       setMsg('runMsg', 'Starting…');
       document.getElementById('runBtn').disabled = true;
-      const body = { script, concurrency };
+      const forceRecrawl = document.getElementById('forceRecrawl').value || null;
+      const body = { script, concurrency, force_recrawl: forceRecrawl };
       if (script === 'enrich_justcall') body.input_file = inputFile;
       if (script === 'enrich_urls') {
         body.input_file = inputFile;
@@ -354,10 +370,28 @@
       }
     };
 
+    async function refreshCheckpointStats() {
+      const el = document.getElementById('checkpointStats');
+      try {
+        const s = await json('/checkpoint/stats');
+        const parts = [];
+        if (s.enriched) parts.push('Enriched: ' + s.enriched);
+        if (s.with_dms) parts.push('With DMs: <strong style="color:var(--accent)">' + s.with_dms + '</strong>');
+        if (s.no_dms) parts.push('No DMs: <strong style="color:#f59e0b">' + s.no_dms + '</strong>');
+        if (s.out_of_scope) parts.push('Out of scope: ' + s.out_of_scope);
+        if (s.no_data) parts.push('No data: ' + s.no_data);
+        if (s.checkpoint_file) parts.push('File: ' + s.checkpoint_file);
+        el.innerHTML = parts.length ? parts.join(' · ') : 'No checkpoint data';
+      } catch (e) {
+        el.textContent = 'Could not load stats';
+      }
+    }
+
     document.getElementById('refreshInput').onclick = refreshInputList;
     document.getElementById('refreshOutput').onclick = refreshOutputList;
     document.getElementById('refreshState').onclick = refreshStateList;
     document.getElementById('refreshStatus').onclick = refreshStatus;
+    document.getElementById('refreshCheckpoint').onclick = refreshCheckpointStats;
 
     document.getElementById('script').onchange = () => {
       const script = document.getElementById('script').value;
@@ -370,6 +404,7 @@
     refreshOutputList();
     refreshStateList();
     refreshStatus();
+    refreshCheckpointStats();
     loadPrompts();
   </script>
 </body>

@@ -23,17 +23,17 @@ class Settings(BaseSettings):
 
     # Crawl4AI (Phase 2)
     max_concurrent_crawls: int = Field(default=5, ge=1, le=50)
-    page_timeout: int = Field(default=30000, ge=5000, le=300000)
+    page_timeout: int = Field(default=45000, ge=5000, le=300000)
     # Max sub-pages to crawl per site (main page is separate). We crawl *up to* this many:
     # the actual count is decided by the LLM (up to N picks) or keyword/safe fallback.
-    max_crawl_subpages: int = Field(default=8, ge=1, le=20)
+    max_crawl_subpages: int = Field(default=10, ge=1, le=20)
 
     # LLM
     max_decision_makers: int = Field(default=3, ge=1, le=10)
     llm_temperature: float = Field(default=0.0, ge=0.0, le=2.0)
 
     # Web search (Phase 2b) — fires when crawl finds no decision makers
-    web_search_enabled: bool = False
+    web_search_enabled: bool = True
     web_search_max_results: int = Field(default=3, ge=1, le=10)
     web_search_model: str = "x-ai/grok-4.1-fast:online"
 

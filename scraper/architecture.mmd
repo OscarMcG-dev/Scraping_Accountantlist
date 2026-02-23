@@ -20,7 +20,7 @@ flowchart TD
         P1 --> P2{"Internal links found?"}
         P2 -->|"> 3 links"| P3["LLM Link Triage<br/>Grok picks best 2-3 pages"]
         P2 -->|"<= 3 links"| P4["Keyword prioritisation<br/>(team/about to contact)"]
-        P3 --> P5["Crawl sub-pages<br/>(max 3, 40s hard timeout)"]
+        P3 --> P5["Crawl sub-pages<br/>(max 3, page_timeout+10s cap)"]
         P4 --> P5
         P5 --> P6["LLM Extraction<br/>Grok 4.1 Fast + strict JSON Schema"]
         P6 --> P7{"DMs found?"}

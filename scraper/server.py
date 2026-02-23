@@ -170,6 +170,7 @@ class RunRequest(BaseModel):
     input_file: str | None = None  # required for enrich_justcall and enrich_urls
     output_format: str | None = None  # for enrich_urls: "default" | "justcall"
     concurrency: int | None = None  # optional; e.g. 4 for enrich_justcall / enrich_urls / main
+    force_recrawl: str | None = None  # "all" | "no-dm" | None
 
 
 @app.post("/run")
@@ -184,6 +185,9 @@ async def run(body: RunRequest):
     input_file = body.input_file
     output_format = body.output_format
     concurrency = body.concurrency
+    force_recrawl = body.force_recrawl
+    if force_recrawl and force_recrawl not in ("all", "no-dm"):
+        raise HTTPException(status_code=400, detail="force_recrawl must be 'all', 'no-dm', or null")
     ensure_dirs()
     if script not in ("enrich_justcall", "main", "enrich_urls"):
         raise HTTPException(
@@ -214,6 +218,8 @@ async def run(body: RunRequest):
         ]
         if concurrency is not None:
             cmd.extend(["--concurrency", str(concurrency)])
+        if force_recrawl:
+            cmd.extend(["--force-recrawl", force_recrawl])
     elif script == "enrich_urls":
         if not input_file:
             raise HTTPException(
@@ -243,6 +249,8 @@ async def run(body: RunRequest):
             cmd.extend(["--justcall-output", str(OUTPUT_DIR / out_name)])
         if concurrency is not None:
             cmd.extend(["--concurrency", str(concurrency)])
+        if force_recrawl:
+            cmd.extend(["--force-recrawl", force_recrawl])
     else:
         # main.py: full directory pipeline (phase 1–3)
         checkpoint_path = STATE_DIR / "checkpoint.json"
@@ -250,6 +258,8 @@ async def run(body: RunRequest):
             "python", "-m", "main",
             "--checkpoint", str(checkpoint_path),
         ]
+        if force_recrawl:
+            cmd.extend(["--force-recrawl", force_recrawl])
         output_path = OUTPUT_DIR  # main.py writes companies.csv / people.csv there
 
     env = os.environ.copy()
@@ -405,6 +415,37 @@ def get_config():
         "state_dir": str(STATE_DIR),
         "max_crawl_subpages": Settings().max_crawl_subpages,
     }
+
+
+@app.get("/checkpoint/stats")
+def checkpoint_stats():
+    """Summary of checkpoint state: counts of enriched, with DMs, no DMs, out of scope."""
+    ensure_dirs()
+    totals = {"enriched": 0, "with_dms": 0, "no_dms": 0, "out_of_scope": 0, "no_data": 0}
+    for name in ("justcall_checkpoint.json", "url_enrichment_checkpoint.json", "checkpoint.json"):
+        path = STATE_DIR / name
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            phase2 = data.get("phase2", {})
+            enriched = phase2.get("enriched_urls", [])
+            enrichments = phase2.get("enrichments", {})
+            totals["enriched"] += len(enriched)
+            for url in enriched:
+                d = enrichments.get(url)
+                if d is None:
+                    totals["no_data"] += 1
+                elif d.get("out_of_scope"):
+                    totals["out_of_scope"] += 1
+                elif d.get("decision_makers"):
+                    totals["with_dms"] += 1
+                else:
+                    totals["no_dms"] += 1
+            return {"checkpoint_file": name, **totals}
+        except Exception:
+            pass
+    return totals
 
 
 PROMPTS_FILE = STATE_DIR / "prompts.json"

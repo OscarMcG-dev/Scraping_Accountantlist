@@ -27,7 +27,7 @@ load_dotenv()
 
 from config import Settings
 from checkpoint import Checkpoint
-from website_enricher import WebsiteEnricher
+from website_enricher import WebsiteEnricher, prefilter_domains
 from models import EnrichmentData, DecisionMaker
 
 logging.basicConfig(
@@ -254,6 +254,7 @@ async def run_enrichment(
     dry_run: bool = False,
     delay: float = 1.0,
     concurrency: int = 4,
+    force_recrawl: Optional[str] = None,
 ):
     """Main enrichment pipeline with concurrent crawling."""
     settings = Settings()
@@ -269,7 +270,7 @@ async def run_enrichment(
     needs_it = df["_needs_enrichment"].sum()
     logger.info(f"{needs_it}/{len(df)} records need enrichment")
 
-    domains_to_enrich = (
+    raw_domains = (
         df[df["_needs_enrichment"]]["Company > Domains"]
         .dropna()
         .str.strip()
@@ -277,7 +278,15 @@ async def run_enrichment(
         .unique()
         .tolist()
     )
-    logger.info(f"{len(domains_to_enrich)} unique domains to crawl")
+    logger.info(f"{len(raw_domains)} unique domains before pre-filter")
+
+    domains_to_enrich, skipped = prefilter_domains(raw_domains)
+    if skipped:
+        logger.info(f"Pre-filter skipped {len(skipped)} domains (DNS/invalid)")
+        for dom, reason in skipped[:10]:
+            logger.debug(f"  Skipped {dom}: {reason}")
+
+    logger.info(f"{len(domains_to_enrich)} domains to crawl after pre-filter")
 
     if limit:
         domains_to_enrich = domains_to_enrich[:limit]
@@ -292,6 +301,14 @@ async def run_enrichment(
         return
 
     checkpoint = Checkpoint(checkpoint_path)
+
+    if force_recrawl == "all":
+        count = checkpoint.invalidate_all_enrichments()
+        logger.info(f"Force recrawl (all): invalidated {count} cached enrichments")
+    elif force_recrawl == "no-dm":
+        count = checkpoint.invalidate_no_dm_urls()
+        logger.info(f"Force recrawl (no-dm): invalidated {count} domains with no decision makers")
+
     enrichments: dict[str, EnrichmentData] = {}
 
     for url, data in checkpoint.get_all_enrichments().items():
@@ -427,6 +444,13 @@ def main():
         "--concurrency", type=int, default=4,
         help="Number of firms to enrich concurrently (default: 4)"
     )
+    parser.add_argument(
+        "--force-recrawl", choices=("all", "no-dm"),
+        default=None,
+        help="Invalidate cached checkpoint data before running. "
+             "'no-dm': re-crawl domains that found no decision makers. "
+             "'all': wipe all cached enrichments and re-crawl everything."
+    )
 
     args = parser.parse_args()
 
@@ -438,6 +462,7 @@ def main():
         dry_run=args.dry_run,
         delay=args.delay,
         concurrency=args.concurrency,
+        force_recrawl=args.force_recrawl,
     ))
 
 

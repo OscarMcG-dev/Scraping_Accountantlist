@@ -64,7 +64,7 @@ flowchart TD
         P1 --> P2{"Internal links found?"}
         P2 -->|"> 3 links"| P3["LLM Link Triage<br/>Grok picks best 2–3 pages"]
         P2 -->|"≤ 3 links"| P4["Keyword prioritisation<br/>(team/about → contact)"]
-        P3 --> P5["Crawl sub-pages<br/>(max 3, 40s hard timeout)"]
+        P3 --> P5["Crawl sub-pages<br/>(max 3, page_timeout+10s hard cap)"]
         P4 --> P5
         P5 --> P6["LLM Extraction<br/>Grok 4.1 Fast + strict JSON Schema"]
         P6 --> P7{"DMs found?"}
@@ -85,9 +85,9 @@ flowchart TD
 
 ## How Enrichment Works (Per Firm)
 
-1. **Homepage crawl** — a headless Chromium browser loads the page (30s timeout), converts to markdown.
+1. **Homepage crawl** — a headless Chromium browser loads the page (configurable timeout, default 45s), converts to markdown.
 2. **Link triage** — all internal links are evaluated. If >3, Grok picks the 2–3 most likely to contain decision-maker info. If ≤3, keyword matching handles it. Service/blog pages are filtered out.
-3. **Sub-page crawl** — the selected pages are crawled (max 3, each with a 40s hard timeout).
+3. **Sub-page crawl** — the selected pages are crawled (max 3, each with page_timeout+10s hard cap).
 4. **LLM extraction** — the combined markdown is sent to Grok 4.1 Fast via OpenRouter with a strict JSON Schema. Output: company description, phones, emails, decision-maker details, social links.
 5. **Phone normalisation** — all numbers are normalised to E.164 format via the `phonenumbers` library.
 6. **Web search fallback** — if the crawl finds no named decision makers (or fails entirely), a web search is triggered using xAI's native search plugin targeting LinkedIn, CPA Australia, CAANZ, and IPA directories.
@@ -287,7 +287,7 @@ ATTIO_API_KEY=                          # Only needed for dedup / Attio People e
 WEB_SEARCH_ENABLED=true
 WEB_SEARCH_MODEL=x-ai/grok-4.1-fast:online
 LLM_LINK_TRIAGE=true
-PAGE_TIMEOUT=30000                      # milliseconds
+PAGE_TIMEOUT=45000                      # milliseconds (45s; hard cap is +10s)
 ```
 
 See `config.py` for the full list with defaults and validation ranges.
@@ -355,7 +355,7 @@ Runs can take a long time (enrichment/crawling); the request will wait until the
    | `DIRECTORY_DELAY` | No | e.g. `1.0` |
    | `DIRECTORY_MAX_CONCURRENT` | No | e.g. `5` |
    | `MAX_CONCURRENT_CRAWLS` | No | e.g. `5` |
-   | `PAGE_TIMEOUT` | No | e.g. `30000` |
+   | `PAGE_TIMEOUT` | No | e.g. `45000` (ms; default 45s) |
    | `MAX_DECISION_MAKERS` | No | e.g. `3` |
    | `LLM_TEMPERATURE` | No | e.g. `0.0` |
    | `WEB_SEARCH_ENABLED` | No | `true` / `false` |

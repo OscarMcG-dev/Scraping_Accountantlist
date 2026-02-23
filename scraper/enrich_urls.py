@@ -38,7 +38,7 @@ load_dotenv()
 
 from config import Settings
 from checkpoint import Checkpoint
-from website_enricher import WebsiteEnricher
+from website_enricher import WebsiteEnricher, prefilter_domains
 from models import EnrichmentData, DecisionMaker
 from attio_dedup import extract_domain
 
@@ -326,6 +326,7 @@ async def run(
     dry_run: bool = False,
     output_format: str = "default",
     justcall_output_path: Optional[str] = None,
+    force_recrawl: Optional[str] = None,
 ):
     """
     output_format: "default" -> companies.csv + people.csv
@@ -335,6 +336,16 @@ async def run(
     settings = Settings()
     entries = _load_input(input_path)
     logger.info(f"Loaded {len(entries)} URLs from {input_path}")
+
+    all_urls = [e["url"] for e in entries]
+    valid_urls, skipped = prefilter_domains(all_urls)
+    if skipped:
+        valid_set = set(valid_urls)
+        before = len(entries)
+        entries = [e for e in entries if e["url"].strip().lower() in valid_set]
+        logger.info(f"Pre-filter: {before} -> {len(entries)} URLs ({len(skipped)} skipped: DNS/invalid)")
+        for dom, reason in skipped[:10]:
+            logger.debug(f"  Skipped {dom}: {reason}")
 
     if limit:
         entries = entries[:limit]
@@ -354,6 +365,14 @@ async def run(
         return (d or url).strip().lower()
 
     checkpoint = Checkpoint(checkpoint_path)
+
+    if force_recrawl == "all":
+        count = checkpoint.invalidate_all_enrichments()
+        logger.info(f"Force recrawl (all): invalidated {count} cached enrichments")
+    elif force_recrawl == "no-dm":
+        count = checkpoint.invalidate_no_dm_urls()
+        logger.info(f"Force recrawl (no-dm): invalidated {count} domains with no decision makers")
+
     enrichments: Dict[str, EnrichmentData] = {}
 
     for stored_key, data in checkpoint.get_all_enrichments().items():
@@ -497,6 +516,11 @@ def main():
     parser.add_argument("--delay", type=float, default=1.0, help="Delay between crawls in seconds")
     parser.add_argument("--limit", type=int, default=None, help="Limit to N URLs (for testing)")
     parser.add_argument("--dry-run", action="store_true", help="Preview URLs without crawling")
+    parser.add_argument(
+        "--force-recrawl", choices=("all", "no-dm"),
+        default=None,
+        help="Invalidate cached data. 'no-dm': re-crawl domains with no DMs. 'all': re-crawl everything."
+    )
     args = parser.parse_args()
 
     asyncio.run(run(
@@ -509,6 +533,7 @@ def main():
         dry_run=args.dry_run,
         output_format=args.output_format,
         justcall_output_path=args.justcall_output,
+        force_recrawl=args.force_recrawl,
     ))
 
 

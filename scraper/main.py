@@ -171,6 +171,13 @@ async def main():
         "--checkpoint", default="data/state/checkpoint.json",
         help="Path to checkpoint file"
     )
+    parser.add_argument(
+        "--force-recrawl", choices=("all", "no-dm"),
+        default=None,
+        help="Invalidate cached enrichment data. "
+             "'no-dm': re-crawl domains with no decision makers. "
+             "'all': wipe and re-crawl everything."
+    )
 
     args = parser.parse_args()
 
@@ -187,6 +194,14 @@ async def main():
             sys.exit(1)
         listings = [DirectoryListing(**l) for l in raw]
         logger.info(f"Loaded {len(listings)} listings from checkpoint")
+
+    if args.force_recrawl:
+        if args.force_recrawl == "all":
+            count = checkpoint.invalidate_all_enrichments()
+            logger.info(f"Force recrawl (all): invalidated {count} cached enrichments")
+        elif args.force_recrawl == "no-dm":
+            count = checkpoint.invalidate_no_dm_urls()
+            logger.info(f"Force recrawl (no-dm): invalidated {count} domains with no decision makers")
 
     enrichments = {}
     if (args.phase == 2 or args.phase is None) and not args.skip_enrichment:

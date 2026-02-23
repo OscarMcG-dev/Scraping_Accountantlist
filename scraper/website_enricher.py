@@ -41,7 +41,7 @@ logger = logging.getLogger(__name__)
 
 TEAM_PATH_KEYWORDS = [
     "team", "our-people", "people", "staff", "our-team",
-    "meet-the", "about-us", "who-we-are", "directors",
+    "meet-the", "about-us", "about", "who-we-are", "directors",
     "partners", "leadership", "our-firm", "our-story",
 ]
 TEAM_TEXT_KEYWORDS = [
@@ -63,6 +63,24 @@ NEGATIVE_PATH_KEYWORDS = [
     "testimonial", "review", "case-study",
 ]
 
+PARKED_SITE_MARKERS = [
+    "godaddy", "this domain is for sale", "domain parking",
+    "plesk", "cpanel", "account suspended", "account has been suspended",
+    "hostpapa", "hostinger", "flywheel", "litesspeed", "litespeed",
+    "default web page", "web server is running", "it works!",
+    "almalinux", "apache2 default", "nginx on", "rackspace",
+    "searchhounds", "dot-services.org", "netregistry",
+    "coming soon", "under construction",
+]
+
+DM_SIGNAL_RE = re.compile(
+    r"partner|director|principal|founder|founded|owner|manager|chartered\s*accountant"
+    r"|@[a-z0-9.-]+\.[a-z]{2,}"
+    r"|contact\s+us|get\s+in\s+touch"
+    r"|\+61\s*\d|\(0[2-9]\)\s*\d",
+    re.IGNORECASE,
+)
+
 MAX_CONTENT_CHARS = 25_000
 
 
@@ -76,10 +94,13 @@ def get_default_crawl_prompts(settings: Settings) -> Dict[str, str]:
         "even when no specific person is named.\n\n"
         "Return JSON: {\"urls\": [\"url1\", \"url2\", ...]}\n"
         "Order by likelihood of useful info. Max {max} URLs.\n\n"
-        "VALUABLE: team, people, about-us, our-firm, staff, directors, "
+        "VALUABLE: team, people, about-us, about, our-firm, staff, directors, "
         "contact, meet-the-team, get-in-touch, reach-us, who-we-are, "
-        "leadership, our-people. Include at least one contact-style page "
-        "(contact us, get in touch, etc.) when the list contains one.\n"
+        "leadership, our-people, partners.\n"
+        "MUST INCLUDE: You MUST include at least one team/about/our-people/"
+        "partners/leadership page when such a link exists — these are the "
+        "primary source for decision maker names. Also include at least one "
+        "contact-style page (contact us, get in touch, etc.) when available.\n"
         "AVOID: service descriptions only, blog, tax guides, FAQs, "
         "privacy/terms, client portals, booking, login, careers.\n"
         "If no link looks useful, return {\"urls\": []}."
@@ -238,11 +259,31 @@ class WebsiteEnricher:
         Falls back to web search (Phase 2b) when:
         - The crawl fails entirely (site down, DNS error, timeout)
         - The crawl succeeds but finds no named decision makers
+        - The crawl content has no useful signals (skip expensive LLM)
         """
         crawl_result = await self._crawl_site_with_retry(website_url, firm_name=firm_name)
         if not crawl_result:
             if self.settings.web_search_enabled:
                 logger.info(f"Crawl failed for {website_url}, falling back to web search")
+                return await self._web_search_enrichment(firm_name, website_url)
+            return None
+
+        # Check parked/dead homepage early (pages dict only has "main" when early-exited)
+        main_md = crawl_result.get("main", "")
+        parked = self._is_parked_or_dead(main_md)
+        if parked and len(crawl_result) == 1:
+            logger.info(f"Skipping LLM for {website_url}: {parked}")
+            if self.settings.web_search_enabled:
+                return await self._web_search_enrichment(firm_name, website_url)
+            return EnrichmentData(
+                out_of_scope=True,
+                out_of_scope_reason=parked,
+            )
+
+        # Content heuristic: skip LLM when no signals at all
+        if not self._pages_have_useful_signals(crawl_result):
+            logger.info(f"No useful signals in crawled pages for {firm_name}, skipping LLM extraction")
+            if self.settings.web_search_enabled:
                 return await self._web_search_enrichment(firm_name, website_url)
             return None
 
@@ -425,6 +466,57 @@ class WebsiteEnricher:
     class _BrowserDeadError(Exception):
         """Raised inside _do_crawl when the underlying browser/context has died."""
 
+    @staticmethod
+    def _is_parked_or_dead(content: str) -> Optional[str]:
+        """Return a reason string if the homepage looks like a parked/dead site, else None."""
+        if len(content.strip()) < 300:
+            return "Homepage content too short (<300 chars); likely dead or empty site"
+        content_lower = content[:3000].lower()
+        for marker in PARKED_SITE_MARKERS:
+            if marker in content_lower:
+                return f"Parked/placeholder site (matched: '{marker}')"
+        return None
+
+    @staticmethod
+    def _homepage_has_dm_signals(content: str) -> bool:
+        """Quick regex check: does the homepage contain signals that DM info may be present?"""
+        return bool(DM_SIGNAL_RE.search(content[:8000]))
+
+    def _select_team_pages(
+        self, team_urls: List[str], priority_urls: List[str], budget: int,
+    ) -> List[str]:
+        """Pick team pages smartly: prefer distinct paths, avoid paginated duplicates.
+
+        Ensures we crawl up to `budget` team pages total (including any already in
+        priority_urls), preferring different URL patterns over numbered pagination.
+        """
+        already_team = [u for u in priority_urls if self._is_team_url(u)]
+        needed = budget - len(already_team)
+        if needed <= 0:
+            return []
+
+        already_set = set(priority_urls)
+        candidates = [u for u in team_urls if u not in already_set]
+        if not candidates:
+            return []
+
+        selected: List[str] = []
+        seen_stems: set = set()
+        for u in already_team:
+            stem = re.sub(r'/page/\d+|/\d+/?$|\?.*$', '', u.rstrip('/'))
+            seen_stems.add(stem)
+
+        for u in candidates:
+            if len(selected) >= needed:
+                break
+            stem = re.sub(r'/page/\d+|/\d+/?$|\?.*$', '', u.rstrip('/'))
+            if stem in seen_stems:
+                continue
+            seen_stems.add(stem)
+            selected.append(u)
+
+        return selected
+
     async def _do_crawl(
         self, crawler: Any, url: str, max_pages: int, firm_name: str,
     ) -> tuple:
@@ -442,7 +534,7 @@ class WebsiteEnricher:
             )
         except asyncio.TimeoutError:
             logger.warning(f"Hard timeout ({hard_timeout:.0f}s) on {url}")
-            await asyncio.sleep(0)  # let Playwright internals settle
+            await asyncio.sleep(0)
             return None, "other"
 
         if not main.success:
@@ -453,7 +545,13 @@ class WebsiteEnricher:
             logger.warning(f"Failed to crawl {url} ({err_type})")
             return None, err_type
 
-        pages = {"main": main.markdown or ""}
+        main_md = main.markdown or ""
+        pages = {"main": main_md}
+
+        parked_reason = self._is_parked_or_dead(main_md)
+        if parked_reason:
+            logger.info(f"Early exit for {url}: {parked_reason}")
+            return pages, ""
 
         try:
             internal_links = self._extract_internal_links(main, url)
@@ -480,10 +578,21 @@ class WebsiteEnricher:
                         internal_links, url, max_n=max_sub,
                     )
 
+            team_urls = self._get_team_urls(internal_links, url)
+
+            # Multi-page team crawling: guarantee up to 3 distinct team pages
+            extra_team = self._select_team_pages(team_urls, priority_urls, budget=3)
+            if extra_team:
+                priority_urls = extra_team + [u for u in priority_urls if u not in extra_team]
+            elif team_urls and not any(self._is_team_url(u) for u in priority_urls):
+                priority_urls = [team_urls[0]] + [u for u in priority_urls if u != team_urls[0]]
+
             contact_urls = self._get_contact_urls(internal_links, url)
             if contact_urls and not any(self._is_contact_url(u) for u in priority_urls):
                 priority_urls = [contact_urls[0]] + [u for u in priority_urls if u != contact_urls[0]]
             priority_urls = priority_urls[: max_pages - 1]
+
+            logger.debug(f"Sub-pages selected for {url}: {priority_urls}")
 
             content_config = CrawlerRunConfig(
                 page_timeout=self.settings.page_timeout,
@@ -612,6 +721,34 @@ class WebsiteEnricher:
                any(kw in text for kw in CONTACT_TEXT_KEYWORDS):
                 contact.append(raw_url)
         return contact
+
+    def _is_team_url(self, url: str) -> bool:
+        """True if URL path suggests a team/about page."""
+        path = urlparse(url.lower()).path
+        segments = self._path_segments(path)
+        return any(seg in TEAM_PATH_KEYWORDS for seg in segments)
+
+    def _get_team_urls(self, links: List[Dict[str, str]], base_url: str) -> List[str]:
+        """Return URLs that look like team/about pages."""
+        base_domain = urlparse(base_url).netloc.replace("www.", "")
+        team = []
+        for link in links:
+            text = link.get("text", "") or ""
+            raw_url = link.get("url") or ""
+            if not raw_url.startswith("http"):
+                continue
+            url_lower = raw_url.lower()
+            path = urlparse(url_lower).path
+            segments = self._path_segments(path)
+            link_domain = urlparse(url_lower).netloc.replace("www.", "")
+            if link_domain and link_domain != base_domain:
+                continue
+            if any(neg in seg for seg in segments for neg in NEGATIVE_PATH_KEYWORDS):
+                continue
+            if any(seg in TEAM_PATH_KEYWORDS for seg in segments) or \
+               any(kw in text for kw in TEAM_TEXT_KEYWORDS):
+                team.append(raw_url)
+        return team
 
     def _safe_fallback_links(
         self, links: List[Dict[str, str]], base_url: str, max_n: int,
@@ -743,10 +880,52 @@ class WebsiteEnricher:
     # Content assembly with smart truncation
     # ------------------------------------------------------------------
 
+    @staticmethod
+    def _extract_homepage_dm_section(content: str, max_chars: int = 3000) -> str:
+        """Pull the section of the homepage most likely to contain DM info.
+
+        Scans for paragraphs/lines mentioning partner/director/founder/etc.
+        and returns up to max_chars of surrounding context. Returns empty
+        string when nothing relevant is found.
+        """
+        if not content:
+            return ""
+        lines = content.split("\n")
+        hits: List[int] = []
+        for i, line in enumerate(lines):
+            if DM_SIGNAL_RE.search(line):
+                hits.append(i)
+        if not hits:
+            return ""
+
+        # Collect a window around each hit
+        collected: List[str] = []
+        used: set = set()
+        total = 0
+        for idx in hits:
+            start = max(0, idx - 2)
+            end = min(len(lines), idx + 3)
+            for j in range(start, end):
+                if j in used:
+                    continue
+                used.add(j)
+                line = lines[j]
+                if total + len(line) > max_chars:
+                    break
+                collected.append(line)
+                total += len(line) + 1
+            if total >= max_chars:
+                break
+
+        return "\n".join(collected)
+
     def _build_combined_content(self, pages: Dict[str, str]) -> str:
         """
         Assemble crawled pages into a single string for the LLM, with smart
         truncation that prioritizes team/about/contact pages over the main page.
+
+        Homepage sections containing DM signals (names, titles, emails) are
+        extracted and placed into the priority budget so they survive truncation.
         """
         priority_pages = {}
         main_content = pages.get("main", "")
@@ -761,8 +940,16 @@ class WebsiteEnricher:
             else:
                 other_pages[page_url] = content
 
+        # Extract DM-relevant sections from homepage before it gets truncated
+        homepage_dm_section = self._extract_homepage_dm_section(main_content)
+
         priority_budget = int(MAX_CONTENT_CHARS * PRIORITY_PAGE_BUDGET)
         priority_text = ""
+
+        if homepage_dm_section:
+            chunk = f"=== Homepage DM Section ===\n{homepage_dm_section}\n\n"
+            priority_text += chunk
+
         for page_url, content in priority_pages.items():
             chunk = f"=== {page_url} ===\n{content}\n\n"
             if len(priority_text) + len(chunk) > priority_budget:
@@ -784,6 +971,20 @@ class WebsiteEnricher:
             non_priority = non_priority[:remaining_budget] + "\n... (truncated)"
 
         return priority_text + non_priority
+
+    def _pages_have_useful_signals(self, pages: Dict[str, str]) -> bool:
+        """Quick heuristic: do any crawled pages contain signals worth sending to the LLM?
+
+        Returns False when all pages are empty or contain only boilerplate with
+        no emails, phone numbers, or title keywords. In that case we can skip
+        the expensive extraction LLM call and go straight to web search.
+        """
+        combined_sample = ""
+        for content in pages.values():
+            combined_sample += content[:4000] + "\n"
+            if len(combined_sample) > 12000:
+                break
+        return bool(DM_SIGNAL_RE.search(combined_sample))
 
     # ------------------------------------------------------------------
     # LLM extraction with structured output + retry
@@ -1068,6 +1269,52 @@ class WebsiteEnricher:
             "Use pipe-separated format like: 'Parramatta NSW | Tax, SMSF | CPA member'\n"
             "- Do NOT fabricate information. Only report what appears in search results."
         )
+
+
+# ------------------------------------------------------------------
+# Upstream data quality pre-filter
+# ------------------------------------------------------------------
+
+def prefilter_domains(
+    domains: List[str],
+    *,
+    timeout_secs: float = 5.0,
+) -> tuple:
+    """Quick quality filter: check each domain has valid DNS and isn't obviously junk.
+
+    Returns (valid, skipped) where skipped is a list of (domain, reason) tuples.
+    Uses socket-level DNS resolution (no HTTP) so it's very fast.
+    """
+    import socket
+
+    valid: List[str] = []
+    skipped: List[tuple] = []
+
+    for domain in domains:
+        clean = domain.strip().lower()
+        if not clean or clean.startswith("#"):
+            continue
+
+        # Strip protocol for DNS check
+        host = clean
+        for prefix in ("https://", "http://"):
+            if host.startswith(prefix):
+                host = host[len(prefix):]
+        host = host.split("/")[0].split(":")[0]
+
+        if not host or "." not in host:
+            skipped.append((clean, "invalid domain format"))
+            continue
+
+        try:
+            socket.getaddrinfo(host, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
+        except socket.gaierror:
+            skipped.append((clean, "DNS does not resolve"))
+            continue
+
+        valid.append(clean)
+
+    return valid, skipped
 
 
 # ------------------------------------------------------------------

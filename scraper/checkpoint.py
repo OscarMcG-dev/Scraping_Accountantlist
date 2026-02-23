@@ -1,8 +1,11 @@
 """Simple JSON checkpoint for resumable scraping across phases."""
 import json
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 from datetime import datetime
+
+
+CHECKPOINT_VERSION = 2
 
 
 class Checkpoint:
@@ -17,10 +20,11 @@ class Checkpoint:
         if self.path.exists():
             with open(self.path, "r") as f:
                 return json.load(f)
-        return {"phase1": {}, "phase2": {}, "meta": {}}
+        return {"phase1": {}, "phase2": {}, "meta": {"version": CHECKPOINT_VERSION}}
 
     def save(self) -> None:
         self._data["meta"]["last_saved"] = datetime.utcnow().isoformat()
+        self._data["meta"]["version"] = CHECKPOINT_VERSION
         with open(self.path, "w") as f:
             json.dump(self._data, f, indent=2, default=str)
 
@@ -62,3 +66,63 @@ class Checkpoint:
 
     def get_all_enrichments(self) -> dict:
         return self._data.get("phase2", {}).get("enrichments", {})
+
+    # -- Force recrawl --
+
+    def invalidate_enrichment(self, url: str) -> bool:
+        """Remove a single URL from enriched_urls and enrichments. Returns True if found."""
+        phase2 = self._data.get("phase2", {})
+        enriched = phase2.get("enriched_urls", [])
+        enrichments = phase2.get("enrichments", {})
+        removed = False
+        if url in enriched:
+            enriched.remove(url)
+            removed = True
+        if url in enrichments:
+            del enrichments[url]
+            removed = True
+        if removed:
+            self.save()
+        return removed
+
+    def invalidate_no_dm_urls(self) -> int:
+        """Remove URLs that were enriched but yielded no decision makers.
+
+        Returns the count of invalidated URLs. This lets --force-recrawl
+        target only the domains that previously failed to find DMs.
+        """
+        phase2 = self._data.get("phase2", {})
+        enriched: list = phase2.get("enriched_urls", [])
+        enrichments: dict = phase2.get("enrichments", {})
+
+        to_remove = []
+        for url in list(enriched):
+            data = enrichments.get(url)
+            if data is None:
+                to_remove.append(url)
+                continue
+            if data.get("out_of_scope"):
+                continue
+            dms = data.get("decision_makers", [])
+            if not dms:
+                to_remove.append(url)
+
+        for url in to_remove:
+            if url in enriched:
+                enriched.remove(url)
+            if url in enrichments:
+                del enrichments[url]
+
+        if to_remove:
+            self.save()
+        return len(to_remove)
+
+    def invalidate_all_enrichments(self) -> int:
+        """Wipe all Phase 2 data. Returns count of removed entries."""
+        phase2 = self._data.get("phase2", {})
+        count = len(phase2.get("enriched_urls", []))
+        phase2["enriched_urls"] = []
+        phase2["enrichments"] = {}
+        if count:
+            self.save()
+        return count
