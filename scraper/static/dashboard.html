@@ -24,6 +24,7 @@
     .badge.done { background: #1e3a5f; color: #93c5fd; }
     .badge.failed { background: #7f1d1d; color: #fca5a5; }
     #log { font-family: ui-monospace, monospace; font-size: 0.8rem; white-space: pre-wrap; word-break: break-all; max-height: 320px; overflow-y: auto; background: #000; padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem; }
+    textarea.prompt { width: 100%; min-height: 120px; font-family: ui-monospace, monospace; font-size: 0.8rem; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); resize: vertical; }
     .file-list { list-style: none; padding: 0; margin: 0; }
     .file-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
     .file-list li:last-child { border-bottom: none; }
@@ -82,6 +83,25 @@
       <button type="button" id="cancelBtn" class="secondary" style="display: none; background: var(--danger); color: #fff; margin-left: 0.5rem;">Cancel run</button>
     </div>
     <div id="log" aria-label="Live log"></div>
+  </div>
+
+  <div class="card">
+    <h2>Crawl prompts</h2>
+    <p style="color: var(--muted); font-size: 0.875rem; margin: 0 0 0.5rem;">Used during crawling: link triage (which pages to open) and extraction (what to pull from content). Saved under state/ for the next run.</p>
+    <div style="margin-bottom: 1rem;">
+      <label for="promptLinkTriageSystem">Link triage (system)</label>
+      <textarea id="promptLinkTriageSystem" class="prompt" placeholder="System prompt for picking sub-pages…"></textarea>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <label for="promptLinkTriageUser">Link triage (user template — use {firm_name}, {max_picks}, {link_list})</label>
+      <textarea id="promptLinkTriageUser" class="prompt" placeholder="User prompt template…"></textarea>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <label for="promptExtraction">Extraction (system)</label>
+      <textarea id="promptExtraction" class="prompt" placeholder="System prompt for extracting firm/DM data…"></textarea>
+    </div>
+    <button type="button" id="savePromptsBtn">Save prompts</button>
+    <div id="promptsMsg" class="msg"></div>
   </div>
 
   <div class="card">
@@ -245,6 +265,36 @@
       document.getElementById('runBtn').disabled = false;
     };
 
+    async function loadPrompts() {
+      try {
+        const p = await json('/prompts');
+        document.getElementById('promptLinkTriageSystem').value = p.link_triage_system || '';
+        document.getElementById('promptLinkTriageUser').value = p.link_triage_user || '';
+        document.getElementById('promptExtraction').value = p.extraction_system || '';
+      } catch (e) {
+        document.getElementById('promptsMsg').textContent = 'Could not load prompts: ' + e.message;
+        document.getElementById('promptsMsg').className = 'msg err';
+      }
+    }
+    document.getElementById('savePromptsBtn').onclick = async () => {
+      setMsg('promptsMsg', 'Saving…');
+      try {
+        const r = await fetch(api('/prompts'), {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            link_triage_system: document.getElementById('promptLinkTriageSystem').value,
+            link_triage_user: document.getElementById('promptLinkTriageUser').value,
+            extraction_system: document.getElementById('promptExtraction').value,
+          }),
+        });
+        if (!r.ok) throw new Error(await r.text());
+        setMsg('promptsMsg', 'Prompts saved. They will apply to the next run.');
+      } catch (e) {
+        setMsg('promptsMsg', e.message || 'Save failed', true);
+      }
+    };
+
     document.getElementById('refreshInput').onclick = refreshInputList;
     document.getElementById('refreshOutput').onclick = refreshOutputList;
     document.getElementById('refreshState').onclick = refreshStateList;
@@ -259,6 +309,7 @@
     refreshOutputList();
     refreshStateList();
     refreshStatus();
+    loadPrompts();
   </script>
 </body>
 </html>

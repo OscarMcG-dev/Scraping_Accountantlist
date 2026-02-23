@@ -24,6 +24,9 @@ class Settings(BaseSettings):
     # Crawl4AI (Phase 2)
     max_concurrent_crawls: int = Field(default=5, ge=1, le=50)
     page_timeout: int = Field(default=30000, ge=5000, le=300000)
+    # Max sub-pages to crawl per site (main page is separate). We crawl *up to* this many:
+    # the actual count is decided by the LLM (up to N picks) or keyword/safe fallback.
+    max_crawl_subpages: int = Field(default=8, ge=1, le=20)
 
     # LLM
     max_decision_makers: int = Field(default=3, ge=1, le=10)

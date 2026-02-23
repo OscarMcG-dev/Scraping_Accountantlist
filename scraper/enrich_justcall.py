@@ -151,6 +151,8 @@ def build_enriched_row(
             row["Email addresses"] = dm.email
         if dm.linkedin:
             row["LinkedIn"] = dm.linkedin
+        if not row["Phone numbers"]:
+            _fill_phones_from_dm(row, dm)
     elif dm and not is_placeholder and not is_junk:
         _fill_name_from_current(row, current_name)
         if row["Job title"].lower() in GENERIC_TITLES or not row["Job title"]:
@@ -159,11 +161,28 @@ def build_enriched_row(
         else:
             row["enrichment_status"] = "existing_kept"
 
+        if dm.email and not row["Email addresses"]:
+            row["Email addresses"] = dm.email
         if dm.linkedin and not row["LinkedIn"]:
             row["LinkedIn"] = dm.linkedin
+        if not row["Phone numbers"]:
+            _fill_phones_from_dm(row, dm)
     else:
-        _fill_name_from_current(row, current_name)
-        row["enrichment_status"] = "no_dm_found"
+        # No named decision maker: keep or set name, then back-fill contact info below.
+        has_contact_info = bool(
+            (enrichment.office_phone or enrichment.associated_mobiles or
+             enrichment.office_email or enrichment.associated_emails)
+        )
+        if has_contact_info and (is_placeholder or is_junk or not (current_name or "").strip()):
+            # Placeholder record so contact info is not lost: "Contact at [Company]"
+            company_name = _safe_str(original.get("Company", "")) or "Firm"
+            row["first_name"] = "Contact at"
+            row["last_name"] = company_name
+            row["Job title"] = row["Job title"] or "Office Contact"
+            row["enrichment_status"] = "no_dm_found_contact_only"
+        else:
+            _fill_name_from_current(row, current_name)
+            row["enrichment_status"] = "no_dm_found"
 
     # Always fill in company-level data from enrichment, even without DMs
     if enrichment.edited_description:
@@ -202,14 +221,29 @@ def _pick_best_dm(dms: list) -> Optional[DecisionMaker]:
     return min(named, key=rank_decision_maker)
 
 
+def _fill_phones_from_dm(row: dict, dm: DecisionMaker) -> None:
+    """Back-fill phone from DM's personal numbers when the record has none."""
+    phones = []
+    for p in (dm.phone_office, dm.phone_mobile, dm.phone_direct):
+        if p and p not in phones:
+            phones.append(p)
+    if phones:
+        row["Phone numbers"] = "; ".join(phones)
+
+
 def _fill_phones_from_enrichment(row: dict, enrichment: EnrichmentData) -> None:
-    """Back-fill phone from enrichment data if the record has none."""
+    """Back-fill phone(s) from enrichment data if the record has none. Joins multiple numbers."""
     if row["Phone numbers"]:
         return
+    phones = []
+    if enrichment.office_phone:
+        phones.append(enrichment.office_phone)
     if enrichment.associated_mobiles:
-        row["Phone numbers"] = enrichment.associated_mobiles[0]
-    elif enrichment.office_phone:
-        row["Phone numbers"] = enrichment.office_phone
+        for p in enrichment.associated_mobiles:
+            if p and p not in phones:
+                phones.append(p)
+    if phones:
+        row["Phone numbers"] = "; ".join(phones)
 
 
 async def run_enrichment(

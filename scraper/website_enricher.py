@@ -14,6 +14,9 @@ Improvements over v1:
 import asyncio
 import json
 import logging
+import os
+import re
+from pathlib import Path
 from typing import Optional, List, Dict, Any
 from urllib.parse import urljoin, urlparse
 
@@ -61,6 +64,87 @@ NEGATIVE_PATH_KEYWORDS = [
 ]
 
 MAX_CONTENT_CHARS = 25_000
+
+
+def get_default_crawl_prompts(settings: Settings) -> Dict[str, str]:
+    """Return default prompt text for link triage and extraction. Used by API and enricher."""
+    link_triage_system = (
+        "You select which pages on an accounting firm's website "
+        "are most likely to contain (a) names, titles, and contact "
+        "details of senior staff (partners, directors, principals), "
+        "or (b) main business contact info (phone, email, address) "
+        "even when no specific person is named.\n\n"
+        "Return JSON: {\"urls\": [\"url1\", \"url2\", ...]}\n"
+        "Order by likelihood of useful info. Max {max} URLs.\n\n"
+        "VALUABLE: team, people, about-us, our-firm, staff, directors, "
+        "contact, meet-the-team, get-in-touch, reach-us, who-we-are, "
+        "leadership, our-people. Include at least one contact-style page "
+        "(contact us, get in touch, etc.) when the list contains one.\n"
+        "AVOID: service descriptions only, blog, tax guides, FAQs, "
+        "privacy/terms, client portals, booking, login, careers.\n"
+        "If no link looks useful, return {\"urls\": []}."
+    )
+    link_triage_user = (
+        "Firm: {firm_name}\n"
+        "Pick up to {max_picks} pages most likely to have "
+        "decision maker info or main contact details (phone/email):\n\n"
+        "{link_list}"
+    )
+    extraction_system = (
+        "You are a data analyst extracting factual firmographic data from "
+        "Australian accounting firm websites. Your output will be read by "
+        "sales reps during cold calls — it must be instantly useful.\n\n"
+        "CRITICAL RULES:\n"
+        "- Report ONLY facts stated on the website. Never invent or embellish.\n"
+        "- Strip ALL marketing language. No adjectives like 'trusted', 'leading', "
+        "'passionate', 'dedicated', 'expert', 'boutique', 'client-focused'.\n"
+        "- If information is not on the site, leave the field as an empty string.\n"
+        "- CONTACT PAGES: Many firms have a 'Contact Us' page that lists only the main "
+        "phone number(s) and email with no staff names. Still extract office_phone, "
+        "office_email, and associated_mobiles/associated_emails from such pages. "
+        "Leave decision_makers empty if no named people appear. Do not skip contact info "
+        "just because there are no decision makers.\n\n"
+        "DESCRIPTION: Write a factual summary of the firm. State what services "
+        "they offer, where they are located, and who they serve. Do not copy "
+        "taglines or mission statements.\n\n"
+        "EDITED_DESCRIPTION: This is the field the rep reads while the phone is "
+        "ringing. Use pipe-separated bullet points. Include:\n"
+        "  - Suburb/city and state\n"
+        "  - Core services (tax compliance, SMSF, audit, bookkeeping, BAS, etc.)\n"
+        "  - Accounting software they use (Xero, MYOB, QuickBooks, Sage)\n"
+        "  - Team size if stated\n"
+        "  - Client types or industry niches they serve\n"
+        "  - Professional body memberships (CAANZ, CPA, NTAA, IPA)\n"
+        "Example: 'Dee Why NSW | Tax, SMSF, audit, BAS | Xero, MYOB | ~8 staff | "
+        "Medical & trades clients | CAANZ, CPA members'\n\n"
+        "DECISION MAKERS: Extract senior staff — Partner, Principal, Director, "
+        "Managing Director, Senior Partner, Tax Partner, Audit Partner, Founder, "
+        "Owner, Manager. Be permissive with senior titles. Exclude receptionists, "
+        "admin staff, juniors, and graduates. "
+        f"Extract up to {settings.max_decision_makers} decision makers.\n\n"
+        "DECISION_MAKER_SUMMARY: For each person, write factual bullet points a "
+        "rep can reference in conversation. Include:\n"
+        "  - Qualifications (CA, CPA, NTAA fellow, BBus, etc.)\n"
+        "  - Years at firm or in industry, if stated\n"
+        "  - Specific responsibilities (e.g. 'heads SMSF division')\n"
+        "  - Prior firms (e.g. 'ex-PwC')\n"
+        "  - Industry specializations\n"
+        "Do NOT write flowing prose. Use short factual fragments separated by '. '.\n"
+        "Example: 'CA, CPA. 12 yrs at firm. Heads tax compliance. Ex-Deloitte. "
+        "Specialises in medical practices.'\n\n"
+        "ASSOCIATED_INFO: List factual supplementary details: professional body "
+        "memberships, tax agent registration number, software stack (including "
+        "add-on tools like Dext, Hubdoc, WorkflowMax), industry niches.\n\n"
+        "PHONE NORMALIZATION: Australian numbers must be +61XXXXXXXXX format. "
+        "New Zealand +64, UK +44.\n\n"
+        "OUT OF SCOPE: Set out_of_scope to true if the business is NOT an "
+        "accounting firm (e.g. completely unrelated business)."
+    )
+    return {
+        "link_triage_system": link_triage_system,
+        "link_triage_user": link_triage_user,
+        "extraction_system": extraction_system,
+    }
 PRIORITY_PAGE_BUDGET = 0.40  # 40% of char budget reserved for team/about/contact pages
 
 
@@ -101,6 +185,24 @@ class WebsiteEnricher:
         self._crawler_pool: List[AsyncWebCrawler] = []
         self._pool_semaphore: Optional[asyncio.Semaphore] = None
         self._pool_queue: Optional[asyncio.Queue] = None
+        self._prompt_overrides: Dict[str, str] = self._load_prompt_overrides()
+
+    def _load_prompt_overrides(self) -> Dict[str, str]:
+        """Load prompt overrides from data/state/prompts.json when present (e.g. from dashboard)."""
+        data_dir = Path(os.environ.get("DATA_DIR", "data"))
+        path = data_dir / "state" / "prompts.json"
+        if not path.is_file():
+            return {}
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            out = {}
+            for key in ("link_triage_system", "link_triage_user", "extraction_system"):
+                if isinstance(data.get(key), str):
+                    out[key] = data[key]
+            return out
+        except Exception as e:
+            logger.debug("Could not load prompt overrides from %s: %s", path, e)
+            return {}
 
     async def start_pool(self, size: int = 4) -> None:
         """Pre-warm a pool of browser contexts for concurrent crawling."""
@@ -208,7 +310,7 @@ class WebsiteEnricher:
         return "other"
 
     async def _crawl_site(
-        self, url: str, max_pages: int = 4, firm_name: str = "",
+        self, url: str, firm_name: str = "",
     ) -> tuple:
         """
         Crawl main page + discovered sub-pages.
@@ -218,6 +320,7 @@ class WebsiteEnricher:
         Uses the browser pool when available; falls back to creating a
         fresh context when the pool is empty or not started.
         """
+        max_pages = 1 + self.settings.max_crawl_subpages
         pooled_crawler = None
         try:
             if self._pool_queue is not None:
@@ -269,35 +372,59 @@ class WebsiteEnricher:
 
         pages = {"main": main.markdown or ""}
 
-        internal_links = self._extract_internal_links(main, url)
+        try:
+            internal_links = self._extract_internal_links(main, url)
+        except Exception as e:
+            logger.debug(f"Link extraction failed for {url}: {e}")
+            internal_links = []
 
-        if self.settings.llm_link_triage and len(internal_links) > 3 and firm_name:
-            priority_urls = self._llm_triage_links(
-                internal_links, firm_name, max_picks=max_pages - 1,
-            )
-            if not priority_urls:
-                priority_urls = self._prioritize_links(internal_links, url)
-        else:
-            priority_urls = self._prioritize_links(internal_links, url)
-
-        content_config = CrawlerRunConfig(
-            page_timeout=self.settings.page_timeout,
-            remove_overlay_elements=True,
-            excluded_tags=["nav", "footer", "aside", "header"],
-            remove_forms=True,
-        )
-        for sub_url in priority_urls[:max_pages - 1]:
-            try:
-                result = await asyncio.wait_for(
-                    crawler.arun(sub_url, config=content_config),
-                    timeout=hard_timeout,
+        # Crawl up to max_sub sub-pages (we don't pad: list length is from LLM/keyword/fallback).
+        max_sub = max_pages - 1
+        try:
+            if self.settings.llm_link_triage and internal_links and firm_name:
+                priority_urls = self._llm_triage_links(
+                    internal_links, firm_name, max_picks=max_sub,
                 )
-                if result.success and result.markdown:
-                    pages[sub_url] = result.markdown
-            except asyncio.TimeoutError:
-                logger.debug(f"Hard timeout on sub-page {sub_url}")
-            except Exception as e:
-                logger.debug(f"Sub-page crawl failed {sub_url}: {e}")
+                if not priority_urls:
+                    priority_urls = self._prioritize_links(internal_links, url)
+                    if not priority_urls:
+                        priority_urls = self._safe_fallback_links(
+                            internal_links, url, max_n=max_sub,
+                        )
+            else:
+                priority_urls = self._prioritize_links(internal_links, url)
+                if not priority_urls:
+                    priority_urls = self._safe_fallback_links(
+                        internal_links, url, max_n=max_sub,
+                    )
+
+            # Ensure at least one contact page is crawled when available.
+            contact_urls = self._get_contact_urls(internal_links, url)
+            if contact_urls and not any(self._is_contact_url(u) for u in priority_urls):
+                priority_urls = [contact_urls[0]] + [u for u in priority_urls if u != contact_urls[0]]
+            priority_urls = priority_urls[: max_pages - 1]
+
+            content_config = CrawlerRunConfig(
+                page_timeout=self.settings.page_timeout,
+                remove_overlay_elements=True,
+                excluded_tags=["nav", "footer", "aside", "header"],
+                remove_forms=True,
+            )
+            for sub_url in priority_urls:
+                try:
+                    result = await asyncio.wait_for(
+                        crawler.arun(sub_url, config=content_config),
+                        timeout=hard_timeout,
+                    )
+                    if result.success and result.markdown:
+                        pages[sub_url] = result.markdown
+                except asyncio.TimeoutError:
+                    logger.debug(f"Hard timeout on sub-page {sub_url}")
+                except Exception as e:
+                    logger.debug(f"Sub-page crawl failed {sub_url}: {e}")
+        except Exception as e:
+            # Triage or sub-page loop failed: keep main page only, don't fail the crawl.
+            logger.warning(f"Sub-page crawl phase failed for {url}, keeping main page only: {e}")
 
         return pages, ""
 
@@ -306,9 +433,15 @@ class WebsiteEnricher:
     # ------------------------------------------------------------------
 
     def _extract_internal_links(self, result: Any, base_url: str) -> List[Dict[str, str]]:
-        """Extract internal links with text context."""
-        links_data = getattr(result, "links", {}) or {}
-        internal = links_data.get("internal", [])
+        """Extract internal links with text context. Tolerates different crawl4ai link shapes."""
+        links_data = getattr(result, "links", None) or {}
+        if not isinstance(links_data, dict):
+            # Some crawlers return a list of links directly
+            internal = links_data if isinstance(links_data, list) else []
+        else:
+            internal = links_data.get("internal", []) or []
+        if not isinstance(internal, list):
+            internal = []
         enriched = []
         seen = set()
 
@@ -342,8 +475,10 @@ class WebsiteEnricher:
         base_domain = base_parsed.netloc.replace("www.", "")
 
         for link in links:
-            text = link["text"]
-            url_lower = link["url"].lower()
+            text = link.get("text", "") or ""
+            url_lower = (link.get("url") or "").lower()
+            if not url_lower.startswith("http"):
+                continue
             path = urlparse(url_lower).path
             segments = self._path_segments(path)
 
@@ -354,14 +489,69 @@ class WebsiteEnricher:
             if any(neg in seg for seg in segments for neg in NEGATIVE_PATH_KEYWORDS):
                 continue
 
+            full_url = link.get("url") or ""
             if any(seg in TEAM_PATH_KEYWORDS for seg in segments) or \
                any(kw in text for kw in TEAM_TEXT_KEYWORDS):
-                team.append(link["url"])
+                team.append(full_url)
             elif any(seg in CONTACT_PATH_KEYWORDS for seg in segments) or \
                  any(kw in text for kw in CONTACT_TEXT_KEYWORDS):
-                contact.append(link["url"])
+                contact.append(full_url)
 
         return team + contact
+
+    def _is_contact_url(self, url: str) -> bool:
+        """True if URL path suggests a contact page (for ensuring we crawl at least one)."""
+        path = urlparse(url.lower()).path
+        segments = self._path_segments(path)
+        return any(seg in CONTACT_PATH_KEYWORDS for seg in segments)
+
+    def _get_contact_urls(self, links: List[Dict[str, str]], base_url: str) -> List[str]:
+        """Return URLs that look like contact pages (for ensuring we crawl at least one)."""
+        base_domain = urlparse(base_url).netloc.replace("www.", "")
+        contact = []
+        for link in links:
+            text = link.get("text", "") or ""
+            raw_url = link.get("url") or ""
+            if not raw_url.startswith("http"):
+                continue
+            url_lower = raw_url.lower()
+            path = urlparse(url_lower).path
+            segments = self._path_segments(path)
+            link_domain = urlparse(url_lower).netloc.replace("www.", "")
+            if link_domain and link_domain != base_domain:
+                continue
+            if any(neg in seg for seg in segments for neg in NEGATIVE_PATH_KEYWORDS):
+                continue
+            if any(seg in CONTACT_PATH_KEYWORDS for seg in segments) or \
+               any(kw in text for kw in CONTACT_TEXT_KEYWORDS):
+                contact.append(raw_url)
+        return contact
+
+    def _safe_fallback_links(
+        self, links: List[Dict[str, str]], base_url: str, max_n: int,
+    ) -> List[str]:
+        """When LLM and keyword prioritization yield nothing: first N same-domain links
+        that are not clearly bad (blog, privacy, login, etc.). Ensures we still crawl
+        something rather than zero sub-pages.
+        """
+        base_domain = urlparse(base_url).netloc.replace("www.", "")
+        out = []
+        for link in links:
+            if len(out) >= max_n:
+                break
+            raw_url = link.get("url") or ""
+            if not raw_url.startswith("http"):
+                continue
+            url_lower = raw_url.lower()
+            path = urlparse(url_lower).path
+            segments = self._path_segments(path)
+            link_domain = urlparse(url_lower).netloc.replace("www.", "")
+            if link_domain and link_domain != base_domain:
+                continue
+            if any(neg in seg for seg in segments for neg in NEGATIVE_PATH_KEYWORDS):
+                continue
+            out.append(raw_url)
+        return out
 
     def _to_absolute(self, base: str, href: str) -> Optional[str]:
         if not href or href.startswith(("javascript:", "mailto:", "tel:")):
@@ -377,6 +567,43 @@ class WebsiteEnricher:
     # LLM-based link triage
     # ------------------------------------------------------------------
 
+    _URL_RE = re.compile(r"https?://[^\s\]\"'<>)\\]+", re.IGNORECASE)
+
+    def _parse_triage_response(self, content: str, max_picks: int, firm_name: str) -> List[str]:
+        """Parse LLM triage JSON (or fallback to URL extraction). Never raises."""
+        urls = []
+        try:
+            data = json.loads(content)
+        except json.JSONDecodeError as e:
+            logger.debug(f"LLM triage JSON decode failed for {firm_name}: {e}")
+            # Fallback: extract any http(s) URLs from raw content
+            urls = list(dict.fromkeys(self._URL_RE.findall(content)))
+            return urls[:max_picks]
+
+        if isinstance(data, list):
+            urls = [u for u in data if isinstance(u, str) and u.startswith("http")]
+        elif isinstance(data, dict):
+            for key in ("urls", "pages", "selected", "links"):
+                val = data.get(key)
+                if val is None:
+                    continue
+                if isinstance(val, list):
+                    urls = [u for u in val if isinstance(u, str) and u.startswith("http")]
+                    break
+                if isinstance(val, str):
+                    # Single URL or newline/comma-separated list
+                    for part in re.split(r"[\n,]", val):
+                        u = part.strip().strip('"\'')
+                        if u.startswith("http"):
+                            urls.append(u)
+                    break
+            if not urls:
+                for k, v in data.items():
+                    if isinstance(v, str) and v.startswith("http") and v not in urls:
+                        urls.append(v)
+        valid = [u for u in urls if isinstance(u, str) and u.startswith("http")]
+        return valid[:max_picks]
+
     def _llm_triage_links(
         self, links: List[Dict[str, str]], firm_name: str, max_picks: int = 3,
     ) -> List[str]:
@@ -389,68 +616,39 @@ class WebsiteEnricher:
             return []
 
         link_list = "\n".join(
-            f"  {i+1}. URL: {l['url']}  |  text: \"{l['text']}\""
+            f"  {i+1}. URL: {l.get('url', '')}  |  text: \"{l.get('text', '')}\""
             for i, l in enumerate(links[:30])
+        )
+        defaults = get_default_crawl_prompts(self.settings)
+        # Use .replace() instead of .format() — prompts contain literal JSON braces
+        # like {"urls": [...]} that .format() would misinterpret as placeholders.
+        system_content = (
+            (self._prompt_overrides.get("link_triage_system") or defaults["link_triage_system"])
+            .replace("{max}", str(max_picks))
+        )
+        user_content = (
+            (self._prompt_overrides.get("link_triage_user") or defaults["link_triage_user"])
+            .replace("{firm_name}", firm_name)
+            .replace("{max_picks}", str(max_picks))
+            .replace("{link_list}", link_list)
         )
 
         try:
             response = self.llm_client.chat.completions.create(
                 model=self.settings.openrouter_model,
                 messages=[
-                    {
-                        "role": "system",
-                        "content": (
-                            "You select which pages on an accounting firm's website "
-                            "are most likely to contain names, titles, and contact "
-                            "details of senior staff (partners, directors, principals).\n\n"
-                            "Return JSON: {\"urls\": [\"url1\", \"url2\", ...]}\n"
-                            "Order by likelihood. Max {max} URLs.\n\n"
-                            "GOOD pages: team, people, about-us, our-firm, staff, "
-                            "directors, contact, meet-the-team\n"
-                            "BAD pages: service descriptions, blog posts, tax guides, "
-                            "FAQs, privacy policy, client portals, booking pages, "
-                            "industry info, login pages.\n"
-                            "If no page is likely to have DM info, return {\"urls\": []}"
-                        ).format(max=max_picks),
-                    },
-                    {
-                        "role": "user",
-                        "content": (
-                            f"Firm: {firm_name}\n"
-                            f"Pick up to {max_picks} pages most likely to have "
-                            f"decision maker info:\n\n{link_list}"
-                        ),
-                    },
+                    {"role": "system", "content": system_content},
+                    {"role": "user", "content": user_content},
                 ],
                 temperature=0.0,
                 max_tokens=500,
                 response_format={"type": "json_object"},
             )
 
-            content = response.choices[0].message.content
-            data = json.loads(content)
-
-            urls = []
-            if isinstance(data, list):
-                urls = data
-            elif isinstance(data, dict):
-                for key in ("urls", "pages", "selected"):
-                    if key in data and isinstance(data[key], list):
-                        urls = data[key]
-                        break
-                if not urls:
-                    seen = set()
-                    for k, v in data.items():
-                        for item in (k, v):
-                            if isinstance(item, str) and item.startswith("http") \
-                               and item not in seen:
-                                seen.add(item)
-                                urls.append(item)
-
-            valid = [u for u in urls if isinstance(u, str) and u.startswith("http")]
+            content = (response.choices[0].message.content or "").strip()
+            valid = self._parse_triage_response(content, max_picks, firm_name)
             logger.info(f"LLM triage selected {len(valid)} pages for {firm_name}")
-            return valid[:max_picks]
-
+            return valid
         except Exception as e:
             logger.debug(f"LLM link triage failed for {firm_name}: {e}")
             return []
@@ -618,59 +816,8 @@ class WebsiteEnricher:
         )
 
     def _get_system_prompt(self) -> str:
-        return (
-            "You are a data analyst extracting factual firmographic data from "
-            "Australian accounting firm websites. Your output will be read by "
-            "sales reps during cold calls — it must be instantly useful.\n\n"
-
-            "CRITICAL RULES:\n"
-            "- Report ONLY facts stated on the website. Never invent or embellish.\n"
-            "- Strip ALL marketing language. No adjectives like 'trusted', 'leading', "
-            "'passionate', 'dedicated', 'expert', 'boutique', 'client-focused'.\n"
-            "- If information is not on the site, leave the field as an empty string.\n\n"
-
-            "DESCRIPTION: Write a factual summary of the firm. State what services "
-            "they offer, where they are located, and who they serve. Do not copy "
-            "taglines or mission statements.\n\n"
-
-            "EDITED_DESCRIPTION: This is the field the rep reads while the phone is "
-            "ringing. Use pipe-separated bullet points. Include:\n"
-            "  - Suburb/city and state\n"
-            "  - Core services (tax compliance, SMSF, audit, bookkeeping, BAS, etc.)\n"
-            "  - Accounting software they use (Xero, MYOB, QuickBooks, Sage)\n"
-            "  - Team size if stated\n"
-            "  - Client types or industry niches they serve\n"
-            "  - Professional body memberships (CAANZ, CPA, NTAA, IPA)\n"
-            "Example: 'Dee Why NSW | Tax, SMSF, audit, BAS | Xero, MYOB | ~8 staff | "
-            "Medical & trades clients | CAANZ, CPA members'\n\n"
-
-            "DECISION MAKERS: Extract senior staff — Partner, Principal, Director, "
-            "Managing Director, Senior Partner, Tax Partner, Audit Partner, Founder, "
-            "Owner, Manager. Be permissive with senior titles. Exclude receptionists, "
-            "admin staff, juniors, and graduates. "
-            f"Extract up to {self.settings.max_decision_makers} decision makers.\n\n"
-
-            "DECISION_MAKER_SUMMARY: For each person, write factual bullet points a "
-            "rep can reference in conversation. Include:\n"
-            "  - Qualifications (CA, CPA, NTAA fellow, BBus, etc.)\n"
-            "  - Years at firm or in industry, if stated\n"
-            "  - Specific responsibilities (e.g. 'heads SMSF division')\n"
-            "  - Prior firms (e.g. 'ex-PwC')\n"
-            "  - Industry specializations\n"
-            "Do NOT write flowing prose. Use short factual fragments separated by '. '.\n"
-            "Example: 'CA, CPA. 12 yrs at firm. Heads tax compliance. Ex-Deloitte. "
-            "Specialises in medical practices.'\n\n"
-
-            "ASSOCIATED_INFO: List factual supplementary details: professional body "
-            "memberships, tax agent registration number, software stack (including "
-            "add-on tools like Dext, Hubdoc, WorkflowMax), industry niches.\n\n"
-
-            "PHONE NORMALIZATION: Australian numbers must be +61XXXXXXXXX format. "
-            "New Zealand +64, UK +44.\n\n"
-
-            "OUT OF SCOPE: Set out_of_scope to true if the business is NOT an "
-            "accounting firm (e.g. completely unrelated business)."
-        )
+        defaults = get_default_crawl_prompts(self.settings)
+        return self._prompt_overrides.get("extraction_system") or defaults["extraction_system"]
 
     # ------------------------------------------------------------------
     # Phase 2b: Web search fallback for decision maker discovery

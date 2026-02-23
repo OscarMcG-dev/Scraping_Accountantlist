@@ -25,6 +25,9 @@ from pydantic import BaseModel
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse
 
+from config import Settings
+from website_enricher import get_default_crawl_prompts
+
 # Use volume path on Railway if set; otherwise local data/
 DATA_DIR = Path(os.environ.get("DATA_DIR", "data"))
 INPUT_DIR = DATA_DIR / "input"
@@ -313,7 +316,44 @@ def get_config():
         "input_dir": str(INPUT_DIR),
         "output_dir": str(OUTPUT_DIR),
         "state_dir": str(STATE_DIR),
+        "max_crawl_subpages": Settings().max_crawl_subpages,
     }
+
+
+PROMPTS_FILE = STATE_DIR / "prompts.json"
+
+
+@app.get("/prompts")
+def get_prompts():
+    """Return crawl prompts (link triage + extraction). From saved file or defaults."""
+    ensure_dirs()
+    if PROMPTS_FILE.is_file():
+        try:
+            return json.loads(PROMPTS_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return get_default_crawl_prompts(Settings())
+
+
+class PromptsUpdate(BaseModel):
+    link_triage_system: str | None = None
+    link_triage_user: str | None = None
+    extraction_system: str | None = None
+
+
+@app.put("/prompts")
+def update_prompts(body: PromptsUpdate):
+    """Update one or more crawl prompts. Saved to state/prompts.json for next run."""
+    ensure_dirs()
+    current = get_prompts()
+    if body.link_triage_system is not None:
+        current["link_triage_system"] = body.link_triage_system
+    if body.link_triage_user is not None:
+        current["link_triage_user"] = body.link_triage_user
+    if body.extraction_system is not None:
+        current["extraction_system"] = body.extraction_system
+    PROMPTS_FILE.write_text(json.dumps(current, indent=2), encoding="utf-8")
+    return {"message": "Prompts saved.", "path": str(PROMPTS_FILE)}
 
 
 def _file_list_with_mtime(dir_path: Path) -> list[dict]:
