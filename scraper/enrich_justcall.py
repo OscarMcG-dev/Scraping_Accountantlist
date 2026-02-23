@@ -10,6 +10,7 @@ Usage:
     python enrich_justcall.py --input "path/to/attio_export.csv"
     python enrich_justcall.py --input "path/to/attio_export.csv" --limit 5 --dry-run
     python enrich_justcall.py --input "path/to/attio_export.csv" --output "data/output/enriched.csv"
+    python enrich_justcall.py --input "path/to/campaign_contacts.csv" --format campaign
     python enrich_justcall.py --input "path/to/attio_export.csv" --concurrency 4
 """
 import argparse
@@ -53,6 +54,47 @@ SENIORITY_ORDER = [
     "principal", "founder", "owner",
     "chartered accountant", "chief executive",
 ]
+
+# Campaign/JustCall CSV column names -> canonical Attio-style names used internally.
+# Ensures we never mix up fields (e.g. Phone vs Email) when reading different exports.
+CAMPAIGN_TO_ATTIO_COLUMNS = {
+    "Person Record ID": "Record ID",
+    "Name": "Record",
+    "Occupation": "Job title",
+    "Email": "Email addresses",
+    "Phone": "Phone numbers",
+    "Website": "Company > Domains",
+}
+
+
+def _is_campaign_format(df: pd.DataFrame) -> bool:
+    """True if CSV has Campaign/JustCall columns (Person Record ID, Name, Website)."""
+    return (
+        "Person Record ID" in df.columns
+        and "Name" in df.columns
+        and "Website" in df.columns
+    )
+
+
+def _normalize_csv_columns(df: pd.DataFrame, csv_format: Optional[str]) -> pd.DataFrame:
+    """
+    Normalize input columns to the canonical names expected by the rest of the pipeline.
+    - attio: no change (already uses Record ID, Record, Job title, etc.).
+    - campaign: rename Campaign/JustCall columns to Attio names; only renames columns
+      that exist so we never overwrite or mix data.
+    """
+    if csv_format == "attio":
+        return df
+    if csv_format == "campaign" or (csv_format is None and _is_campaign_format(df)):
+        rename = {
+            old: new
+            for old, new in CAMPAIGN_TO_ATTIO_COLUMNS.items()
+            if old in df.columns
+        }
+        if rename:
+            df = df.rename(columns=rename)
+            logger.info(f"Normalized Campaign columns to Attio names: {list(rename.keys())} -> {list(rename.values())}")
+    return df
 
 
 def needs_enrichment(record_name: str, job_title: str) -> bool:
@@ -255,13 +297,16 @@ async def run_enrichment(
     delay: float = 1.0,
     concurrency: int = 4,
     force_recrawl: Optional[str] = None,
+    csv_format: Optional[str] = None,
 ):
     """Main enrichment pipeline with concurrent crawling."""
     settings = Settings()
 
-    logger.info(f"Loading Attio export from: {input_path}")
+    logger.info(f"Loading CSV from: {input_path}")
     df = pd.read_csv(input_path)
     logger.info(f"Loaded {len(df)} records")
+
+    df = _normalize_csv_columns(df, csv_format)
 
     df["_needs_enrichment"] = df.apply(
         lambda r: needs_enrichment(str(r.get("Record", "")), str(r.get("Job title", ""))),
@@ -418,7 +463,12 @@ def main():
     )
     parser.add_argument(
         "--input", required=True,
-        help="Path to the Attio People export CSV"
+        help="Path to the Attio People export CSV or Campaign/JustCall contacts CSV"
+    )
+    parser.add_argument(
+        "--format", dest="csv_format", choices=("attio", "campaign"), default=None,
+        help="Input CSV format: 'attio' (Record ID, Record, Job title, Company > Domains, ...) "
+             "or 'campaign' (Person Record ID, Name, Occupation, Website, ...). Default: auto-detect."
     )
     parser.add_argument(
         "--output", default="data/output/attio_people_update.csv",
@@ -463,6 +513,7 @@ def main():
         delay=args.delay,
         concurrency=args.concurrency,
         force_recrawl=args.force_recrawl,
+        csv_format=args.csv_format,
     ))
 
 

@@ -122,7 +122,7 @@ def root():
         "dashboard": "GET /dashboard — shareable web UI (upload, run, logs, download)",
         "endpoints": {
             "upload": "POST /upload — upload CSV/TXT",
-            "run": "POST /run — body: {\"script\", \"input_file\"?, \"output_format\"?, \"concurrency\"?} (script: enrich_justcall | enrich_urls | main)",
+            "run": "POST /run — body: {\"script\", \"input_file\"?, \"output_format\"?, \"csv_format\"?, \"concurrency\"?} (script: enrich_justcall | enrich_urls | main; csv_format for enrich_justcall: attio | campaign)",
             "run_status": "GET /run/status — running?, log tail, uptime, progress, last_run",
             "run_cancel": "POST /run/cancel — cancel current run",
             "config": "GET /config — data_dir, timeout_seconds (read-only)",
@@ -169,6 +169,7 @@ class RunRequest(BaseModel):
     script: str  # "enrich_justcall" | "main" | "enrich_urls"
     input_file: str | None = None  # required for enrich_justcall and enrich_urls
     output_format: str | None = None  # for enrich_urls: "default" | "justcall"
+    csv_format: str | None = None  # for enrich_justcall: "attio" | "campaign" (omit = auto-detect)
     concurrency: int | None = None  # optional; e.g. 4 for enrich_justcall / enrich_urls / main
     force_recrawl: str | None = None  # "all" | "no-dm" | None
 
@@ -184,10 +185,13 @@ async def run(body: RunRequest):
     script = body.script
     input_file = body.input_file
     output_format = body.output_format
+    csv_format = body.csv_format
     concurrency = body.concurrency
     force_recrawl = body.force_recrawl
     if force_recrawl and force_recrawl not in ("all", "no-dm"):
         raise HTTPException(status_code=400, detail="force_recrawl must be 'all', 'no-dm', or null")
+    if csv_format is not None and csv_format not in ("attio", "campaign"):
+        raise HTTPException(status_code=400, detail="csv_format must be 'attio', 'campaign', or null")
     ensure_dirs()
     if script not in ("enrich_justcall", "main", "enrich_urls"):
         raise HTTPException(
@@ -216,6 +220,8 @@ async def run(body: RunRequest):
             "--output", str(output_path),
             "--checkpoint", str(checkpoint_path),
         ]
+        if csv_format in ("attio", "campaign"):
+            cmd.extend(["--format", csv_format])
         if concurrency is not None:
             cmd.extend(["--concurrency", str(concurrency)])
         if force_recrawl:

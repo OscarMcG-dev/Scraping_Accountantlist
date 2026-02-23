@@ -68,6 +68,14 @@
         <label for="inputFile">Input file</label>
         <select id="inputFile"><option value="">— select after upload —</option></select>
       </div>
+      <div id="justcallFormatWrap" style="display: none;">
+        <label for="justcallFormat">Input CSV format</label>
+        <select id="justcallFormat">
+          <option value="">Auto (detect)</option>
+          <option value="attio">Attio (Record ID, Record, Job title, Company &gt; Domains…)</option>
+          <option value="campaign">Campaign / JustCall (Person Record ID, Name, Occupation, Website…)</option>
+        </select>
+      </div>
       <div id="urlOutputFormatWrap" style="display: none;">
         <label for="urlOutputFormat">Output format</label>
         <select id="urlOutputFormat">
@@ -317,7 +325,11 @@
       document.getElementById('runBtn').disabled = true;
       const forceRecrawl = document.getElementById('forceRecrawl').value || null;
       const body = { script, concurrency, force_recrawl: forceRecrawl };
-      if (script === 'enrich_justcall') body.input_file = inputFile;
+      if (script === 'enrich_justcall') {
+        body.input_file = inputFile;
+        const justcallFormat = document.getElementById('justcallFormat').value;
+        if (justcallFormat) body.csv_format = justcallFormat;
+      }
       if (script === 'enrich_urls') {
         body.input_file = inputFile;
         body.output_format = document.getElementById('urlOutputFormat').value;
@@ -396,6 +408,7 @@
     document.getElementById('script').onchange = () => {
       const script = document.getElementById('script').value;
       document.getElementById('inputFileWrap').style.display = (script === 'enrich_justcall' || script === 'enrich_urls') ? 'block' : 'none';
+      document.getElementById('justcallFormatWrap').style.display = script === 'enrich_justcall' ? 'block' : 'none';
       document.getElementById('urlOutputFormatWrap').style.display = script === 'enrich_urls' ? 'block' : 'none';
     };
     document.getElementById('script').dispatchEvent(new Event('change'));
