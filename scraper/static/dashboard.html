@@ -84,6 +84,12 @@
     <div id="runMsg" class="msg"></div>
     <h2 style="margin-top: 1rem;">Run status</h2>
     <div id="statusBadge"></div>
+    <div id="progressBar" style="display: none; margin-top: 0.5rem;">
+      <div style="background: var(--border); border-radius: 4px; height: 8px; overflow: hidden;">
+        <div id="progressFill" style="background: var(--accent); height: 100%; width: 0%; transition: width 0.3s;"></div>
+      </div>
+      <div id="progressText" style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    </div>
     <div id="progressInfo" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
     <div id="lastRunInfo" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
     <div style="margin-top: 0.5rem;">
@@ -153,7 +159,7 @@
       try {
         const { files } = await json('/input');
         const names = files.map(fileDisplayName).filter(Boolean);
-        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const m = fileMtime(f); return `<li><span>${n}${m}</span><a href="${api('/input/' + encodeURIComponent(n))}" download>Download</a></li>`; }).join('') : '<li>No files</li>';
+        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const sz = (f && f.size_human) ? ' · ' + f.size_human : ''; const m = fileMtime(f); return `<li><span>${n}${sz}${m}</span><a href="${api('/input/' + encodeURIComponent(n))}" download>Download</a></li>`; }).join('') : '<li>No files</li>';
         const opts = names.map(n => `<option value="${n}">${n}</option>`).join('');
         select.innerHTML = '<option value="">— select —</option>' + opts;
       } catch (e) {
@@ -166,17 +172,29 @@
       try {
         const { files } = await json('/output');
         const names = files.map(fileDisplayName).filter(Boolean);
-        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const m = fileMtime(f); return `<li><span>${n}${m}</span><a href="${api('/output/' + encodeURIComponent(n))}" download>Download</a></li>`; }).join('') : '<li>No files</li>';
+        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const sz = (f && f.size_human) ? ' · ' + f.size_human : ''; const m = fileMtime(f); return `<li><span>${n}${sz}${m}</span><span><a href="${api('/output/' + encodeURIComponent(n))}" download>Download</a> <a href="#" onclick="deleteFile('output','${n}');return false" style="color:var(--danger);margin-left:0.5rem">Delete</a></span></li>`; }).join('') : '<li>No files</li>';
       } catch (e) {
         list.innerHTML = '<li>Error loading list</li>';
       }
+    }
+
+    async function deleteFile(type, name) {
+      if (!confirm('Delete ' + name + '?')) return;
+      try {
+        const r = await fetch(api('/' + type + '/' + encodeURIComponent(name)), { method: 'DELETE' });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); alert(d.detail || 'Delete failed'); }
+        if (type === 'state') refreshStateList(); else if (type === 'output') refreshOutputList();
+      } catch (e) { alert(e.message); }
     }
 
     async function refreshStateList() {
       const list = document.getElementById('stateList');
       try {
         const { files } = await json('/state');
-        list.innerHTML = files.length ? files.map(f => `<li><span>${f}</span><a href="${api('/state/' + encodeURIComponent(f))}" download>Download</a></li>`).join('') : '<li>No files</li>';
+        list.innerHTML = files.length ? files.map(f => {
+          const n = fileDisplayName(f); const sz = (f && f.size_human) ? ' · ' + f.size_human : ''; const m = fileMtime(f);
+          return `<li><span>${n}${sz}${m}</span><span><a href="${api('/state/' + encodeURIComponent(n))}" download>Download</a> <a href="#" onclick="deleteFile('state','${n}');return false" style="color:var(--danger);margin-left:0.5rem">Delete</a></span></li>`;
+        }).join('') : '<li>No files</li>';
       } catch (e) {
         list.innerHTML = '<li>Error loading list</li>';
       }
@@ -188,21 +206,47 @@
         const s = await json('/run/status');
         const badge = document.getElementById('statusBadge');
         const cancelBtn = document.getElementById('cancelBtn');
+        const runBtn = document.getElementById('runBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
         if (s.running) {
           badge.innerHTML = '<span class="badge running">Running</span>';
           cancelBtn.style.display = 'inline-block';
+          runBtn.disabled = true;
           if (!statusInterval) statusInterval = setInterval(refreshStatus, 2000);
+          if (s.log_progress && s.log_progress.total > 0) {
+            progressBar.style.display = 'block';
+            progressFill.style.width = s.log_progress.percent + '%';
+            progressText.textContent = s.log_progress.current + '/' + s.log_progress.total + ' (' + s.log_progress.percent + '%) · ' + s.log_progress.rate_per_min.toFixed(1) + '/min · ETA ' + s.log_progress.eta_min + 'min';
+          } else {
+            progressBar.style.display = 'none';
+          }
         } else {
           cancelBtn.style.display = 'none';
+          runBtn.disabled = false;
+          progressBar.style.display = 'none';
           if (statusInterval) { clearInterval(statusInterval); statusInterval = null; }
           if (s.last_exit_code === 0) badge.innerHTML = '<span class="badge done">Last run: success</span>';
           else if (s.last_exit_code != null) badge.innerHTML = '<span class="badge failed">Last run: exit ' + s.last_exit_code + '</span>';
           else badge.innerHTML = '';
         }
         const progressEl = document.getElementById('progressInfo');
-        progressEl.textContent = (s.progress && s.progress.enriched_count != null) ? 'Progress: ' + s.progress.enriched_count + ' enriched (from checkpoint)' : '';
+        if (s.progress && s.progress.enriched_count != null) {
+          let txt = 'Checkpoint: ' + s.progress.enriched_count + ' domains processed';
+          if (s.progress.enrichments_with_data) txt += ', ' + s.progress.enrichments_with_data + ' with data';
+          progressEl.textContent = txt;
+        } else {
+          progressEl.textContent = '';
+        }
         const lastRunEl = document.getElementById('lastRunInfo');
-        lastRunEl.textContent = (s.last_run && s.last_run.finished_at) ? 'Last run finished: ' + s.last_run.finished_at + (s.last_run.exit_code != null ? ' (exit ' + s.last_run.exit_code + ')' : '') : '';
+        if (s.last_run && s.last_run.finished_at) {
+          let txt = 'Last run: ' + (s.last_run.script || '') + ' finished ' + s.last_run.finished_at;
+          if (s.last_run.exit_code != null) txt += ' (exit ' + s.last_run.exit_code + ')';
+          lastRunEl.textContent = txt;
+        } else {
+          lastRunEl.textContent = '';
+        }
         const logEl = document.getElementById('log');
         logEl.textContent = s.log_tail || '(no log yet)';
         logEl.scrollTop = logEl.scrollHeight;
@@ -273,11 +317,11 @@
         }
         setMsg('runMsg', data.output_file ? 'Output: ' + data.output_file : (data.message || 'Run started'));
         refreshStatus();
-        statusInterval = setInterval(refreshStatus, 2000);
+        if (!statusInterval) statusInterval = setInterval(refreshStatus, 2000);
       } catch (e) {
         setMsg('runMsg', e.message, true);
+        document.getElementById('runBtn').disabled = false;
       }
-      document.getElementById('runBtn').disabled = false;
     };
 
     async function loadPrompts() {

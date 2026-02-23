@@ -13,6 +13,7 @@ Set SCRAPER_RUN_TIMEOUT_SECONDS to change max run time (default 3600 = 1 hour).
 """
 import json
 import os
+import re
 import subprocess
 import threading
 import time
@@ -59,7 +60,7 @@ def ensure_dirs():
 
 
 def _progress_from_checkpoint() -> dict | None:
-    """Read checkpoint JSON(s) and return enriched/done counts if present."""
+    """Read checkpoint JSON(s) and return enriched/done counts with rate estimates."""
     for name in ("justcall_checkpoint.json", "url_enrichment_checkpoint.json", "checkpoint.json"):
         path = STATE_DIR / name
         if not path.is_file():
@@ -69,9 +70,40 @@ def _progress_from_checkpoint() -> dict | None:
             phase2 = data.get("phase2", {})
             enriched = phase2.get("enriched_urls", []) or list(phase2.get("enrichments", {}).keys())
             if enriched is not None:
-                return {"checkpoint_file": name, "enriched_count": len(enriched) if isinstance(enriched, list) else 0}
+                enriched_count = len(enriched) if isinstance(enriched, list) else 0
+                enrichments_with_data = len(phase2.get("enrichments", {}))
+                result = {
+                    "checkpoint_file": name,
+                    "enriched_count": enriched_count,
+                    "enrichments_with_data": enrichments_with_data,
+                }
+                return result
         except Exception:
             pass
+    return None
+
+
+def _parse_progress_from_log() -> dict | None:
+    """Parse the latest [N/M] progress line and rate/ETA from the run log."""
+    log_path = STATE_DIR / "run.log"
+    if not log_path.is_file():
+        return None
+    try:
+        content = log_path.read_text(encoding="utf-8", errors="replace")
+        lines = content.splitlines()
+        for line in reversed(lines):
+            if "/min, ETA" in line and "[" in line:
+                m = re.search(r"\[(\d+)/(\d+)\].*\[([0-9.]+)/min, ETA (\d+)min\]", line)
+                if m:
+                    return {
+                        "current": int(m.group(1)),
+                        "total": int(m.group(2)),
+                        "rate_per_min": float(m.group(3)),
+                        "eta_min": int(m.group(4)),
+                        "percent": round(int(m.group(1)) / int(m.group(2)) * 100, 1) if int(m.group(2)) else 0,
+                    }
+    except Exception:
+        pass
     return None
 
 
@@ -94,11 +126,13 @@ def root():
             "run_status": "GET /run/status — running?, log tail, uptime, progress, last_run",
             "run_cancel": "POST /run/cancel — cancel current run",
             "config": "GET /config — data_dir, timeout_seconds (read-only)",
-            "input_list": "GET /input — list uploaded files (with mtime)",
-            "output_list": "GET /output — list output files (with mtime)",
-            "state_list": "GET /state — list state/checkpoint files",
+            "input_list": "GET /input — list uploaded files (with mtime, size)",
+            "output_list": "GET /output — list output files (with mtime, size)",
             "output_download": "GET /output/{filename}",
+            "output_delete": "DELETE /output/{filename}",
+            "state_list": "GET /state — list state/checkpoint files (with mtime, size)",
             "state_download": "GET /state/{filename}",
+            "state_delete": "DELETE /state/{filename} — delete checkpoint to reset a run",
         },
         "timeout_seconds": RUN_TIMEOUT,
     }
@@ -237,8 +271,12 @@ async def run(body: RunRequest):
     def run_in_background():
         global _running, _last_exit_code, _current_proc
         proc = None
+        started_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         try:
             with open(log_path, "w") as logf:
+                logf.write(f"# Script: {script} | Started: {started_at}\n")
+                logf.write(f"# Command: {' '.join(cmd)}\n")
+                logf.flush()
                 proc = subprocess.Popen(
                     cmd,
                     stdout=logf,
@@ -247,34 +285,42 @@ async def run(body: RunRequest):
                     cwd=cwd,
                     env=env,
                 )
-            with _run_lock:
-                _current_proc = proc
-            try:
-                proc.wait(timeout=RUN_TIMEOUT)
-            except subprocess.TimeoutExpired:
-                proc.kill()
-                proc.wait()
-            finally:
                 with _run_lock:
-                    _last_exit_code = proc.returncode
-                    _running = False
-                    _current_proc = None
-                ensure_dirs()
+                    _current_proc = proc
                 try:
-                    LAST_RUN_FILE.write_text(
-                        json.dumps({
-                            "finished_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                            "exit_code": proc.returncode,
-                        }),
-                        encoding="utf-8",
-                    )
-                except Exception:
-                    pass
-        except Exception:
+                    proc.wait(timeout=RUN_TIMEOUT)
+                except subprocess.TimeoutExpired:
+                    logf.write(f"\n# TIMEOUT: Run exceeded {RUN_TIMEOUT}s limit, killing process.\n")
+                    logf.flush()
+                    proc.kill()
+                    proc.wait()
+            with _run_lock:
+                _last_exit_code = proc.returncode
+                _running = False
+                _current_proc = None
+            ensure_dirs()
+            try:
+                LAST_RUN_FILE.write_text(
+                    json.dumps({
+                        "script": script,
+                        "started_at": started_at,
+                        "finished_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                        "exit_code": proc.returncode,
+                    }),
+                    encoding="utf-8",
+                )
+            except Exception:
+                pass
+        except Exception as exc:
             with _run_lock:
                 _running = False
                 _last_exit_code = -1
                 _current_proc = None
+            try:
+                with open(log_path, "a") as logf:
+                    logf.write(f"\n# INTERNAL ERROR: {exc}\n")
+            except Exception:
+                pass
 
     thread = threading.Thread(target=run_in_background, daemon=True)
     thread.start()
@@ -318,13 +364,17 @@ def run_status():
             last_run = json.loads(LAST_RUN_FILE.read_text(encoding="utf-8"))
         except Exception:
             pass
+    progress = _progress_from_checkpoint()
+    log_progress = _parse_progress_from_log() if running else None
+
     return {
         "running": running,
         "last_exit_code": last_exit,
         "log_tail": log_tail,
         "timeout_seconds": RUN_TIMEOUT,
         "uptime_seconds": round(time.time() - _start_time, 1),
-        "progress": _progress_from_checkpoint(),
+        "progress": progress,
+        "log_progress": log_progress,
         "last_run": last_run,
     }
 
@@ -398,11 +448,21 @@ def _file_list_with_mtime(dir_path: Path) -> list[dict]:
     for f in dir_path.iterdir():
         if f.is_file():
             try:
-                mtime = f.stat().st_mtime
-                mtime_iso = datetime.fromtimestamp(mtime, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                st = f.stat()
+                mtime_iso = datetime.fromtimestamp(st.st_mtime, tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                size_bytes = st.st_size
             except Exception:
                 mtime_iso = None
-            files.append({"name": f.name, "mtime_iso": mtime_iso})
+                size_bytes = None
+            entry = {"name": f.name, "mtime_iso": mtime_iso, "size_bytes": size_bytes}
+            if size_bytes is not None:
+                if size_bytes < 1024:
+                    entry["size_human"] = f"{size_bytes} B"
+                elif size_bytes < 1024 * 1024:
+                    entry["size_human"] = f"{size_bytes / 1024:.1f} KB"
+                else:
+                    entry["size_human"] = f"{size_bytes / (1024 * 1024):.1f} MB"
+            files.append(entry)
     return sorted(files, key=lambda x: x["name"])
 
 
@@ -440,10 +500,9 @@ def download_input(filename: str):
 
 @app.get("/state")
 def list_state():
-    """List state/checkpoint files in DATA_DIR/state."""
+    """List state/checkpoint files in DATA_DIR/state with mtime and size."""
     ensure_dirs()
-    files = [f.name for f in STATE_DIR.iterdir() if f.is_file()]
-    return {"files": sorted(files)}
+    return {"files": _file_list_with_mtime(STATE_DIR)}
 
 
 @app.get("/state/{filename}")
@@ -453,3 +512,28 @@ def download_state(filename: str):
     if not path.is_file():
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(path, filename=filename)
+
+
+@app.delete("/state/{filename}")
+def delete_state(filename: str):
+    """Delete a state file (e.g. checkpoint JSON to reset a run). Blocked while a run is in progress."""
+    with _run_lock:
+        if _running:
+            raise HTTPException(status_code=409, detail="Cannot delete state files while a run is in progress.")
+    safe = Path(filename).name
+    path = STATE_DIR / safe
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+    path.unlink()
+    return {"message": f"Deleted {safe}"}
+
+
+@app.delete("/output/{filename}")
+def delete_output(filename: str):
+    """Delete an output file."""
+    safe = Path(filename).name
+    path = OUTPUT_DIR / safe
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+    path.unlink()
+    return {"message": f"Deleted {safe}"}

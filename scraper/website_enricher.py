@@ -162,13 +162,12 @@ class WebsiteEnricher:
             api_key=settings.openrouter_api_key,
             base_url=settings.openrouter_base_url,
         )
-        # extra_args reduce "Page crashed" / "Target crashed" in Docker/low-memory environments
         self.browser_config = BrowserConfig(
             headless=True,
-            viewport_width=1920,
-            viewport_height=1080,
+            viewport_width=1280,
+            viewport_height=720,
             extra_args=[
-                "--disable-dev-shm-usage",  # use /tmp instead of /dev/shm (helps in containers)
+                "--disable-dev-shm-usage",
                 "--no-sandbox",
                 "--disable-gpu",
                 "--disable-software-rasterizer",
@@ -178,6 +177,12 @@ class WebsiteEnricher:
                 "--disable-sync",
                 "--mute-audio",
                 "--no-first-run",
+                "--disable-translate",
+                "--disable-features=TranslateUI",
+                "--disable-ipc-flooding-protection",
+                "--disable-renderer-backgrounding",
+                "--disable-backgrounding-occluded-windows",
+                "--js-flags=--max-old-space-size=256",
             ],
         )
         self._enrichment_schema = get_enrichment_json_schema()
@@ -307,8 +312,12 @@ class WebsiteEnricher:
 
     def _is_browser_closed_error(self, err: Exception) -> bool:
         """True if the exception indicates the pooled browser/context is dead (do not reuse)."""
-        msg = (str(err) or "").lower()
-        return any(m.lower() in msg for m in self._BROWSER_CLOSED_MARKERS)
+        return self._is_browser_closed_error_str(str(err))
+
+    def _is_browser_closed_error_str(self, msg: str) -> bool:
+        """True if the error message indicates the browser/context is dead."""
+        msg_lower = (msg or "").lower()
+        return any(m.lower() in msg_lower for m in self._BROWSER_CLOSED_MARKERS)
 
     def _classify_error(self, err_str: str) -> str:
         """Classify a crawl error into a category for retry/fallback logic."""
@@ -346,10 +355,14 @@ class WebsiteEnricher:
             else:
                 async with AsyncWebCrawler(config=self.browser_config) as crawler:
                     return await self._do_crawl(crawler, url, max_pages, firm_name)
+        except self._BrowserDeadError as e:
+            crawler_dead = True
+            logger.warning(f"Browser/context died during crawl of {url}, will replace in pool")
+            return None, "other"
         except Exception as e:
             crawler_dead = self._is_browser_closed_error(e)
             if crawler_dead:
-                logger.warning(f"Pooled browser/context closed for {url}, replacing crawler in pool")
+                logger.warning(f"Browser/context died during crawl of {url}, will replace in pool")
             err_type = self._classify_error(str(e))
             if err_type == "dns":
                 logger.warning(f"DNS resolution failed for {url}")
@@ -359,21 +372,58 @@ class WebsiteEnricher:
         finally:
             if pooled_crawler is not None and self._pool_queue is not None:
                 if crawler_dead:
-                    try:
-                        await pooled_crawler.__aexit__(None, None, None)
-                    except Exception:
-                        pass
-                    try:
-                        if pooled_crawler in self._crawler_pool:
-                            self._crawler_pool.remove(pooled_crawler)
-                        new_crawler = AsyncWebCrawler(config=self.browser_config)
-                        await new_crawler.__aenter__()
-                        self._crawler_pool.append(new_crawler)
-                        self._pool_queue.put_nowait(new_crawler)
-                    except Exception as ex:
-                        logger.warning(f"Could not replace dead crawler in pool: {ex}")
+                    await self._replace_dead_crawler(pooled_crawler)
                 else:
                     self._pool_queue.put_nowait(pooled_crawler)
+
+    async def _replace_dead_crawler(self, dead_crawler: Any) -> None:
+        """Shut down a dead crawler and spin up a replacement in the pool."""
+        try:
+            await dead_crawler.__aexit__(None, None, None)
+        except Exception:
+            pass
+        if dead_crawler in self._crawler_pool:
+            self._crawler_pool.remove(dead_crawler)
+        try:
+            new_crawler = AsyncWebCrawler(config=self.browser_config)
+            await new_crawler.__aenter__()
+            self._crawler_pool.append(new_crawler)
+            self._pool_queue.put_nowait(new_crawler)
+            logger.info("Replaced dead browser crawler in pool — pool size %d", len(self._crawler_pool))
+        except Exception as ex:
+            logger.error(f"Could not replace dead crawler: {ex}. Pool size is now {len(self._crawler_pool)}.")
+            if not self._crawler_pool:
+                logger.warning("Pool is empty — attempting full pool restart")
+                await self._restart_pool()
+
+    async def _restart_pool(self) -> None:
+        """Tear down all crawlers and recreate the pool from scratch."""
+        target_size = max(len(self._crawler_pool), 1)
+        for c in list(self._crawler_pool):
+            try:
+                await c.__aexit__(None, None, None)
+            except Exception:
+                pass
+        self._crawler_pool.clear()
+        while not self._pool_queue.empty():
+            try:
+                self._pool_queue.get_nowait()
+            except asyncio.QueueEmpty:
+                break
+        created = 0
+        for _ in range(target_size):
+            try:
+                crawler = AsyncWebCrawler(config=self.browser_config)
+                await crawler.__aenter__()
+                self._crawler_pool.append(crawler)
+                self._pool_queue.put_nowait(crawler)
+                created += 1
+            except Exception as ex:
+                logger.error(f"Failed to create crawler during pool restart: {ex}")
+        logger.info(f"Pool restart complete: {created}/{target_size} crawlers created")
+
+    class _BrowserDeadError(Exception):
+        """Raised inside _do_crawl when the underlying browser/context has died."""
 
     async def _do_crawl(
         self, crawler: Any, url: str, max_pages: int, firm_name: str,
@@ -392,10 +442,13 @@ class WebsiteEnricher:
             )
         except asyncio.TimeoutError:
             logger.warning(f"Hard timeout ({hard_timeout:.0f}s) on {url}")
+            await asyncio.sleep(0)  # let Playwright internals settle
             return None, "other"
 
         if not main.success:
             err_text = str(getattr(main, "error_message", ""))
+            if self._is_browser_closed_error_str(err_text):
+                raise self._BrowserDeadError(err_text)
             err_type = self._classify_error(err_text)
             logger.warning(f"Failed to crawl {url} ({err_type})")
             return None, err_type
@@ -408,7 +461,6 @@ class WebsiteEnricher:
             logger.debug(f"Link extraction failed for {url}: {e}")
             internal_links = []
 
-        # Crawl up to max_sub sub-pages (we don't pad: list length is from LLM/keyword/fallback).
         max_sub = max_pages - 1
         try:
             if self.settings.llm_link_triage and internal_links and firm_name:
@@ -428,7 +480,6 @@ class WebsiteEnricher:
                         internal_links, url, max_n=max_sub,
                     )
 
-            # Ensure at least one contact page is crawled when available.
             contact_urls = self._get_contact_urls(internal_links, url)
             if contact_urls and not any(self._is_contact_url(u) for u in priority_urls):
                 priority_urls = [contact_urls[0]] + [u for u in priority_urls if u != contact_urls[0]]
@@ -451,9 +502,14 @@ class WebsiteEnricher:
                 except asyncio.TimeoutError:
                     logger.debug(f"Hard timeout on sub-page {sub_url}")
                 except Exception as e:
+                    if self._is_browser_closed_error(e):
+                        raise self._BrowserDeadError(str(e)) from e
                     logger.debug(f"Sub-page crawl failed {sub_url}: {e}")
+        except self._BrowserDeadError:
+            raise
         except Exception as e:
-            # Triage or sub-page loop failed: keep main page only, don't fail the crawl.
+            if self._is_browser_closed_error(e):
+                raise self._BrowserDeadError(str(e)) from e
             logger.warning(f"Sub-page crawl phase failed for {url}, keeping main page only: {e}")
 
         return pages, ""
