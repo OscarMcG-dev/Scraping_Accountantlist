@@ -1275,6 +1275,16 @@ class WebsiteEnricher:
 # Upstream data quality pre-filter
 # ------------------------------------------------------------------
 
+def _dns_resolves(host: str) -> bool:
+    """Resolve host via getaddrinfo (used in thread; no timeout here)."""
+    import socket
+    try:
+        socket.getaddrinfo(host, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
+        return True
+    except (socket.gaierror, OSError):
+        return False
+
+
 def prefilter_domains(
     domains: List[str],
     *,
@@ -1283,14 +1293,21 @@ def prefilter_domains(
     """Quick quality filter: check each domain has valid DNS and isn't obviously junk.
 
     Returns (valid, skipped) where skipped is a list of (domain, reason) tuples.
-    Uses socket-level DNS resolution (no HTTP) so it's very fast.
+    Uses socket-level DNS resolution (no HTTP). Each lookup runs in a thread with
+    timeout_secs so slow/unresponsive DNS does not hang; logs progress every 100 domains.
     """
-    import socket
+    import logging
+    import threading
 
+    logger = logging.getLogger(__name__)
     valid: List[str] = []
     skipped: List[tuple] = []
+    total = len(domains)
 
-    for domain in domains:
+    for i, domain in enumerate(domains):
+        if total > 50 and (i + 1) % 100 == 0:
+            logger.info(f"Pre-filter DNS: {i + 1}/{total} domains checked…")
+
         clean = domain.strip().lower()
         if not clean or clean.startswith("#"):
             continue
@@ -1299,19 +1316,24 @@ def prefilter_domains(
         host = clean
         for prefix in ("https://", "http://"):
             if host.startswith(prefix):
-                host = host[len(prefix):]
+                host = host[len(prefix) :]
         host = host.split("/")[0].split(":")[0]
 
         if not host or "." not in host:
             skipped.append((clean, "invalid domain format"))
             continue
 
-        try:
-            socket.getaddrinfo(host, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
-        except socket.gaierror:
+        result: List[bool] = []
+        thread = threading.Thread(target=lambda: result.append(_dns_resolves(host)))
+        thread.daemon = True
+        thread.start()
+        thread.join(timeout=timeout_secs)
+        if thread.is_alive():
+            skipped.append((clean, "DNS timeout"))
+            continue
+        if not result or not result[0]:
             skipped.append((clean, "DNS does not resolve"))
             continue
-
         valid.append(clean)
 
     return valid, skipped

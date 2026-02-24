@@ -95,6 +95,13 @@
           <option value="all">Re-crawl everything</option>
         </select>
       </div>
+      <div>
+        <label for="webSearchEnabled">Web search plugin</label>
+        <select id="webSearchEnabled">
+          <option value="1">On (when no DMs from crawl)</option>
+          <option value="0">Off</option>
+        </select>
+      </div>
       <button type="button" id="runBtn">Start run</button>
     </div>
     <div id="runMsg" class="msg"></div>
@@ -324,7 +331,8 @@
       setMsg('runMsg', 'Starting…');
       document.getElementById('runBtn').disabled = true;
       const forceRecrawl = document.getElementById('forceRecrawl').value || null;
-      const body = { script, concurrency, force_recrawl: forceRecrawl };
+      const webSearchEnabled = document.getElementById('webSearchEnabled').value;
+      const body = { script, concurrency, force_recrawl: forceRecrawl, web_search_enabled: webSearchEnabled === '1' };
       if (script === 'enrich_justcall') {
         body.input_file = inputFile;
         const justcallFormat = document.getElementById('justcallFormat').value;

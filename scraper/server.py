@@ -172,6 +172,7 @@ class RunRequest(BaseModel):
     csv_format: str | None = None  # for enrich_justcall: "attio" | "campaign" (omit = auto-detect)
     concurrency: int | None = None  # optional; e.g. 4 for enrich_justcall / enrich_urls / main
     force_recrawl: str | None = None  # "all" | "no-dm" | None
+    web_search_enabled: bool | None = None  # if set, overrides env for this run (Phase 2b fallback)
 
 
 @app.post("/run")
@@ -273,6 +274,8 @@ async def run(body: RunRequest):
     if concurrency is not None:
         env["MAX_CONCURRENT_CRAWLS"] = str(concurrency)
         env["DIRECTORY_MAX_CONCURRENT"] = str(concurrency)
+    if body.web_search_enabled is not None:
+        env["WEB_SEARCH_ENABLED"] = "true" if body.web_search_enabled else "false"
 
     global _running, _last_exit_code
     cwd = Path(__file__).resolve().parent
