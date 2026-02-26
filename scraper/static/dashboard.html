@@ -36,7 +36,8 @@
 <body>
   <h1>Scraper Dashboard</h1>
   <p style="color: var(--muted); margin: 0 0 0.5rem;">Share this link to upload files, start runs, watch logs, and download outputs.</p>
-  <p id="uptimeConfig" style="color: var(--muted); font-size: 0.875rem; margin: 0 0 1rem;"></p>
+  <p id="uptimeConfig" style="color: var(--muted); font-size: 0.875rem; margin: 0 0 0.25rem;"></p>
+  <p id="configInfo" style="color: var(--muted); font-size: 0.875rem; margin: 0 0 1rem;"></p>
 
   <div class="card">
     <h2>Upload input file</h2>
@@ -356,6 +357,17 @@
     }
 
     let statusInterval = null;
+    async function refreshConfig() {
+      try {
+        const c = await json('/config');
+        const sec = c.timeout_seconds;
+        const hours = sec >= 3600 ? (sec / 3600) + 'h' : (sec / 60) + 'm';
+        document.getElementById('configInfo').textContent = 'Run timeout: ' + hours + ' (' + sec + 's)' + (c.data_dir ? ' · Data dir: ' + c.data_dir : '');
+      } catch (e) {
+        document.getElementById('configInfo').textContent = '';
+      }
+    }
+
     async function refreshStatus() {
       try {
         const s = await json('/run/status');
@@ -743,6 +755,7 @@
     };
     document.getElementById('script').dispatchEvent(new Event('change'));
 
+    refreshConfig();
     refreshInputList();
     refreshOutputList();
     refreshStateList();

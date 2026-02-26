@@ -334,7 +334,7 @@ The deploy runs a **small API server** (`server.py`) so you can feed input and p
      curl -o result.csv "https://your-app.up.railway.app/output/attio_people_enriched_abc123.csv"
      ```
 
-Runs can take a long time (enrichment/crawling); the request will wait until the script finishes or times out. **Max run time** is set by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 3600 = 1 hour). Increase it in Railway Variables if you need longer runs (e.g. `SCRAPER_RUN_TIMEOUT_SECONDS=7200` for 2 hours).
+Runs can take a long time (enrichment/crawling); the request will wait until the script finishes or times out. **Max run time** is set by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 21600 = 6 hours). Change it in Railway Variables if you need different limits (e.g. `SCRAPER_RUN_TIMEOUT_SECONDS=7200` for 2 hours).
 
 **Observability:** While a run is in progress (or after it fails), call **GET /run/status** to see whether a run is active and the **tail of live logs** (stdout/stderr from the scraper). That way you can confirm it isn’t silently failing. Example: `curl https://your-app.up.railway.app/run/status`. Only one run can be in progress at a time; starting another returns 409 until the current one finishes.
 
@@ -364,7 +364,7 @@ Runs can take a long time (enrichment/crawling); the request will wait until the
    | `LLM_LINK_TRIAGE` | No | `true` / `false` |
    | `OUTPUT_DIR` | No | e.g. `data/output` |
    | `DATA_DIR` | For API + volume | e.g. `/data` when using a mounted volume |
-   | `SCRAPER_RUN_TIMEOUT_SECONDS` | No | Max run time in seconds (default `3600` = 1 hour) |
+   | `SCRAPER_RUN_TIMEOUT_SECONDS` | No | Max run time in seconds (default `21600` = 6 hours) |
 
 3. Redeploy so the new variables are picked up.
 

@@ -9,7 +9,7 @@ Minimal API to feed input files and pull output from the scraper on Railway.
 - GET /output, GET /input: list files with mtime
 
 Set DATA_DIR in env (e.g. /data) when using a Railway volume; default is data/ for local.
-Set SCRAPER_RUN_TIMEOUT_SECONDS to change max run time (default 3600 = 1 hour).
+Set SCRAPER_RUN_TIMEOUT_SECONDS to change max run time (default 21600 = 6 hours).
 """
 import json
 import os
@@ -76,8 +76,8 @@ INPUT_DIR = DATA_DIR / "input"
 OUTPUT_DIR = DATA_DIR / "output"
 STATE_DIR = DATA_DIR / "state"
 
-# Max time a single run is allowed (seconds). Env: SCRAPER_RUN_TIMEOUT_SECONDS (default 1 hour).
-RUN_TIMEOUT = int(os.environ.get("SCRAPER_RUN_TIMEOUT_SECONDS", "3600"))
+# Max time a single run is allowed (seconds). Env: SCRAPER_RUN_TIMEOUT_SECONDS (default 6 hours).
+RUN_TIMEOUT = int(os.environ.get("SCRAPER_RUN_TIMEOUT_SECONDS", "21600"))
 
 # Observability: live log file and running state (shared across requests)
 RUN_LOG_FILE = STATE_DIR / "run.log"

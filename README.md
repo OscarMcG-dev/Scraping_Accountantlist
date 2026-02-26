@@ -52,7 +52,7 @@ All three share the same **enrichment engine** (`website_enricher.py`): browser-
 | `MAX_CRAWL_SUBPAGES` | No | `10` | Max sub-pages per site (LLM picks up to this) |
 | `OUTPUT_DIR` | No | `data/output` | Where CSVs are written (local) |
 | `DATA_DIR` | Railway + volume | — | e.g. `/data`; then input/output/state live under it |
-| `SCRAPER_RUN_TIMEOUT_SECONDS` | No | `3600` | Max run time for API-triggered jobs (Railway) |
+| `SCRAPER_RUN_TIMEOUT_SECONDS` | No | `21600` | Max run time for API-triggered jobs (6 hours) |
 
 Full list and ranges are in `scraper/config.py`.
 
@@ -98,7 +98,7 @@ The app is deployed as a **single service** that runs the **API server** (`serve
 - **GET /checkpoint/stats** — Counts: enriched, with_dms, no_dms, out_of_scope, no_data.
 - **GET /prompts**, **PUT /prompts** — Read/update crawl prompts (link triage + extraction) stored in state; used on next run.
 
-Only one run can be active at a time; starting another returns **409** until the current one finishes or is cancelled. Runs are limited by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 1 hour).
+Only one run can be active at a time; starting another returns **409** until the current one finishes or is cancelled. Runs are limited by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 6 hours).
 
 ---
 
@@ -185,7 +185,7 @@ If you’re coming back after an older version, here’s what to expect:
 - **Prompts:** Link-triage and extraction prompts can be **read/updated via GET/PUT /prompts**; they’re stored in state and used on the next run (no code change needed for prompt tweaks).
 - **Checkpoint stats:** **GET /checkpoint/stats** gives counts (enriched, with_dms, no_dms, out_of_scope, no_data) for observability.
 - **State endpoints:** **GET /state** and **GET /state/{filename}** (and **DELETE /state/{filename}**) for checkpoint and run.log; **DELETE** is blocked while a run is in progress.
-- **Run timeout:** Long runs are capped by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 3600). Increase in Railway Variables if needed.
+- **Run timeout:** Long runs are capped by **`SCRAPER_RUN_TIMEOUT_SECONDS`** (default 21600 = 6 hours). Change in Railway Variables if needed.
 - **Dockerfile at repo root:** Railway can use the root **Dockerfile** to build the scraper (recommended) so Railpack detection issues are avoided.
 - **Team/about prioritization:** Engine guarantees at least one “team” page when present and strengthens the link-triage prompt (see `scraper/docs/TEAM_ABOUT_PRIORITIZATION_PLAN.md`).
 
