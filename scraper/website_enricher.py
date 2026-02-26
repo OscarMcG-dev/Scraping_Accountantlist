@@ -468,12 +468,22 @@ class WebsiteEnricher:
 
     @staticmethod
     def _is_parked_or_dead(content: str) -> Optional[str]:
-        """Return a reason string if the homepage looks like a parked/dead site, else None."""
-        if len(content.strip()) < 300:
-            return "Homepage content too short (<300 chars); likely dead or empty site"
-        content_lower = content[:3000].lower()
+        """Return a reason string if the homepage looks like a parked/dead site, else None.
+
+        Only skips truly empty pages (<50 chars). Short-but-real pages are
+        kept — many small firm sites have minimal homepages that still contain
+        useful contact info or links to team/about pages.
+        """
+        stripped = content.strip()
+        if len(stripped) < 50:
+            return "Homepage content too short (<50 chars); likely dead or empty site"
+        content_lower = stripped[:3000].lower()
         for marker in PARKED_SITE_MARKERS:
             if marker in content_lower:
+                # Don't flag as parked if we also see DM signals (real site that
+                # happens to mention a marker word like "coming soon" in passing).
+                if DM_SIGNAL_RE.search(stripped[:4000]):
+                    continue
                 return f"Parked/placeholder site (matched: '{marker}')"
         return None
 

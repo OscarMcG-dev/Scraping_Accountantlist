@@ -41,7 +41,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-PLACEHOLDER_PREFIXES = ("team member at",)
+# Names starting with these are placeholders; record needs enrichment to get real DM.
+PLACEHOLDER_PREFIXES = ("team member at", "contact at")
 GENERIC_TITLES = {"office contact", "meet the team", ""}
 JUNK_NAMES = {
     "customercare", "reception", "admin", "info", "enquiries", "accounts",
@@ -98,7 +99,11 @@ def _normalize_csv_columns(df: pd.DataFrame, csv_format: Optional[str]) -> pd.Da
 
 
 def needs_enrichment(record_name: str, job_title: str) -> bool:
-    """Return True if this record has poor data that enrichment could fix."""
+    """Return True if this record has poor data that enrichment could fix.
+
+    Treated as needing enrichment: placeholder names (e.g. 'Contact at [Company]',
+    'team member at ...'), junk names, single-word names, or generic titles.
+    """
     name_lower = (record_name or "").strip().lower()
     title_lower = (job_title or "").strip().lower()
 
@@ -404,7 +409,11 @@ async def run_enrichment(
                         dm_count = len(enrichment.decision_makers)
                         logger.info(f"  -> {dm_count} decision maker(s) found")
                     else:
-                        checkpoint.mark_enriched(domain)
+                        # Save minimal result so rows get no_dm_found (not no_enrichment)
+                        # and --force-recrawl no-dm can re-crawl these later.
+                        empty = EnrichmentData(decision_makers=[])
+                        enrichments[domain] = empty
+                        checkpoint.save_enrichment(domain, empty.model_dump())
                         logger.info("  -> No data extracted")
                 except Exception as e:
                     logger.error(f"  -> Failed: {e}")

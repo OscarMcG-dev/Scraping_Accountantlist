@@ -48,9 +48,38 @@
       <button type="button" id="uploadBtn">Upload</button>
     </div>
     <div id="uploadMsg" class="msg"></div>
+    <div id="uploadValidation" style="display: none; margin-top: 0.5rem; font-size: 0.875rem;"></div>
+    <details style="margin-top: 1rem;">
+      <summary style="cursor: pointer; color: var(--muted);">Format guide (required columns)</summary>
+      <div id="formatGuide" style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--muted);"></div>
+    </details>
     <h2 style="margin-top: 1rem;">Uploaded inputs</h2>
     <ul id="inputList" class="file-list"></ul>
     <button type="button" class="secondary" id="refreshInput">Refresh</button>
+  </div>
+
+  <div class="card">
+    <h2>CSV Pipeline</h2>
+    <p style="color: var(--muted); font-size: 0.875rem; margin: 0 0 0.5rem;">Track CSVs: upload → enrich → campaign ready.</p>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 0.5rem;">
+      <div>
+        <h3 style="font-size: 0.85rem; color: var(--muted); margin: 0 0 0.25rem;">Needs enrichment</h3>
+        <ul id="pipelineNeeds" class="file-list"></ul>
+      </div>
+      <div>
+        <h3 style="font-size: 0.85rem; color: #f59e0b; margin: 0 0 0.25rem;">Partial</h3>
+        <ul id="pipelinePartial" class="file-list"></ul>
+      </div>
+      <div>
+        <h3 style="font-size: 0.85rem; color: var(--accent); margin: 0 0 0.25rem;">Fully enriched</h3>
+        <ul id="pipelineFull" class="file-list"></ul>
+      </div>
+      <div>
+        <h3 style="font-size: 0.85rem; color: #3b82f6; margin: 0 0 0.25rem;">Campaign ready</h3>
+        <ul id="pipelineReady" class="file-list"></ul>
+      </div>
+    </div>
+    <button type="button" class="secondary" id="refreshPipeline">Refresh pipeline</button>
   </div>
 
   <div class="card">
@@ -102,6 +131,10 @@
           <option value="0">Off</option>
         </select>
       </div>
+      <div>
+        <label for="runName">Run name (optional)</label>
+        <input type="text" id="runName" placeholder="e.g. NSW_CAANZ_Feb26" style="min-width: 140px;">
+      </div>
       <button type="button" id="runBtn">Start run</button>
     </div>
     <div id="runMsg" class="msg"></div>
@@ -114,12 +147,67 @@
       <div id="progressText" style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;"></div>
     </div>
     <div id="progressInfo" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    <div id="enrichmentBreakdown" style="display: none; margin-top: 0.5rem;">
+      <div style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem;">Enrichment breakdown</div>
+      <div id="enrichmentBar" style="display: flex; gap: 2px; height: 20px; border-radius: 4px; overflow: hidden; background: var(--border);"></div>
+      <div id="enrichmentLegend" style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    </div>
+    <div id="lastRunSummary" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    <div id="currentDomain" style="font-size: 0.85rem; color: var(--accent); margin-top: 0.25rem;"></div>
+    <div id="issuesStrip" style="font-size: 0.8rem; margin-top: 0.25rem;"></div>
     <div id="lastRunInfo" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem;"></div>
     <div style="margin-top: 0.5rem;">
       <button type="button" class="secondary" id="refreshStatus">Refresh status</button>
       <button type="button" id="cancelBtn" class="secondary" style="display: none; background: var(--danger); color: #fff; margin-left: 0.5rem;">Cancel run</button>
     </div>
     <div id="log" aria-label="Live log"></div>
+  </div>
+
+  <div class="card">
+    <h2>Create campaign (JustCall)</h2>
+    <p style="color: var(--muted); font-size: 0.875rem; margin: 0 0 0.5rem;">Create a JustCall Sales Dialer campaign from an enriched output CSV. Leads are graded A–D and custom fields are mapped automatically.</p>
+    <div class="row" style="gap: 1rem;">
+      <div>
+        <label for="campaignFile">Enriched CSV</label>
+        <select id="campaignFile"><option value="">— select from output —</option></select>
+      </div>
+      <div>
+        <label for="campaignName">Campaign name</label>
+        <input type="text" id="campaignName" placeholder="e.g. OBC_AU_ACC_NSW_Feb26" style="min-width: 200px;">
+      </div>
+      <div>
+        <label for="dialMode">Dial mode</label>
+        <select id="dialMode">
+          <option value="Autodial">Autodial</option>
+          <option value="Predictive">Predictive</option>
+          <option value="Dynamic">Dynamic</option>
+        </select>
+      </div>
+      <div>
+        <label for="minGrade">Min lead grade</label>
+        <select id="minGrade">
+          <option value="D">D (all leads)</option>
+          <option value="C">C+ (phone + name)</option>
+          <option value="B">B+ (phone + name + title/email)</option>
+          <option value="A">A only (full data)</option>
+        </select>
+      </div>
+      <button type="button" id="createCampaignBtn">Create campaign</button>
+    </div>
+    <div id="campaignPreview" style="font-size: 0.875rem; color: var(--muted); margin-top: 0.5rem;"></div>
+    <div id="leadGradeBar" style="display: none; margin-top: 0.5rem;">
+      <div style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem;">Lead quality</div>
+      <div id="gradeBar" style="display: flex; gap: 2px; height: 16px; border-radius: 4px; overflow: hidden; background: var(--border);"></div>
+      <div id="gradeLegend" style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;"></div>
+    </div>
+    <div id="campaignMsg" class="msg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Created campaigns</h2>
+    <p style="color: var(--muted); font-size: 0.875rem; margin: 0 0 0.5rem;">Campaigns created from this dashboard (CSV used and date).</p>
+    <ul id="campaignsList" class="file-list"></ul>
+    <button type="button" class="secondary" id="refreshCampaigns">Refresh</button>
   </div>
 
   <div class="card">
@@ -150,6 +238,10 @@
 
   <div class="card">
     <h2>Output files</h2>
+    <div style="margin-bottom: 0.5rem;">
+      <label for="filterTag" style="display:inline;">Filter by tag</label>
+      <select id="filterTag" style="margin-left: 0.5rem;"><option value="">All</option></select>
+    </div>
     <ul id="outputList" class="file-list"></ul>
     <button type="button" class="secondary" id="refreshOutput">Refresh</button>
   </div>
@@ -197,15 +289,47 @@
       }
     }
 
+    var outputMetadata = {};
     async function refreshOutputList() {
       const list = document.getElementById('outputList');
+      const filterTag = (document.getElementById('filterTag').value || '').trim();
       try {
-        const { files } = await json('/output');
-        const names = files.map(fileDisplayName).filter(Boolean);
-        list.innerHTML = names.length ? files.map(f => { const n = fileDisplayName(f); const sz = (f && f.size_human) ? ' · ' + f.size_human : ''; const m = fileMtime(f); return `<li><span>${n}${sz}${m}</span><span><a href="${api('/output/' + encodeURIComponent(n))}" download>Download</a> <a href="#" onclick="deleteFile('output','${n}');return false" style="color:var(--danger);margin-left:0.5rem">Delete</a></span></li>`; }).join('') : '<li>No files</li>';
+        const [filesRes, metaRes] = await Promise.all([json('/output'), json('/output/metadata')]);
+        const files = filesRes.files || [];
+        outputMetadata = (metaRes.metadata || {});
+        const allTags = new Set();
+        Object.values(outputMetadata).forEach(m => { (m.tags || []).forEach(t => allTags.add(t)); });
+        const filterSelect = document.getElementById('filterTag');
+        const currentVal = filterSelect.value;
+        filterSelect.innerHTML = '<option value="">All</option>' + Array.from(allTags).sort().map(t => '<option value="' + t + '">' + t + '</option>').join('');
+        if (currentVal && allTags.has(currentVal)) filterSelect.value = currentVal;
+        let filtered = files;
+        if (filterTag) filtered = files.filter(f => ((outputMetadata[f.name] || {}).tags || []).indexOf(filterTag) >= 0);
+        const names = filtered.map(fileDisplayName).filter(Boolean);
+        list.innerHTML = names.length ? filtered.map(f => {
+          const n = fileDisplayName(f);
+          const sz = (f && f.size_human) ? ' · ' + f.size_human : '';
+          const m = fileMtime(f);
+          const meta = outputMetadata[n] || {};
+          const tags = (meta.tags || []).join(', ');
+          const tagLabel = tags ? ' <span style="color:var(--muted);font-size:0.8rem">[' + tags + ']</span>' : '';
+          return '<li><span>' + n + tagLabel + sz + m + '</span><span><a href="' + api('/output/' + encodeURIComponent(n)) + '" download>Download</a> <a href="' + api('/output/summary?filename=' + encodeURIComponent(n) + '&format=csv') + '" download>Summary</a> <button type="button" class="secondary" style="padding:0.2rem 0.4rem;font-size:0.75rem" onclick="editTags(\'' + n.replace(/'/g, "\\'") + '\')">Tags</button> <a href="#" onclick="deleteFile(\'output\',\'' + n.replace(/'/g, "\\'") + '\');return false" style="color:var(--danger);margin-left:0.25rem">Delete</a></span></li>';
+        }).join('') : '<li>No files</li>';
       } catch (e) {
         list.innerHTML = '<li>Error loading list</li>';
       }
+    }
+    async function editTags(filename) {
+      const meta = outputMetadata[filename] || {};
+      const current = (meta.tags || []).join(', ');
+      const raw = prompt('Tags (comma-separated)', current);
+      if (raw === null) return;
+      const tags = raw.split(',').map(s => s.trim()).filter(Boolean);
+      try {
+        await fetch(api('/output/metadata'), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ filename: filename, tags: tags }) });
+        refreshOutputList();
+        refreshPipeline();
+      } catch (e) { alert(e.message); }
     }
 
     async function deleteFile(type, name) {
@@ -215,6 +339,7 @@
         if (!r.ok) { const d = await r.json().catch(() => ({})); alert(d.detail || 'Delete failed'); }
         if (type === 'state') refreshStateList(); else if (type === 'output') refreshOutputList();
       } catch (e) { alert(e.message); }
+      if (type === 'output') refreshPipeline();
     }
 
     async function refreshStateList() {
@@ -269,6 +394,46 @@
         } else {
           progressEl.textContent = '';
         }
+        const breakdownEl = document.getElementById('enrichmentBreakdown');
+        const barEl = document.getElementById('enrichmentBar');
+        const legendEl = document.getElementById('enrichmentLegend');
+        if (s.enrichment_breakdown && s.enrichment_breakdown.total > 0) {
+          breakdownEl.style.display = 'block';
+          const t = s.enrichment_breakdown.total;
+          const w = s.enrichment_breakdown.with_dms || 0;
+          const n = s.enrichment_breakdown.no_dms || 0;
+          const o = s.enrichment_breakdown.out_of_scope || 0;
+          const d = s.enrichment_breakdown.no_data || 0;
+          const wp = Math.round((w / t) * 100); const np = Math.round((n / t) * 100); const op = Math.round((o / t) * 100); const dp = Math.round((d / t) * 100);
+          barEl.innerHTML = '<div style="background:var(--accent);height:100%;width:' + wp + '%" title="With DMs: ' + w + '"></div><div style="background:#f59e0b;height:100%;width:' + np + '%" title="No DMs: ' + n + '"></div><div style="background:var(--muted);height:100%;width:' + op + '%" title="Out of scope: ' + o + '"></div><div style="background:var(--danger);height:100%;width:' + dp + '%" title="No data: ' + d + '"></div>';
+          legendEl.textContent = 'With DMs: ' + w + ' (' + wp + '%) · No DMs: ' + n + ' · Out of scope: ' + o + ' · No data: ' + d;
+        } else {
+          breakdownEl.style.display = 'none';
+        }
+        const summaryEl = document.getElementById('lastRunSummary');
+        if (s.last_run_summary && s.last_run_summary.total_processed > 0) {
+          const u = s.last_run_summary;
+          summaryEl.innerHTML = 'Last run summary: <strong>' + u.total_processed + '</strong> processed, <strong style="color:var(--accent)">' + (u.with_dms || 0) + '</strong> with DMs, ' + (u.no_dms || 0) + ' no DMs, ' + (u.out_of_scope || 0) + ' out of scope, ' + (u.no_data || 0) + ' no data · ' + (u.duration_seconds || 0) + 's' + (u.output_file_when_done ? ' · Output: ' + u.output_file_when_done : '');
+        } else {
+          summaryEl.textContent = '';
+        }
+        const currentDomEl = document.getElementById('currentDomain');
+        if (s.running && s.current_domain) {
+          currentDomEl.textContent = 'Currently: ' + s.current_domain;
+          currentDomEl.style.display = 'block';
+        } else {
+          currentDomEl.style.display = 'none';
+          currentDomEl.textContent = '';
+        }
+        const issuesEl = document.getElementById('issuesStrip');
+        if (s.issues && s.issues.length > 0) {
+          const parts = s.issues.map(i => i.count + ' ' + i.type).join(', ');
+          issuesEl.innerHTML = 'Issues: ' + parts + ' <a href="#" onclick="document.getElementById(\'log\').scrollIntoView(); return false;" style="color:var(--muted);">Show in log</a>';
+          issuesEl.style.display = 'block';
+        } else {
+          issuesEl.style.display = 'none';
+          issuesEl.innerHTML = '';
+        }
         const lastRunEl = document.getElementById('lastRunInfo');
         if (s.last_run && s.last_run.finished_at) {
           let txt = 'Last run: ' + (s.last_run.script || '') + ' finished ' + s.last_run.finished_at;
@@ -307,6 +472,7 @@
       const input = document.getElementById('file');
       if (!input.files?.length) { setMsg('uploadMsg', 'Choose a file', true); return; }
       setMsg('uploadMsg', 'Uploading…');
+      document.getElementById('uploadValidation').style.display = 'none';
       const fd = new FormData();
       fd.append('file', input.files[0]);
       try {
@@ -315,6 +481,16 @@
         if (!r.ok) { setMsg('uploadMsg', data.detail || r.statusText, true); return; }
         setMsg('uploadMsg', 'Uploaded: ' + (data.filename || 'ok'));
         refreshInputList();
+        refreshPipeline();
+        if ((data.filename || '').toLowerCase().endsWith('.csv')) {
+          const vfd = new FormData();
+          vfd.append('file', input.files[0]);
+          const vr = await fetch(api('/validate'), { method: 'POST', body: vfd });
+          const vdata = await vr.json().catch(() => ({}));
+          const valEl = document.getElementById('uploadValidation');
+          valEl.style.display = 'block';
+          valEl.innerHTML = '<span class="' + (vdata.valid ? 'ok' : 'err') + '">Format: ' + (vdata.format_detected || 'unknown') + '</span> · Rows: ' + (vdata.row_count || 0) + (vdata.columns_missing?.length ? ' · Missing: ' + vdata.columns_missing.join(', ') : '') + (vdata.warnings?.length ? ' · ' + vdata.warnings.join(' ') : '');
+        }
       } catch (e) {
         setMsg('uploadMsg', e.message, true);
       }
@@ -332,7 +508,8 @@
       document.getElementById('runBtn').disabled = true;
       const forceRecrawl = document.getElementById('forceRecrawl').value || null;
       const webSearchEnabled = document.getElementById('webSearchEnabled').value;
-      const body = { script, concurrency, force_recrawl: forceRecrawl, web_search_enabled: webSearchEnabled === '1' };
+      const runName = document.getElementById('runName').value.trim() || null;
+      const body = { script, concurrency, force_recrawl: forceRecrawl, web_search_enabled: webSearchEnabled === '1', run_name: runName };
       if (script === 'enrich_justcall') {
         body.input_file = inputFile;
         const justcallFormat = document.getElementById('justcallFormat').value;
@@ -390,6 +567,149 @@
       }
     };
 
+    async function loadFormatGuide() {
+      try {
+        const { formats } = await json('/formats');
+        const html = Object.entries(formats).map(([key, info]) =>
+          '<div style="margin-bottom:0.5rem"><strong>' + key + '</strong>: ' + (info.description || '') + ' Required: ' + (info.required || []).join(', ') + '. Use with: ' + (info.use_with_script || '') + '</div>'
+        ).join('');
+        document.getElementById('formatGuide').innerHTML = html || 'No formats';
+      } catch (e) {
+        document.getElementById('formatGuide').textContent = 'Could not load: ' + e.message;
+      }
+    }
+
+    function startEnrichFor(name, suggestedScript) {
+      document.getElementById('inputFile').value = name;
+      if (suggestedScript && ['enrich_justcall', 'enrich_urls', 'main'].indexOf(suggestedScript) >= 0) {
+        document.getElementById('script').value = suggestedScript;
+        document.getElementById('script').dispatchEvent(new Event('change'));
+      }
+      document.getElementById('runName').focus();
+    }
+
+    async function refreshPipeline() {
+      try {
+        const s = await json('/pipeline/status');
+        const render = (listId, arr, showEnrich) => {
+          const ul = document.getElementById(listId);
+          if (!arr || arr.length === 0) { ul.innerHTML = '<li style="color:var(--muted)">None</li>'; return; }
+          ul.innerHTML = arr.map(f => {
+            const n = f.name || f;
+            const rc = f.row_count != null ? ' · ' + f.row_count + ' rows' : '';
+            const ph = f.with_phone != null ? ' · ' + f.with_phone + ' phones' : '';
+            const m = f.mtime_iso ? ' · ' + f.mtime_iso : '';
+            const script = f.suggested_script || '';
+            const fmt = f.format_detected ? ' [' + f.format_detected + ']' : '';
+            const enrichBtn = showEnrich ? ' <button type="button" class="secondary" style="padding:0.2rem 0.5rem;font-size:0.75rem" onclick="startEnrichFor(\'' + n.replace(/'/g, "\\'") + '\', \'' + (script || '') + '\')">Enrich</button>' : '';
+            const isInput = f.is_input !== false;
+            const downloadPath = isInput ? '/input/' : '/output/';
+            return '<li><span>' + n + fmt + rc + ph + m + '</span><span><a href="' + api(downloadPath + encodeURIComponent(n)) + '" download>Download</a>' + enrichBtn + '</span></li>';
+          }).join('');
+        };
+        render('pipelineNeeds', s.needs_enrichment, true);
+        render('pipelinePartial', s.partially_enriched, false);
+        render('pipelineFull', s.fully_enriched, false);
+        render('pipelineReady', s.campaign_ready, false);
+        const campaignSelect = document.getElementById('campaignFile');
+        const ready = s.campaign_ready || [];
+        const opts = ready.map(f => '<option value="' + (f.name || f) + '">' + (f.name || f) + ' (' + (f.with_phone || 0) + ' phones)</option>').join('');
+        campaignSelect.innerHTML = '<option value="">— select —</option>' + opts;
+        if (ready.length === 0) {
+          const outFiles = await json('/output');
+          const names = (outFiles.files || []).map(f => f.name).filter(Boolean);
+          campaignSelect.innerHTML = '<option value="">— select —</option>' + names.map(n => '<option value="' + n + '">' + n + '</option>').join('');
+        }
+      } catch (e) {
+        document.getElementById('pipelineNeeds').innerHTML = '<li>Error</li>';
+      }
+    }
+
+    document.getElementById('campaignFile').onchange = async function() {
+      const name = this.value;
+      const previewEl = document.getElementById('campaignPreview');
+      const nameEl = document.getElementById('campaignName');
+      const gradeBarWrap = document.getElementById('leadGradeBar');
+      if (!name) { previewEl.textContent = ''; gradeBarWrap.style.display = 'none'; return; }
+      var stem = name.replace(/\.csv$/i, '');
+      stem = stem.replace(/^attio_people_enriched_/, '').replace(/^url_enrichment_people_/, '');
+      if (!nameEl.value.trim()) nameEl.value = stem ? 'OBC_AU_ACC_' + stem : '';
+      try {
+        const p = await json('/campaign/preview?filename=' + encodeURIComponent(name));
+        previewEl.textContent = p.row_count + ' rows, ' + (p.with_phone || 0) + ' with phone · ' + (p.has_first_name ? 'Has first_name' : 'Missing first_name');
+        if (p.lead_grades) {
+          gradeBarWrap.style.display = 'block';
+          const g = p.lead_grades;
+          const t = (g.A||0)+(g.B||0)+(g.C||0)+(g.D||0) || 1;
+          const pct = k => Math.round(((g[k]||0)/t)*100);
+          document.getElementById('gradeBar').innerHTML =
+            '<div style="background:var(--accent);height:100%;width:'+pct('A')+'%" title="A: '+g.A+'"></div>' +
+            '<div style="background:#3b82f6;height:100%;width:'+pct('B')+'%" title="B: '+g.B+'"></div>' +
+            '<div style="background:#f59e0b;height:100%;width:'+pct('C')+'%" title="C: '+g.C+'"></div>' +
+            '<div style="background:var(--muted);height:100%;width:'+pct('D')+'%" title="D: '+g.D+'"></div>';
+          document.getElementById('gradeLegend').textContent = 'A: '+(g.A||0)+' · B: '+(g.B||0)+' · C: '+(g.C||0)+' · D: '+(g.D||0);
+        } else {
+          gradeBarWrap.style.display = 'none';
+        }
+      } catch (e) {
+        previewEl.textContent = '';
+        gradeBarWrap.style.display = 'none';
+      }
+    };
+
+    document.getElementById('createCampaignBtn').onclick = async () => {
+      const filename = document.getElementById('campaignFile').value;
+      const campaignName = document.getElementById('campaignName').value.trim();
+      if (!filename) { setMsg('campaignMsg', 'Select an output CSV', true); return; }
+      if (!campaignName) { setMsg('campaignMsg', 'Enter a campaign name', true); return; }
+      if (!/^[A-Z0-9]/.test(campaignName) || campaignName.length < 3) {
+        setMsg('campaignMsg', 'Campaign name must start with uppercase/digit, min 3 chars (e.g. OBC_AU_ACC_NSW_Feb26)', true);
+        return;
+      }
+      setMsg('campaignMsg', 'Creating campaign…');
+      try {
+        const r = await fetch(api('/campaign/create'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            csv_file: filename,
+            campaign_name: campaignName,
+            dial_mode: document.getElementById('dialMode').value,
+            country_code: 'AU',
+            min_grade: document.getElementById('minGrade').value,
+          }),
+        });
+        const data = await r.json().catch(() => ({}));
+        if (!r.ok) { setMsg('campaignMsg', data.detail || r.statusText, true); return; }
+        let msg = 'Campaign created: ' + (data.campaign_id || '') + '. Contacts: ' + (data.contacts_added || 0);
+        if (data.skipped_below_grade) msg += ' (skipped ' + data.skipped_below_grade + ' below grade ' + data.min_grade + ')';
+        if (data.lead_grades) msg += ' · Grades A:' + (data.lead_grades.A||0) + ' B:' + (data.lead_grades.B||0) + ' C:' + (data.lead_grades.C||0) + ' D:' + (data.lead_grades.D||0);
+        if (data.error) msg += '. ' + data.error;
+        setMsg('campaignMsg', msg);
+        if (data.campaign_id) document.getElementById('campaignPreview').textContent = 'Campaign ID: ' + data.campaign_id;
+        refreshCampaigns();
+      } catch (e) {
+        setMsg('campaignMsg', e.message, true);
+      }
+    };
+
+    async function refreshCampaigns() {
+      const list = document.getElementById('campaignsList');
+      try {
+        const { campaigns } = await json('/campaigns');
+        list.innerHTML = (campaigns || []).length ? campaigns.map(c => {
+          const csvLink = c.csv_filename ? '<a href="' + api('/output/' + encodeURIComponent(c.csv_filename)) + '" download>' + c.csv_filename + '</a>' : '';
+          const g = c.lead_grades || {};
+          const gradeStr = (g.A || g.B || g.C || g.D) ? ' · A:' + (g.A||0) + ' B:' + (g.B||0) + ' C:' + (g.C||0) + ' D:' + (g.D||0) : '';
+          return '<li><span><strong>' + (c.campaign_name || c.campaign_id) + '</strong> · ' + (c.contacts_added || 0) + ' contacts' + gradeStr + ' · ' + (c.created_at || '') + '</span><span>' + csvLink + '</span></li>';
+        }).join('') : '<li style="color:var(--muted)">None yet</li>';
+      } catch (e) {
+        list.innerHTML = '<li>Error loading</li>';
+      }
+    }
+
+    document.getElementById('filterTag').onchange = refreshOutputList;
+
     async function refreshCheckpointStats() {
       const el = document.getElementById('checkpointStats');
       try {
@@ -407,8 +727,10 @@
       }
     }
 
-    document.getElementById('refreshInput').onclick = refreshInputList;
-    document.getElementById('refreshOutput').onclick = refreshOutputList;
+    document.getElementById('refreshInput').onclick = () => { refreshInputList(); refreshPipeline(); };
+    document.getElementById('refreshOutput').onclick = () => { refreshOutputList(); refreshPipeline(); };
+    document.getElementById('refreshPipeline').onclick = refreshPipeline;
+    document.getElementById('refreshCampaigns').onclick = refreshCampaigns;
     document.getElementById('refreshState').onclick = refreshStateList;
     document.getElementById('refreshStatus').onclick = refreshStatus;
     document.getElementById('refreshCheckpoint').onclick = refreshCheckpointStats;
@@ -426,6 +748,9 @@
     refreshStateList();
     refreshStatus();
     refreshCheckpointStats();
+    refreshPipeline();
+    refreshCampaigns();
+    loadFormatGuide();
     loadPrompts();
   </script>
 </body>

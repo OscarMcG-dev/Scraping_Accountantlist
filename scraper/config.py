@@ -47,4 +47,9 @@ class Settings(BaseSettings):
     max_retries: int = Field(default=3, ge=0, le=10)
     retry_delay: float = Field(default=2.0, ge=0.0, le=60.0)
 
+    # JustCall API (campaign creation from dashboard)
+    justcall_api_key: str = ""
+    justcall_api_secret: str = ""
+    justcall_base_url: str = "https://api.justcall.io/v2.1"
+
     model_config = {"env_file": ".env", "case_sensitive": False}
